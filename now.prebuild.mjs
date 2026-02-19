@@ -12,25 +12,6 @@ export default async ({ rootDir, config, fs, path, logger, registerExplicitId })
   const staticContentDir = path.join(rootDir, config.staticContentDir)
   fs.rmSync(staticContentDir, { recursive: true, force: true })
 
-  const hasModuleScript = htmlFiles.some((file) => {
-    const content = fs.readFileSync(file, 'utf-8')
-    return /<script[^>]+type\s*=\s*["']module["'][^>]*src\s*=/i.test(content)
-  })
-
-  if (!hasModuleScript) {
-    logger.info('No module script entry points found — copying HTML files directly.')
-    fs.mkdirSync(staticContentDir, { recursive: true })
-    for (const file of htmlFiles) {
-      const rel = path.relative(clientDir, file)
-      const dest = path.join(staticContentDir, rel)
-      fs.mkdirSync(path.dirname(dest), { recursive: true })
-      fs.copyFileSync(file, dest)
-      const stat = fs.statSync(dest)
-      logger.info(`Copied asset: ${rel} (${stat.size} bytes)`)
-    }
-    return
-  }
-
   const rollupBundle = await rollup({
     fs,
     input: htmlFilePattern,
