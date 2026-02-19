@@ -433,18 +433,26 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   }
 
   function loadHist(){
-    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,percent_complete,message,sys_created_on&sysparm_query=nameSTARTSWITHBatch^ORnameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on&sysparm_limit=50')
+    var q='nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
+    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,percent_complete,message,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
       .then(function(d){
-        var es=(d.result||[]).map(function(r){return{name:fd(r.name)||'Unknown',state:fd(r.state)||'',msg:fd(r.message)||'',created:fd(r.sys_created_on)||''};});
+        var es=(d.result||[]).map(function(r){
+          var stRaw=(''+(fv(r.state)||'')).toLowerCase();
+          var stDisp=(''+(fd(r.state)||'')).toLowerCase();
+          var sLabel=fd(r.state)||fv(r.state)||'Unknown';
+          var cls=(stRaw==='2'||stDisp.indexOf('complete')>-1||stDisp.indexOf('success')>-1)?'uc-s-ok'
+            :(stRaw==='3'||stRaw==='4'||stDisp.indexOf('fail')>-1||stDisp.indexOf('error')>-1)?'uc-s-err'
+            :(stRaw==='1'||stDisp.indexOf('running')>-1)?'uc-s-run':'uc-s-oth';
+          return{name:fd(r.name)||'Unknown',state:sLabel,cls:cls,msg:fd(r.message)||'',created:fd(r.sys_created_on)||''};
+        });
         var h=document.getElementById('ucHist');if(!h)return;
         if(!es.length){h.innerHTML='<div class="uc-empty">No installation history found.</div>';return;}
         h.innerHTML='';
         h.appendChild(el('div',{className:'uc-fl'},es.map(function(e){
-          var s=e.state.toLowerCase(),cls=s.indexOf('success')>-1||s.indexOf('complete')>-1?'uc-s-ok':s.indexOf('fail')>-1||s.indexOf('error')>-1?'uc-s-err':s.indexOf('running')>-1?'uc-s-run':'uc-s-oth';
-          var ic=cls==='uc-s-ok'?'\u2713':cls==='uc-s-err'?'\u2717':cls==='uc-s-run'?'\u27F3':'\u2022';
-          return el('div',{className:'uc-fi '+cls},[el('div',{className:'uc-fi-icon'},ic),el('div',{className:'uc-fi-body'},[el('div',{className:'uc-fi-name'},e.name),el('div',{className:'uc-fi-meta'},[e.created?el('span',null,e.created):null,el('span',{className:'uc-fi-st'},e.state)]),e.msg?el('div',{className:'uc-fi-msg'},e.msg):null])]);
+          var ic=e.cls==='uc-s-ok'?'\u2713':e.cls==='uc-s-err'?'\u2717':e.cls==='uc-s-run'?'\u27F3':'\u2022';
+          return el('div',{className:'uc-fi '+e.cls},[el('div',{className:'uc-fi-icon'},ic),el('div',{className:'uc-fi-body'},[el('div',{className:'uc-fi-name'},e.name),el('div',{className:'uc-fi-meta'},[e.created?el('span',null,e.created):null,el('span',{className:'uc-fi-st'},e.state)]),e.msg?el('div',{className:'uc-fi-msg'},e.msg):null])]);
         })));
-      }).catch(function(){var h=document.getElementById('ucHist');if(h)h.innerHTML='<div class="uc-empty">Failed to load history.</div>';});
+      }).catch(function(err){console.error('[UC] History load error:',err);var h=document.getElementById('ucHist');if(h)h.innerHTML='<div class="uc-empty">Failed to load history.</div>';});
   }
 
   function nav(v){S.view=v;render();}
