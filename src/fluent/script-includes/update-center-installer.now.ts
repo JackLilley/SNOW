@@ -138,8 +138,8 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
             "                        if (storeApp.get(appId) && storeApp.getValue('version') == version) { installed = true; break; }\\n" +
             "                        updateWorker('Installing (' + (i + 1) + '/' + totalApps + '): ' + appName + ' (' + waited + 's)...', pctBefore, 'running');\\n" +
             "                    }\\n" +
-"                    if (installed) { res.method = 'InstallAppWorker'; }\\n" +
-"                    else { res.method = 'InstallAppWorker (async)'; installed = true; }\\n" +
+            "                    if (installed) { res.method = 'InstallAppWorker'; }\\n" +
+            "                    else { res.method = 'InstallAppWorker (async)'; installed = true; }\\n" +
             "                }\\n" +
             "            } catch (e1) { gs.info('UpdateCenterInstaller: sn_appclient not available'); }\\n" +
             "\\n" +
