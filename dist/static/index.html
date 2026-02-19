@@ -244,7 +244,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     filter: 'all', search: '', pPct: 0, pState: 'Preparing...', pErr: '', pDone: false, logs: [], elapsed: 0,
     serverStart: null
   };
-  var pollT = null;
+  var clientStart = 0, pollT = null, tickT = null;
 
   function getToken() {
     if (window.g_ck) return window.g_ck;
@@ -292,18 +292,36 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   function triggerInstall(apps) {
     return new Promise(function(resolve, reject) {
       if (typeof GlideAjax === 'undefined') {
-        reject(new Error('GlideAjax not available. Ensure page is loaded within ServiceNow framework.'));
+        reject(new Error('GlideAjax not available — page must be loaded within ServiceNow.'));
         return;
       }
-      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-      ga.addParam('sysparm_name', 'installBatch');
-      ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) {
+      var payload = JSON.stringify(apps.map(function(a) {
         return { id: a.id, name: a.name, lv: a.lv, iv: a.iv };
-      })));
-      ga.getXMLAnswer(function(answer) {
-        if (answer && answer.length > 10) resolve(answer);
-        else reject(new Error('Server returned empty progress worker ID. Check Script Include is deployed.'));
-      });
+      }));
+      console.log('[UpdateCenter] Calling UpdateCenterInstaller.installBatch with', payload);
+      var timedOut = false;
+      var timer = setTimeout(function() {
+        timedOut = true;
+        reject(new Error('GlideAjax call timed out after 30s. Verify UpdateCenterInstaller Script Include exists in scope x_g_s7s_updater.'));
+      }, 30000);
+      try {
+        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+        ga.addParam('sysparm_name', 'installBatch');
+        ga.addParam('sysparm_apps', payload);
+        ga.getXMLAnswer(function(answer) {
+          if (timedOut) return;
+          clearTimeout(timer);
+          console.log('[UpdateCenter] GlideAjax response:', answer);
+          if (answer && answer.length > 10) {
+            resolve(answer);
+          } else {
+            reject(new Error('Server returned empty worker ID ("' + (answer || '') + '"). Check Script Include logs.'));
+          }
+        });
+      } catch (e) {
+        clearTimeout(timer);
+        reject(new Error('GlideAjax error: ' + e.message));
+      }
     });
   }
 
@@ -434,21 +452,33 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   function nav(v){S.view=v;render();}
   function refresh(){S.loading=true;S.error=null;render();getUpdates().then(function(d){S.updates=d;S.lastRefresh=new Date();}).catch(function(e){S.error='Failed to load updates: '+(e.message||'Unknown');}).finally(function(){S.loading=false;render();});}
   function doInstall(sel){
-    S.installQueue=sel;S.installing=true;S.view='progress';S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];S.elapsed=0;S.serverStart=null;render();
+    S.installQueue=sel;S.installing=true;S.view='progress';S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];S.elapsed=0;S.serverStart=null;
+    clientStart=Date.now();
+    if(tickT)clearInterval(tickT);
+    tickT=setInterval(function(){
+      if(S.serverStart) S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
+      else S.elapsed=Math.floor((Date.now()-clientStart)/1000);
+      var el=document.querySelector('.uc-timer');
+      if(el)el.textContent=fmtDur(S.elapsed);
+    },1000);
+    render();
     addLog('Triggering batch installation ('+sel.length+' app'+(sel.length>1?'s':'')+')...');
     triggerInstall(sel).then(function(workerId){
       S.batchId=workerId;
-      addLog('Server accepted install request (worker: '+workerId.substring(0,8)+'...)');
+      addLog('Server accepted request (worker: '+workerId.substring(0,8)+'...)');
       startPoll();
     }).catch(function(e){
+      clearInterval(tickT);
       S.error='Failed to start installation: '+(e.message||'Unknown');
-      addLog('Failed to start: '+(e.message||'Unknown'),'error');
-      S.installing=false;S.view='updates';render();
+      addLog('ERROR: '+(e.message||'Unknown'),'error');
+      S.installing=false;S.pDone=true;S.pErr=e.message||'Unknown';
+      render();
     });
   }
   function addLog(m,t){S.logs.push({time:new Date().toLocaleTimeString(),message:m,type:t||'info'});render();setTimeout(function(){var l=document.getElementById('ucLog');if(l)l.scrollTop=l.scrollHeight;},50);}
   function startPoll(){
     var lastMsg='';
+    console.log('[UpdateCenter] Starting poll for worker:', S.batchId);
     pollT=setInterval(function(){if(!S.batchId)return;
       pollWorker(S.batchId).then(function(p){
         var pct=parseInt(fv(p.percent_complete))||0;
@@ -456,11 +486,8 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 
         var created=fd(p.sys_created_on);
         if(created&&!S.serverStart){
-          S.serverStart=new Date(created);
+          try{S.serverStart=new Date(created);}catch(e){}
           addLog('Install process started on server','info');
-        }
-        if(S.serverStart){
-          S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
         }
 
         var stateVal=fv(p.state)||'';
@@ -471,17 +498,22 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
         if(stateVal!==S.pState){S.pState=stateVal;}
 
         if(stateVal==='complete'||stateVal==='Complete'||stateVal==='Successful'){
-          clearInterval(pollT);S.pPct=100;S.pDone=true;
+          clearInterval(pollT);if(tickT)clearInterval(tickT);
+          S.pPct=100;S.pDone=true;
           addLog('Batch installation completed!','success');
           S.installing=false;S.batchId=null;refresh();
         } else if(stateVal==='error'||stateVal==='Error'||stateVal==='Failed'){
-          clearInterval(pollT);S.pDone=true;
+          clearInterval(pollT);if(tickT)clearInterval(tickT);
+          S.pDone=true;
           var errMsg=fd(p.error_message)||fv(p.error_message)||'Installation failed.';
           S.pErr=errMsg;
           addLog('Installation failed: '+errMsg,'error');
         }
         render();
-      }).catch(function(e){addLog('Poll error: '+e.message,'warning');});
+      }).catch(function(e){
+        console.error('[UpdateCenter] Poll error:', e);
+        addLog('Poll error: '+e.message,'warning');
+      });
     },3000);
   }
 
