@@ -8,5 +8,5 @@ UiPage({
   description: 'Batch Store update installer with real-time progress monitoring',
   category: 'general',
   html: updateCenterPage,
-  direct: true,
+  direct: false,
 })
