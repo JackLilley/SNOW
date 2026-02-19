@@ -220,6 +220,52 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 .uc-s-run .uc-fi-icon { background: rgba(25,118,210,.1); color: #1976d2; }
 .uc-s-run .uc-fi-st { color: #1976d2; }
 .uc-s-oth .uc-fi-icon { background: var(--uc-bg2); color: var(--uc-text3); }
+.uc-fi-acts { display: flex; gap: 6px; margin-top: 8px; }
+.uc-btn-xs { padding: 4px 10px; font-size: 11px; border-radius: 6px; }
+.uc-btn-r { background: rgba(211,47,47,.08); color: var(--uc-red); }
+.uc-btn-r:hover { background: rgba(211,47,47,.15); }
+
+/* Scheduled */
+.uc-sched-item {
+  background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: 12px;
+  padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+}
+.uc-sched-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; background: rgba(25,118,210,.08); }
+.uc-sched-body { flex: 1; min-width: 0; }
+.uc-sched-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.uc-sched-time { font-size: 13px; color: var(--uc-accent); font-weight: 500; margin-bottom: 4px; }
+.uc-sched-apps { font-size: 12px; color: var(--uc-text2); line-height: 1.5; }
+.uc-sched-acts { display: flex; gap: 8px; margin-top: 10px; }
+.uc-sched-cancelled { opacity: .5; }
+
+/* Schedule dialog */
+.uc-dlg-sched { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; padding: 14px; background: var(--uc-bg); border-radius: 10px; }
+.uc-dlg-sched label { font-size: 13px; font-weight: 500; color: var(--uc-text2); }
+.uc-dt-input {
+  padding: 8px 12px; border: 1px solid var(--uc-border); border-radius: 8px; font-size: 14px;
+  background: var(--uc-surface); color: var(--uc-text); font-family: inherit; width: 100%;
+}
+.uc-dt-input:focus { border-color: var(--uc-accent); outline: none; }
+
+/* Release Notes Modal */
+.uc-rn-modal {
+  background: var(--uc-surface); border-radius: 16px; padding: 28px; width: 640px; max-width: 92vw;
+  max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 16px 48px rgba(0,0,0,.2);
+}
+.uc-rn-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.uc-rn-hdr h3 { margin: 0; font-size: 18px; font-weight: 600; }
+.uc-rn-meta { display: flex; gap: 16px; font-size: 13px; color: var(--uc-text2); margin-bottom: 16px; flex-wrap: wrap; }
+.uc-rn-meta span { display: flex; align-items: center; gap: 4px; }
+.uc-rn-tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+.uc-rn-tbl th { text-align: left; padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--uc-text2); text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid var(--uc-border); }
+.uc-rn-tbl td { padding: 10px 12px; border-bottom: 1px solid var(--uc-border); vertical-align: middle; }
+.uc-rn-tbl tr:last-child td { border-bottom: none; }
+.uc-rn-ok { color: var(--uc-green); font-weight: 600; }
+.uc-rn-fail { color: var(--uc-red); font-weight: 600; }
+.uc-rn-summary { padding: 14px; background: var(--uc-bg); border-radius: 10px; font-size: 14px; font-weight: 500; text-align: center; }
+.uc-rn-pre { flex: 1; overflow-y: auto; }
+.uc-rn-acts { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.uc-rn-copied { font-size: 12px; color: var(--uc-green); font-weight: 500; margin-right: auto; }
 
 .uc-hidden { display: none !important; }
 </style>
@@ -314,6 +360,27 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     }
   }
 
+  function fireScheduleAjax(apps, schedTime, cb) {
+    if (typeof GlideAjax === 'undefined') { cb(null); return; }
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'scheduleInstall');
+      ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
+      ga.addParam('sysparm_schedule_time', schedTime);
+      ga.getXMLAnswer(function(answer) { console.log('[UC] Schedule response:', answer); cb(answer); });
+    } catch (e) { console.error('[UC] Schedule error:', e); cb(null); }
+  }
+
+  function fireCancelAjax(workerId, cb) {
+    if (typeof GlideAjax === 'undefined') { cb(false); return; }
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'cancelScheduled');
+      ga.addParam('sysparm_worker_id', workerId);
+      ga.getXMLAnswer(function(answer) { console.log('[UC] Cancel response:', answer); cb(answer === 'cancelled'); });
+    } catch (e) { console.error('[UC] Cancel error:', e); cb(false); }
+  }
+
   function findRecentWorker() {
     var q = 'nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
     return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
@@ -332,7 +399,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 
   function renderNav(){
     var n=document.getElementById('ucNav');n.innerHTML='';
-    [['dashboard','Dashboard'],['updates','Updates'],['history','History']].forEach(function(t){
+    [['dashboard','Dashboard'],['updates','Updates'],['scheduled','Scheduled'],['history','History']].forEach(function(t){
       n.appendChild(el('button',{className:'uc-nav-link'+(S.view===t[0]?' active':''),onclick:function(){nav(t[0]);}},t[1]));
     });
     if(S.installing)n.appendChild(el('button',{className:'uc-nav-link uc-nav-pulse',onclick:function(){nav('progress');}},'Installing...'));
@@ -363,7 +430,8 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
       hi>0?el('div',{className:'uc-risk-ban'},[el('span',null,'\u26A0'),el('span',null,[el('strong',null,''+hi),document.createTextNode(' update'+(hi>1?'s':'')+' flagged as elevated risk.')])]):null,
       el('div',{className:'uc-qa'},[el('h3',null,'Quick Actions'),el('div',{className:'uc-qa-grid'},[
         el('button',{className:'uc-qa-card',disabled:tot===0,onclick:function(){nav('updates');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDCE6'),el('div',null,[el('div',{className:'uc-qa-title'},'Install Updates'),el('div',{className:'uc-qa-desc'},'Select and batch install store app updates')])]),
-        el('button',{className:'uc-qa-card',onclick:function(){nav('history');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDCCB'),el('div',null,[el('div',{className:'uc-qa-title'},'Installation History'),el('div',{className:'uc-qa-desc'},'View past batch installation activity')])])])]),
+        el('button',{className:'uc-qa-card',onclick:function(){nav('scheduled');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDD52'),el('div',null,[el('div',{className:'uc-qa-title'},'Scheduled Updates'),el('div',{className:'uc-qa-desc'},'View and manage scheduled installations')])]),
+        el('button',{className:'uc-qa-card',onclick:function(){nav('history');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDCCB'),el('div',null,[el('div',{className:'uc-qa-title'},'Installation History'),el('div',{className:'uc-qa-desc'},'View past activity and release notes')])])])]),
       ve.length>0?el('div',{className:'uc-vs'},[el('h3',null,'By Vendor'),el('div',{className:'uc-vl'},ve.map(function(v){return el('div',{className:'uc-vr'},[el('span',{className:'uc-vn'},v[0]),el('span',{className:'uc-vc'},''+v[1])]);}))])  :null
     ]);
   }
@@ -400,14 +468,55 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   function showDlg(){
     var sel=S.updates.filter(function(u){return S.selected[u.id];});if(!sel.length)return;
     var mc=sel.filter(function(u){return u.level==='major';}).length,c=document.getElementById('ucDialog');c.innerHTML='';
-    c.appendChild(el('div',{className:'uc-overlay',onclick:function(){c.innerHTML='';}},
-      el('div',{className:'uc-dlg',onclick:function(e){e.stopPropagation();}},[
-        el('h3',{className:'uc-dlg-title'},'Confirm Batch Installation'),
-        el('p',{className:'uc-dlg-sub'},[document.createTextNode('You are about to install '),el('strong',null,''+sel.length),document.createTextNode(' update'+(sel.length>1?'s':'')+'.')]),
-        mc>0?el('div',{className:'uc-dlg-warn'},'\u26A0 '+mc+' major update'+(mc>1?'s':'')+'. May contain breaking changes.'):null,
-        el('div',{className:'uc-dlg-list'},sel.map(function(u){return el('div',{className:'uc-dlg-item'},[el('span',{className:'uc-dlg-name'},u.name),el('span',{className:'uc-dlg-ver'},u.iv+' \u2192 '+u.lv),el('span',{className:'uc-dlg-lvl uc-lv-'+u.level},u.level)]);})),
-        el('div',{className:'uc-dlg-acts'},[el('button',{className:'uc-btn uc-btn-s',onclick:function(){c.innerHTML='';}},'Cancel'),
-          el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';doInstall(sel);}},'Install '+sel.length+' Update'+(sel.length>1?'s':''))])])));
+    var showSched=false;
+    function rebuildDlg(){
+      c.innerHTML='';
+      var dtInput;
+      var schedSection=el('div',{className:'uc-dlg-sched',style:showSched?'':'display:none'},[
+        el('label',null,'Schedule date & time:'),
+        dtInput=el('input',{type:'datetime-local',className:'uc-dt-input'})
+      ]);
+      var minDt=new Date(Date.now()+300000).toISOString().slice(0,16);
+      setTimeout(function(){if(dtInput)dtInput.min=minDt;},0);
+      c.appendChild(el('div',{className:'uc-overlay',onclick:function(){c.innerHTML='';}},
+        el('div',{className:'uc-dlg',onclick:function(e){e.stopPropagation();}},[
+          el('h3',{className:'uc-dlg-title'},showSched?'Schedule Installation':'Confirm Batch Installation'),
+          el('p',{className:'uc-dlg-sub'},[document.createTextNode(showSched?'Schedule ':'Install '),el('strong',null,''+sel.length),document.createTextNode(' update'+(sel.length>1?'s':'')+(showSched?' for a future date/time.':' now.'))]),
+          mc>0?el('div',{className:'uc-dlg-warn'},'\u26A0 '+mc+' major update'+(mc>1?'s':'')+'. May contain breaking changes.'):null,
+          el('div',{className:'uc-dlg-list'},sel.map(function(u){return el('div',{className:'uc-dlg-item'},[el('span',{className:'uc-dlg-name'},u.name),el('span',{className:'uc-dlg-ver'},u.iv+' \u2192 '+u.lv),el('span',{className:'uc-dlg-lvl uc-lv-'+u.level},u.level)]);})),
+          schedSection,
+          el('div',{className:'uc-dlg-acts'},[
+            el('button',{className:'uc-btn uc-btn-s',onclick:function(){c.innerHTML='';}},'Cancel'),
+            showSched
+              ?el('button',{className:'uc-btn uc-btn-s',onclick:function(){showSched=false;rebuildDlg();}},'Back')
+              :el('button',{className:'uc-btn uc-btn-s',onclick:function(){showSched=true;rebuildDlg();}},'Schedule for Later'),
+            showSched
+              ?el('button',{className:'uc-btn uc-btn-p',onclick:function(){
+                  var v=dtInput?dtInput.value:'';
+                  if(!v){alert('Please select a date and time.');return;}
+                  var dt=new Date(v);
+                  var snDt=dt.toLocaleString('en-US',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).replace(/(\d+)\/(\d+)\/(\d+),\s*/,'$3-$1-$2 ');
+                  c.innerHTML='';
+                  doSchedule(sel,snDt,v);
+                }},'Confirm Schedule')
+              :el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';doInstall(sel);}},'Install Now')
+          ])])));
+    }
+    rebuildDlg();
+  }
+
+  function doSchedule(sel,snDt,localDt){
+    addLog('Scheduling '+sel.length+' update'+(sel.length>1?'s':'')+' for '+localDt+'...');
+    fireScheduleAjax(sel,snDt,function(answer){
+      if(answer&&answer.length>2){
+        S.error=null;
+        addLog('Updates scheduled successfully!','success');
+        nav('scheduled');
+      } else {
+        S.error='Failed to schedule updates. Check that the Script Include is deployed.';
+        render();
+      }
+    });
   }
 
   function renderProg(){
@@ -434,7 +543,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 
   function loadHist(){
     var q='nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
-    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,percent_complete,message,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
+    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,percent_complete,message,output_summary,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
       .then(function(d){
         var es=(d.result||[]).map(function(r){
           var stRaw=(''+(fv(r.state)||'')).toLowerCase();
@@ -443,17 +552,131 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
           var cls=(stRaw==='2'||stDisp.indexOf('complete')>-1||stDisp.indexOf('success')>-1)?'uc-s-ok'
             :(stRaw==='3'||stRaw==='4'||stDisp.indexOf('fail')>-1||stDisp.indexOf('error')>-1)?'uc-s-err'
             :(stRaw==='1'||stDisp.indexOf('running')>-1)?'uc-s-run':'uc-s-oth';
-          return{name:fd(r.name)||'Unknown',state:sLabel,cls:cls,msg:fd(r.message)||'',created:fd(r.sys_created_on)||''};
+          var summary=fv(r.output_summary)||'';
+          var hasNotes=false;
+          try{var p=JSON.parse(summary);hasNotes=p&&p.type==='release_notes'&&p.apps;}catch(e){}
+          return{id:fv(r.sys_id),name:fd(r.name)||'Unknown',state:sLabel,cls:cls,msg:fd(r.message)||'',created:fd(r.sys_created_on)||'',hasNotes:hasNotes,summary:summary};
         });
         var h=document.getElementById('ucHist');if(!h)return;
         if(!es.length){h.innerHTML='<div class="uc-empty">No installation history found.</div>';return;}
         h.innerHTML='';
         h.appendChild(el('div',{className:'uc-fl'},es.map(function(e){
           var ic=e.cls==='uc-s-ok'?'\u2713':e.cls==='uc-s-err'?'\u2717':e.cls==='uc-s-run'?'\u27F3':'\u2022';
-          return el('div',{className:'uc-fi '+e.cls},[el('div',{className:'uc-fi-icon'},ic),el('div',{className:'uc-fi-body'},[el('div',{className:'uc-fi-name'},e.name),el('div',{className:'uc-fi-meta'},[e.created?el('span',null,e.created):null,el('span',{className:'uc-fi-st'},e.state)]),e.msg?el('div',{className:'uc-fi-msg'},e.msg):null])]);
+          return el('div',{className:'uc-fi '+e.cls},[
+            el('div',{className:'uc-fi-icon'},ic),
+            el('div',{className:'uc-fi-body'},[
+              el('div',{className:'uc-fi-name'},e.name),
+              el('div',{className:'uc-fi-meta'},[e.created?el('span',null,e.created):null,el('span',{className:'uc-fi-st'},e.state)]),
+              e.msg?el('div',{className:'uc-fi-msg'},e.msg):null,
+              e.hasNotes?el('div',{className:'uc-fi-acts'},[el('button',{className:'uc-btn uc-btn-xs uc-btn-s',onclick:(function(sum){return function(){showReleaseNotes(sum);};})(e.summary)},'Release Notes')]):null
+            ])
+          ]);
         })));
       }).catch(function(err){console.error('[UC] History load error:',err);var h=document.getElementById('ucHist');if(h)h.innerHTML='<div class="uc-empty">Failed to load history.</div>';});
   }
+
+  function renderScheduled(){
+    var c=el('div',null,[
+      el('div',{className:'uc-fhdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Scheduled Updates'),el('button',{className:'uc-btn uc-btn-s',onclick:function(){loadScheduledView();}},'Refresh')]),
+      el('div',{id:'ucSched'},el('div',{className:'uc-empty'},'Loading scheduled updates...'))
+    ]);
+    loadScheduledView();return c;
+  }
+
+  function loadScheduledView(){
+    var q='nameSTARTSWITHUpdate Center Scheduled^ORDERBYDESCsys_created_on';
+    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,message,output_summary,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
+      .then(function(d){
+        var items=(d.result||[]).map(function(r){
+          var stRaw=(''+(fv(r.state)||'')).toLowerCase();
+          var stDisp=(''+(fd(r.state)||'')).toLowerCase();
+          var isCancelled=stRaw==='cancelled'||stRaw==='4'||stDisp.indexOf('cancel')>-1;
+          var isDone=stRaw==='2'||stRaw==='complete'||stDisp.indexOf('complete')>-1||stDisp.indexOf('success')>-1;
+          var isRunning=stRaw==='1'||stRaw==='running'||stDisp.indexOf('running')>-1;
+          var isPending=!isCancelled&&!isDone&&!isRunning;
+          var meta=null;
+          try{meta=JSON.parse(fv(r.output_summary)||'');}catch(e){}
+          var apps=meta&&meta.apps?meta.apps:[];
+          var schedTime=meta&&meta.scheduled_time?meta.scheduled_time:(fd(r.message)||'');
+          var schedBy=meta&&meta.scheduled_by?meta.scheduled_by:'';
+          return{id:fv(r.sys_id),name:fd(r.name)||'Scheduled Install',schedTime:schedTime,schedBy:schedBy,apps:apps,isPending:isPending,isCancelled:isCancelled,isDone:isDone,isRunning:isRunning,state:fd(r.state)||fv(r.state)||'',created:fd(r.sys_created_on)||''};
+        });
+        var h=document.getElementById('ucSched');if(!h)return;
+        if(!items.length){h.innerHTML='<div class="uc-empty">No scheduled updates. Select updates and choose "Schedule for Later" to create one.</div>';return;}
+        h.innerHTML='';
+        items.forEach(function(it){
+          var statusTxt=it.isPending?'Pending':it.isRunning?'Running':it.isDone?'Completed':it.isCancelled?'Cancelled':it.state;
+          var ic=it.isPending?'\uD83D\uDD52':it.isRunning?'\u27F3':it.isDone?'\u2713':'\u2717';
+          var appList=it.apps.map(function(a){return(a.name||a.id)+' '+a.iv+' \u2192 '+a.lv;}).join(', ');
+          h.appendChild(el('div',{className:'uc-sched-item'+(it.isCancelled?' uc-sched-cancelled':'')},[
+            el('div',{className:'uc-sched-icon'},ic),
+            el('div',{className:'uc-sched-body'},[
+              el('div',{className:'uc-sched-title'},it.name),
+              el('div',{className:'uc-sched-time'},it.schedTime.replace('Scheduled for ','')),
+              it.apps.length?el('div',{className:'uc-sched-apps'},appList):null,
+              it.schedBy?el('div',{className:'uc-sched-apps'},'Scheduled by: '+it.schedBy):null,
+              el('div',{className:'uc-sched-apps'},'Status: '+statusTxt),
+              it.isPending?el('div',{className:'uc-sched-acts'},[
+                el('button',{className:'uc-btn uc-btn-xs uc-btn-r',onclick:(function(wid){return function(){
+                  if(!confirm('Cancel this scheduled install?'))return;
+                  fireCancelAjax(wid,function(ok){
+                    if(ok) addLog('Scheduled install cancelled.','success');
+                    else addLog('Failed to cancel scheduled install.','warning');
+                    loadScheduledView();
+                  });
+                };})(it.id)},'Cancel')
+              ]):null
+            ])
+          ]));
+        });
+      }).catch(function(err){console.error('[UC] Scheduled load error:',err);var h=document.getElementById('ucSched');if(h)h.innerHTML='<div class="uc-empty">Failed to load scheduled updates.</div>';});
+  }
+
+  function showReleaseNotes(summaryJson){
+    var data;
+    try{data=JSON.parse(summaryJson);}catch(e){alert('No release notes data available.');return;}
+    if(!data||!data.apps){alert('No release notes data available.');return;}
+    var c=document.getElementById('ucDialog');c.innerHTML='';
+    var tblRows=data.apps.map(function(a){
+      var tr=document.createElement('tr');
+      var ok=a.status==='success';
+      tr.innerHTML='<td>'+(ok?'\u2713':'\u2717')+'</td><td><b>'+esc(a.name)+'</b></td><td class="uc-mono">'+esc(a.from)+'</td><td>\u2192</td><td class="uc-mono">'+esc(a.to)+'</td><td class="'+(ok?'uc-rn-ok':'uc-rn-fail')+'">'+esc(a.status)+'</td>'+(a.error?'<td style="color:var(--uc-red);font-size:12px">'+esc(a.error)+'</td>':'<td></td>');
+      return tr;
+    });
+    var tbl=document.createElement('table');
+    tbl.className='uc-rn-tbl';
+    var thead=document.createElement('thead');
+    thead.innerHTML='<tr><th></th><th>Application</th><th>From</th><th></th><th>To</th><th>Status</th><th>Notes</th></tr>';
+    tbl.appendChild(thead);
+    var tbody=document.createElement('tbody');
+    tblRows.forEach(function(tr){tbody.appendChild(tr);});
+    tbl.appendChild(tbody);
+
+    var copiedEl=el('span',{className:'uc-rn-copied',style:'visibility:hidden'},'Copied!');
+    var sumText=data.completed+' of '+data.total+' installed successfully'+(data.failed>0?', '+data.failed+' failed':'');
+
+    c.appendChild(el('div',{className:'uc-overlay',onclick:function(){c.innerHTML='';}},
+      el('div',{className:'uc-rn-modal',onclick:function(e){e.stopPropagation();}},[
+        el('div',{className:'uc-rn-hdr'},[el('h3',null,'Release Notes'),el('button',{className:'uc-btn uc-btn-g',onclick:function(){c.innerHTML='';'}},'\u2715')]),
+        el('div',{className:'uc-rn-meta'},[
+          data.startTime?el('span',null,'Started: '+data.startTime):null,
+          data.endTime?el('span',null,'Ended: '+data.endTime):null
+        ]),
+        el('div',{className:'uc-rn-pre'},[tbl]),
+        el('div',{className:'uc-rn-summary'},sumText),
+        el('div',{className:'uc-rn-acts'},[
+          copiedEl,
+          el('button',{className:'uc-btn uc-btn-s',onclick:function(){
+            var txt='RELEASE NOTES\\n'+(data.startTime?'Date: '+data.startTime+'\\n':'')+'\\n';
+            data.apps.forEach(function(a){txt+=(a.status==='success'?'[OK] ':'[FAIL] ')+a.name+' '+a.from+' -> '+a.to+(a.error?' ('+a.error+')':'')+'\\n';});
+            txt+='\\nSummary: '+sumText;
+            try{navigator.clipboard.writeText(txt);copiedEl.style.visibility='visible';setTimeout(function(){copiedEl.style.visibility='hidden';},2000);}catch(e){prompt('Copy:',txt);}
+          }},'Copy to Clipboard'),
+          el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';}},'Close')
+        ])
+      ])));
+  }
+  function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
 
   function nav(v){S.view=v;render();}
   function refresh(){S.loading=true;S.error=null;render();getUpdates().then(function(d){S.updates=d;S.lastRefresh=new Date();}).catch(function(e){S.error='Failed to load updates: '+(e.message||'Unknown');}).finally(function(){S.loading=false;render();});}
@@ -604,6 +827,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     if(S.view==='dashboard'){c.innerHTML='';c.appendChild(renderDash());}
     else if(S.view==='updates'){c.innerHTML='';c.appendChild(renderList());}
     else if(S.view==='progress'){c.innerHTML='';c.appendChild(renderProg());}
+    else if(S.view==='scheduled'){c.innerHTML='';c.appendChild(renderScheduled());}
     else if(S.view==='history'){c.innerHTML='';c.appendChild(renderHist());}
   }
 
