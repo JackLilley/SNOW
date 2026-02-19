@@ -1,179 +1,67 @@
 # SNOW Update Center
 
-A ServiceNow scoped application for batch-installing Store updates with a modern Next Experience UI and real-time installation monitoring.
+Batch Store update installer for ServiceNow with real-time progress monitoring. Built as a NowSDK application with React/TypeScript.
 
-## Overview
+## What it does
 
-SNOW Update Center improves upon the standard Application Manager experience by providing:
+- Scans your instance for store apps with available updates
+- Displays updates categorized by type (major/minor/patch) with risk assessment
+- Lets you select multiple apps and batch install them via the CI/CD API
+- Shows real-time installation progress with an activity log
+- Tracks installation history
 
-- **Dashboard View** — At-a-glance summary of available major, minor, and patch updates with risk indicators
-- **Batch Selection & Install** — Select multiple updates across categories, review dependencies, and install in one operation
-- **Real-Time Activity Monitor** — Live progress tracking per-application with detailed activity logs, just like Application Manager's built-in monitor
-- **Installation History** — Full audit trail of past batch installations with outcomes and timing
-- **Scheduling** — Queue installations for maintenance windows
-- **Dependency Analysis** — See which apps depend on others and install in the right order
-
-## Architecture
+## Project Structure
 
 ```
-┌─────────────────────────────────────────────────────┐
-│              Next Experience UI (Workspace)          │
-│  ┌──────────┐ ┌──────────────┐ ┌─────────────────┐  │
-│  │Dashboard │ │ Update List  │ │Activity Monitor │  │
-│  │  Page    │ │    Page      │ │     Page        │  │
-│  └────┬─────┘ └──────┬───────┘ └───────┬─────────┘  │
-│       │              │                 │             │
-│  ┌────▼──────────────▼─────────────────▼─────────┐  │
-│  │         Scripted REST API (v1)                 │  │
-│  │  /available-updates  /batch-install  /progress │  │
-│  └────┬──────────────────────┬───────────────────┘  │
-│       │                      │                      │
-│  ┌────▼──────────┐    ┌──────▼──────────────────┐   │
-│  │Script Includes│    │  Flow Designer Subflows  │   │
-│  │               │    │                          │   │
-│  │BatchUpdateMgr │    │ Batch Install + Monitor  │   │
-│  │UpdateAnalyzer │    │ CI/CD Batch Install API  │   │
-│  │ActivityLogger │    └──────────────────────────┘   │
-│  └───────────────┘                                   │
-│                                                      │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │                    Tables                        │ │
-│  │  Remote: Available Updates                       │ │
-│  │  Physical: Batch Request, Batch Item, Activity   │ │
-│  └─────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────┘
+src/
+  client/              # React UI (TypeScript + CSS)
+    app.tsx            # Main app with view routing
+    components/
+      Dashboard.tsx    # Overview with stats and quick actions
+      UpdateList.tsx   # Filterable update list with batch select
+      ConfirmDialog.tsx# Pre-install confirmation
+      ProgressMonitor.tsx # Real-time install progress + activity log
+      ActivityFeed.tsx # Installation history from sys_progress_worker
+    services/
+      UpdateService.ts # API layer (Table API + CI/CD batch install)
+    types/
+      index.ts         # TypeScript interfaces
+  fluent/              # NowSDK fluent API definitions
+    ui-pages/
+      update-center.now.ts  # Registers the UI Page
+  server/              # Server-side TypeScript
 ```
-
-## Application Scope
-
-- **Scope Name**: `x_snc_update_center`
-- **App Name**: SNOW Update Center
-
-## Tables
-
-| Table | Type | Purpose |
-|-------|------|---------|
-| `x_snc_update_center_available_update` | Remote | Dynamically queries available Store updates |
-| `x_snc_update_center_batch_request` | Physical | Tracks batch installation requests |
-| `x_snc_update_center_batch_item` | Physical | Individual apps within a batch request |
-| `x_snc_update_center_activity_log` | Physical | Detailed per-step activity log entries |
 
 ## Prerequisites
 
-1. **CI/CD Spoke** — The Continuous Integration / Continuous Deployment spoke must be active
-2. **CI/CD Credentials** — A user with `sn_cicd.sys_ci_automation` role, plus a credential alias configured
-3. **Admin Access** — The installing user needs `admin` role to create tables and flows
-4. **ServiceNow Version** — Washington DC or later recommended (for latest Next Experience features)
+- ServiceNow instance with the **CI/CD Spoke** plugin (`sn_cicd`) active
+- NowSDK CLI installed (`npm i -g @servicenow/sdk`)
+- App linked to instance via `now-sdk configure`
 
-## Installation (Git Import)
+## Development
 
-This repo is structured for ServiceNow's source control integration.
-
-### Option A: Link from Instance (Recommended)
-
-ServiceNow source control works best when the app is created on the instance first:
-
-1. Open **App Engine Studio** (or classic **Studio**) on your instance
-2. **Create a new app**: Name = `SNOW Update Center`, Scope = `x_snc_update_center`
-3. Go to **Source Control settings** and link to this Git repo URL
-4. ServiceNow will sync and detect the `update/` XML records
-5. Click **Apply Remote Changes** to import all Script Includes, REST API, roles, etc.
-
-### Option B: Clone Git Repository (IDE)
-
-If your instance supports it:
-
-1. Open **ServiceNow IDE**
-2. Click **Clone Git repository**
-3. Enter this repo's URL and credentials
-4. ServiceNow will import the application scope and all records from `update/`
-
-> **Note:** If you get "No fluent app found", use Option A instead. The IDE clone feature requires the app to have been originally created via App Engine Studio.
-
-### Post-Import Setup
-
-The Git import creates the app scope, Script Includes, REST API, roles, UI action, scheduled job, and system properties. However, some artifacts **must be built on the platform** after import:
-
-- Physical tables (3) — batch_request, batch_item, activity_log
-- Remote table + definition script
-- Flow Designer subflows (2) — Batch Install + Monitor Progress
-- ACLs
-- CI/CD credential configuration
-- Next Experience UI components (optional)
-
-See **[docs/POST_IMPORT_SETUP.md](docs/POST_IMPORT_SETUP.md)** for complete step-by-step instructions.
-
-## File Structure
-
-```
-├── sn_source_control.properties    # ServiceNow Git integration config
-├── update/                         # ServiceNow-importable XML records
-│   ├── sys_app_*.xml              #   Application record
-│   ├── sys_user_role_*.xml        #   Roles (admin, reviewer)
-│   ├── sys_script_include_*.xml   #   Script Includes (3)
-│   ├── sys_ws_definition_*.xml    #   REST API definition
-│   ├── sys_ws_operation_*.xml     #   REST API endpoints (8)
-│   ├── sys_ui_action_*.xml        #   UI Action
-│   ├── sysauto_script_*.xml       #   Scheduled Job
-│   └── sys_properties_*.xml       #   System Properties (3)
-│
-├── src/                            # Human-readable reference (not imported by SN)
-│   ├── tables/                    #   Table schemas + remote table script
-│   ├── script-includes/           #   Script Include source files
-│   ├── scripted-rest-api/         #   REST API source (combined)
-│   ├── flows/                     #   Flow Designer subflow definitions
-│   ├── ui/next-experience/        #   UI Builder components + pages + styles
-│   ├── ui-actions/                #   UI Action source
-│   ├── scheduled-jobs/            #   Scheduled job source
-│   └── acl/                       #   ACL rule definitions
-│
-├── docs/
-│   ├── POST_IMPORT_SETUP.md       #   What to build after Git import
-│   ├── SETUP.md                   #   Full manual setup guide
-│   └── ARCHITECTURE.md            #   Architecture deep-dive
-│
-└── README.md
+```bash
+npm install
+now-sdk build     # Build for deployment
+now-sdk install   # Deploy to instance
 ```
 
-### What Gets Imported vs. What Needs Manual Setup
+After deployment, navigate to:
+`https://<instance>.service-now.com/x_g_s7s_updater_update_center.do`
 
-| Artifact | Via Git Import | Manual Post-Import |
-|----------|:-:|:-:|
-| App scope + metadata | Y | |
-| Roles (admin, reviewer) | Y | |
-| Script Includes (3) | Y | |
-| Scripted REST API + endpoints | Y | |
-| UI Action | Y | |
-| Scheduled Job | Y | |
-| System Properties (3) | Y | |
-| Physical Tables (3) | | Y |
-| Remote Table + Script | | Y |
-| Flow Designer Subflows (2) | | Y |
-| ACLs | | Y |
-| CI/CD Credentials | | Y |
-| Next Experience UI | | Y (optional) |
-| Navigation Modules | | Y |
+## API Dependencies
 
-## Key Improvements Over the Blog Post Version
+The app calls these ServiceNow APIs from the client:
 
-| Feature | Blog Version | SNOW Update Center |
-|---------|-------------|-------------------|
-| UI Framework | Core UI (Jelly pages) | Next Experience (UI Builder) |
-| Progress Tracking | Basic progress worker bar | Per-app activity feed with status icons |
-| Update Categorization | Major/Minor/Patch only | + Risk level, dependency info, release notes |
-| Installation History | None | Full audit trail with outcomes |
-| Error Handling | Basic error messages | Detailed error logging with retry options |
-| Scheduling | None | Maintenance window scheduling |
-| Dependency Analysis | None | Pre-install dependency checking |
-| ACLs | None | Role-based access control |
+| API | Purpose |
+|-----|---------|
+| `GET /api/now/table/sys_store_app` | List apps with available updates |
+| `GET /api/now/table/sys_app_version` | Get available versions per app |
+| `POST /api/sn_cicd/app/batch/install` | Trigger batch installation |
+| `GET /api/sn_cicd/progress/{id}` | Poll installation progress |
+| `GET /api/now/table/sys_progress_worker` | Installation history |
 
-## Roles
+## Scope
 
-| Role | Description |
-|------|-------------|
-| `x_snc_update_center.admin` | Full access — can install updates and configure settings |
-| `x_snc_update_center.reviewer` | Read-only — can view available updates and history |
-
-## License
-
-Internal ServiceNow application — not for redistribution.
+- **Scope**: `x_g_s7s_updater`
+- **Scope ID**: `67d384af87c7b610375662060cbb35be`
