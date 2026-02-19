@@ -315,15 +315,6 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   }
 
   function findRecentWorker() {
-    var q = 'nameSTARTSWITHUpdate Center^stateINrunning,Running^ORDERBYDESCsys_created_on';
-    return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
-      .then(function(d) {
-        var r = (d.result || [])[0];
-        return r ? fv(r.sys_id) : null;
-      }).catch(function() { return null; });
-  }
-
-  function findAnyRecentWorker() {
     var q = 'nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
     return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
       .then(function(d) {
@@ -459,6 +450,13 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   function nav(v){S.view=v;render();}
   function refresh(){S.loading=true;S.error=null;render();getUpdates().then(function(d){S.updates=d;S.lastRefresh=new Date();}).catch(function(e){S.error='Failed to load updates: '+(e.message||'Unknown');}).finally(function(){S.loading=false;render();});}
 
+  function saveSession(){
+    try{sessionStorage.setItem('uc_session',JSON.stringify({
+      batchId:S.batchId,installQueue:S.installQueue,clientStart:clientStart
+    }));}catch(e){}
+  }
+  function clearSession(){try{sessionStorage.removeItem('uc_session');}catch(e){}}
+
   function addLog(m,t){
     S.logs.push({time:new Date().toLocaleTimeString(),message:m,type:t||'info'});
     var logEl=document.getElementById('ucLog');
@@ -470,6 +468,18 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     }
   }
 
+  function isStateDone(p){
+    var raw=(''+(fv(p.state)||'')).toLowerCase();
+    var disp=(''+(fd(p.state)||'')).toLowerCase();
+    return raw==='2'||raw==='complete'||raw==='successful'||disp.indexOf('complete')>-1||disp.indexOf('success')>-1;
+  }
+  function isStateFailed(p){
+    var raw=(''+(fv(p.state)||'')).toLowerCase();
+    var disp=(''+(fd(p.state)||'')).toLowerCase();
+    return raw==='3'||raw==='4'||raw==='error'||raw==='failed'||raw==='cancelled'
+      ||disp.indexOf('error')>-1||disp.indexOf('fail')>-1||disp.indexOf('cancel')>-1;
+  }
+
   function doInstall(sel){
     S.installQueue=sel;S.installing=true;S.view='progress';
     S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];
@@ -477,12 +487,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     clientStart=Date.now();
     if(tickT)clearInterval(tickT);
     if(pollT)clearInterval(pollT);
-    tickT=setInterval(function(){
-      if(S.serverStart) S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
-      else S.elapsed=Math.floor((Date.now()-clientStart)/1000);
-      var t=document.querySelector('.uc-timer');
-      if(t)t.textContent=fmtDur(S.elapsed);
-    },1000);
+    startTick();
     render();
 
     setTimeout(function(){
@@ -494,36 +499,39 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     },100);
   }
 
+  function startTick(){
+    if(tickT)clearInterval(tickT);
+    tickT=setInterval(function(){
+      if(S.serverStart) S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
+      else S.elapsed=Math.floor((Date.now()-clientStart)/1000);
+      var t=document.querySelector('.uc-timer');
+      if(t)t.textContent=fmtDur(S.elapsed);
+    },1000);
+  }
+
   function searchForWorker(attempt){
-    if(S.batchId){startPoll();return;}
+    if(S.batchId){saveSession();startPoll();return;}
     findRecentWorker().then(function(id){
-      if(!id) id=null;
       if(id){
         S.batchId=id;
-        addLog('Found active progress worker: '+id.substring(0,8)+'...','success');
+        saveSession();
+        addLog('Found progress worker: '+id.substring(0,8)+'...','success');
         startPoll();
-      } else if(attempt<8){
+      } else if(attempt<10){
         var delay=attempt<3?2000:3000;
-        addLog('Worker not found yet, retrying... (attempt '+(attempt+2)+')','info');
+        if(attempt>0) addLog('Worker not found yet, retrying... ('+(attempt+1)+'/10)','info');
         setTimeout(function(){searchForWorker(attempt+1);},delay);
       } else {
-        findAnyRecentWorker().then(function(id2){
-          if(id2){
-            S.batchId=id2;
-            addLog('Found completed worker: '+id2.substring(0,8)+'...','info');
-            startPoll();
-          } else {
-            addLog('Could not locate progress worker after multiple attempts.','error');
-            addLog('The install may have completed. Check History tab.','warning');
-            S.pDone=true;S.pState='Unknown';
-            if(tickT)clearInterval(tickT);
-            render();
-          }
-        });
+        addLog('Could not locate progress worker.','error');
+        addLog('The install may have completed. Check History tab.','warning');
+        S.pDone=true;S.pState='Unknown';
+        if(tickT)clearInterval(tickT);
+        clearSession();
+        render();
       }
     }).catch(function(e){
       addLog('Search error: '+e.message,'warning');
-      if(attempt<8) setTimeout(function(){searchForWorker(attempt+1);},3000);
+      if(attempt<10) setTimeout(function(){searchForWorker(attempt+1);},3000);
     });
   }
 
@@ -542,26 +550,26 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
           try{S.serverStart=new Date(created);}catch(e){}
         }
 
-        var stateVal=(fv(p.state)||'').toLowerCase();
-        var stateDisplay=fd(p.state)||fv(p.state)||'running';
+        var stateDisplay=fd(p.state)||fv(p.state)||'Running';
         var msg=fd(p.message)||fv(p.message)||'';
 
         if(msg&&msg!==lastMsg){lastMsg=msg;addLog(msg);}
-
         S.pState=stateDisplay;
 
-        if(stateVal==='complete'||stateVal==='successful'){
+        if(isStateDone(p)){
           clearInterval(pollT);if(tickT)clearInterval(tickT);
           S.pPct=100;S.pDone=true;
           addLog('Batch installation completed!','success');
           S.installing=false;S.batchId=null;
+          clearSession();
           render();refresh();
-        } else if(stateVal==='error'||stateVal==='failed'||stateVal==='cancelled'){
+        } else if(isStateFailed(p)){
           clearInterval(pollT);if(tickT)clearInterval(tickT);
           S.pDone=true;
           var errMsg=fd(p.error_message)||fv(p.error_message)||'Installation encountered an issue.';
           S.pErr=errMsg;
           addLog('Installation issue: '+errMsg,'error');
+          clearSession();
           render();
         } else {
           updateProgressUI();
@@ -591,7 +599,27 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
     else if(S.view==='history'){c.innerHTML='';c.appendChild(renderHist());}
   }
 
+  function resumeSession(){
+    try{
+      var raw=sessionStorage.getItem('uc_session');
+      if(!raw) return false;
+      var sess=JSON.parse(raw);
+      if(!sess.batchId) return false;
+      S.batchId=sess.batchId;
+      S.installQueue=sess.installQueue||[];
+      S.installing=true;
+      S.view='progress';
+      S.pPct=0;S.pState='Resuming...';S.pDone=false;S.pErr='';S.logs=[];
+      clientStart=sess.clientStart||Date.now();
+      startTick();
+      render();
+      addLog('Resuming monitoring of active installation...','info');
+      startPoll();
+      return true;
+    }catch(e){return false;}
+  }
+
   document.getElementById('ucErrDismiss').addEventListener('click',function(){S.error=null;renderErr();});
-  render();refresh();
+  if(!resumeSession()){render();refresh();}else{refresh();}
 })();
 </script>
