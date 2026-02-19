@@ -1,10 +1,976 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Update Center</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./main.tsx"></script>
-  </body>
-</html>
+<style>
+.uc-root {
+  --uc-bg: var(--now-color_background--secondary, var(--now-color--neutral-1, #f5f6fa));
+  --uc-bg2: var(--now-color_background--tertiary, var(--now-color--neutral-2, #ebedf3));
+  --uc-surface: var(--now-color_background--primary, var(--now-color--neutral-0, #ffffff));
+  --uc-border: var(--now-color_divider--color-primary, var(--now-color--neutral-3, #e0e2ea));
+  --uc-text: var(--now-color_text--primary, var(--now-color--neutral-18, #1a1a2e));
+  --uc-text2: var(--now-color_text--secondary, var(--now-color--neutral-12, #5a5d70));
+  --uc-text3: var(--now-color_text--tertiary, var(--now-color--neutral-8, #8b8ea3));
+  --uc-accent: var(--now-color--primary-1, var(--now-color_brand--primary, #1976d2));
+  --uc-accent-h: var(--now-color--primary-2, var(--now-color_brand--secondary, #1565c0));
+  --uc-red: var(--now-color_alert--critical-2, var(--now-color--alert-critical-2, #d32f2f));
+  --uc-orange: var(--now-color_alert--warning-2, var(--now-color--alert-warning-2, #f57c00));
+  --uc-blue: var(--now-color--primary-1, var(--now-color_brand--primary, #1976d2));
+  --uc-green: var(--now-color_alert--positive-2, var(--now-color--alert-positive-2, #388e3c));
+  --uc-shadow-s: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --uc-shadow-m: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --uc-shadow-l: 0 12px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  --uc-radius: 12px;
+  --uc-speed: .2s;
+  font-family: var(--now-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif);
+  font-size: 14px; line-height: 1.5; color: var(--uc-text); background: var(--uc-bg);
+  -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+.uc-root *, .uc-root *::before, .uc-root *::after { box-sizing: border-box; }
+
+@keyframes ucFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes ucFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ucPulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+@keyframes ucShimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes ucSlideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+@keyframes ucScaleIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:none} }
+@keyframes ucProgressPulse { 0%{opacity:.85} 50%{opacity:1} 100%{opacity:.85} }
+
+.uc-nav {
+  display: flex; align-items: center; gap: 24px; padding: 0 32px; height: 56px;
+  background: var(--uc-surface); border-bottom: 1px solid var(--uc-border); position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.uc-nav-brand { font-size: 16px; font-weight: 700; color: var(--uc-accent); letter-spacing: -0.02em; }
+.uc-nav-links { display: flex; gap: 2px; }
+.uc-nav-link {
+  position: relative; padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--uc-text2); margin: 0;
+  background: none; border: none; border-radius: 8px; cursor: pointer; font-family: inherit;
+  transition: color var(--uc-speed), background var(--uc-speed);
+}
+.uc-nav-link:hover { background: var(--uc-bg2); color: var(--uc-text); }
+.uc-nav-link.active { background: rgba(25,118,210,.08); color: var(--uc-accent); font-weight: 600; }
+.uc-nav-link:active:not(:disabled) { transform: scale(.97); }
+.uc-nav-pulse { color: var(--uc-accent)!important; font-weight: 600!important; animation: ucPulse 2s infinite; }
+
+.uc-error {
+  display: flex; align-items: center; justify-content: space-between; padding: 10px 32px;
+  background: rgba(211,47,47,.06); border-bottom: 1px solid rgba(211,47,47,.15); color: var(--uc-red); font-size: 13px;
+  animation: ucSlideDown var(--uc-speed) ease-out;
+}
+.uc-content { padding: 28px 32px; max-width: 1200px; width: 100%; margin: 0 auto; animation: ucFadeUp .35s ease-out; }
+.uc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin: 0;
+  padding: 8px 18px; font-size: 13px; font-weight: 500; border: none; border-radius: 8px;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+  transition: all var(--uc-speed) ease; position: relative; overflow: hidden;
+}
+.uc-btn:active:not(:disabled) { transform: scale(.96); }
+.uc-btn:disabled { opacity: .5; cursor: not-allowed; }
+.uc-btn:focus-visible { outline: 2px solid var(--uc-accent); outline-offset: 2px; }
+.uc-btn-p { background: var(--uc-accent); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.uc-btn-p:hover:not(:disabled) { background: var(--uc-accent-h); box-shadow: var(--uc-shadow-m); transform: translateY(-1px); }
+.uc-btn-s { background: var(--uc-bg2); color: var(--uc-text); }
+.uc-btn-s:hover:not(:disabled) { background: var(--uc-border); box-shadow: var(--uc-shadow-s); }
+.uc-btn-g { background: none; color: var(--uc-text2); padding: 6px 10px; }
+.uc-btn-g:hover:not(:disabled) { background: var(--uc-bg2); color: var(--uc-text); }
+
+/* Dashboard */
+.uc-dash { display: flex; flex-direction: column; gap: 24px; }
+.uc-dash-hdr { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+.uc-dash-title { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+.uc-dash-sub { font-size: 12px; color: var(--uc-text3); margin-top: 2px; }
+.uc-dash-acts { display: flex; gap: 8px; }
+.uc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.uc-stat {
+  background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: var(--uc-radius);
+  padding: 22px; text-align: center; width: 100%; font-family: inherit; color: inherit;
+  transition: all .25s ease; box-shadow: var(--uc-shadow-s);
+}
+button.uc-stat { cursor: pointer; }
+button.uc-stat:hover { box-shadow: var(--uc-shadow-m); transform: translateY(-3px); border-color: var(--uc-accent); }
+button.uc-stat:active { transform: translateY(-1px); }
+.uc-stat-val { font-size: 40px; font-weight: 800; line-height: 1; margin-bottom: 8px; letter-spacing: -0.03em; }
+.uc-stat-lbl { font-size: 13px; font-weight: 500; color: var(--uc-text2); }
+.uc-stat-hint { font-size: 11px; color: var(--uc-text3); margin-top: 6px; }
+.uc-stat-tag { font-size: 11px; margin-top: 8px; padding: 3px 10px; border-radius: 99px; display: inline-block; font-weight: 500; }
+.uc-c-accent .uc-stat-val { color: var(--uc-accent); }
+.uc-c-red .uc-stat-val { color: var(--uc-red); }
+.uc-c-blue .uc-stat-val { color: var(--uc-blue); }
+.uc-c-green .uc-stat-val { color: var(--uc-green); }
+.uc-tag-r { background: rgba(211,47,47,.08); color: var(--uc-red); }
+.uc-tag-b { background: rgba(25,118,210,.08); color: var(--uc-blue); }
+.uc-tag-g { background: rgba(56,142,60,.08); color: var(--uc-green); }
+.uc-risk-ban {
+  display: flex; align-items: center; gap: 10px; padding: 14px 18px; font-size: 14px;
+  background: rgba(211,47,47,.06); border: 1px solid rgba(211,47,47,.2); border-radius: var(--uc-radius); color: var(--uc-red);
+  animation: ucFadeUp .4s ease-out;
+}
+.uc-qa h3, .uc-vs h3 { font-size: 16px; font-weight: 600; margin: 0 0 12px; }
+.uc-qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.uc-qa-card {
+  display: flex; align-items: center; gap: 14px; background: var(--uc-surface); border: 1px solid var(--uc-border);
+  border-radius: var(--uc-radius); padding: 18px 20px; cursor: pointer; text-align: left; width: 100%; font-family: inherit; color: inherit;
+  transition: all .25s ease; box-shadow: var(--uc-shadow-s);
+}
+.uc-qa-card:hover:not(:disabled) { border-color: var(--uc-accent); box-shadow: var(--uc-shadow-m); transform: translateY(-2px); }
+.uc-qa-card:active:not(:disabled) { transform: translateY(0); box-shadow: var(--uc-shadow-s); }
+.uc-qa-card:disabled { opacity: .5; cursor: not-allowed; }
+.uc-qa-icon { font-size: 28px; flex-shrink: 0; }
+.uc-qa-title { font-size: 14px; font-weight: 600; }
+.uc-qa-desc { font-size: 12px; color: var(--uc-text2); margin-top: 2px; }
+.uc-vl { background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: var(--uc-radius); overflow: hidden; box-shadow: var(--uc-shadow-s); }
+.uc-vr { display: flex; justify-content: space-between; padding: 10px 16px; font-size: 13px; border-bottom: 1px solid var(--uc-border); transition: background var(--uc-speed); }
+.uc-vr:hover { background: var(--uc-bg); }
+.uc-vr:last-child { border-bottom: none; }
+.uc-vn { font-weight: 500; }
+.uc-vc { color: var(--uc-text2); background: var(--uc-bg2); padding: 1px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+
+/* Update List */
+.uc-ul { display: flex; flex-direction: column; gap: 16px; }
+.uc-ul-hdr { display: flex; align-items: center; gap: 12px; }
+.uc-ul-hdr h2 { font-size: 20px; font-weight: 700; margin: 0; flex: 1; letter-spacing: -0.01em; }
+.uc-toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.uc-search {
+  flex: 1; min-width: 200px; padding: 9px 14px; border: 1px solid var(--uc-border); border-radius: 8px;
+  font-size: 14px; background: var(--uc-surface); color: var(--uc-text); outline: none;
+  transition: border-color var(--uc-speed), box-shadow var(--uc-speed);
+}
+.uc-search:focus { border-color: var(--uc-accent); box-shadow: 0 0 0 3px rgba(25,118,210,.1); }
+.uc-fg { display: flex; border: 1px solid var(--uc-border); border-radius: 8px; overflow: hidden; }
+.uc-fb {
+  padding: 8px 14px; font-size: 13px; border: none; background: var(--uc-surface); color: var(--uc-text2);
+  cursor: pointer; font-family: inherit; border-right: 1px solid var(--uc-border); margin: 0;
+  transition: all var(--uc-speed);
+}
+.uc-fb:last-child { border-right: none; }
+.uc-fb.active { background: var(--uc-accent); color: #fff; font-weight: 600; }
+.uc-fb:hover:not(.active) { background: var(--uc-bg2); }
+.uc-sel-bar {
+  display: flex; justify-content: space-between; align-items: center; padding: 10px 14px;
+  background: var(--uc-bg2); border-radius: 8px; font-size: 13px;
+}
+.uc-sel-lbl { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--uc-text2); }
+.uc-empty { text-align: center; padding: 56px 24px; color: var(--uc-text3); font-size: 15px; animation: ucFadeIn .4s ease; }
+.uc-tbl { border: 1px solid var(--uc-border); border-radius: var(--uc-radius); overflow: hidden; box-shadow: var(--uc-shadow-s); }
+.uc-th, .uc-tr {
+  display: grid; grid-template-columns: 40px 2fr 100px 30px 100px 100px 80px 1fr;
+  gap: 4px; padding: 10px 14px; align-items: center;
+}
+.uc-th {
+  background: var(--uc-bg2); font-size: 11px; font-weight: 600; color: var(--uc-text3);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.uc-tr { border-top: 1px solid var(--uc-border); font-size: 13px; transition: background var(--uc-speed); background: var(--uc-surface); }
+.uc-tr:hover { background: var(--uc-bg); }
+.uc-tr.uc-sel { background: rgba(25,118,210,.04); }
+.uc-cc { display: flex; align-items: center; justify-content: center; }
+.uc-cn { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.uc-an { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.uc-as { font-size: 11px; color: var(--uc-text3); font-family: monospace; }
+.uc-ar { text-align: center; color: var(--uc-text3); }
+.uc-mono { font-family: monospace; font-size: 12px; }
+.uc-rb { font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 600; text-transform: uppercase; }
+.uc-rb-low { background: rgba(56,142,60,.1); color: #388e3c; }
+.uc-rb-medium { background: rgba(245,124,0,.1); color: #f57c00; }
+.uc-rb-high { background: rgba(211,47,47,.1); color: #d32f2f; }
+.uc-rb-critical { background: rgba(136,14,79,.1); color: #880e4f; }
+.uc-cv { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--uc-text2); font-size: 12px; }
+
+/* Dialog */
+.uc-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: center;
+  justify-content: center; z-index: 1000; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  animation: ucFadeIn .2s ease-out;
+}
+.uc-dlg {
+  background: var(--uc-surface); border-radius: 20px; padding: 28px; width: 520px; max-width: 90vw;
+  max-height: 80vh; display: flex; flex-direction: column; box-shadow: var(--uc-shadow-l);
+  animation: ucScaleIn .25s ease-out;
+}
+.uc-dlg-title { margin: 0 0 4px; font-size: 18px; font-weight: 700; }
+.uc-dlg-sub { margin: 0 0 16px; font-size: 14px; color: var(--uc-text2); }
+.uc-dlg-warn {
+  padding: 10px 14px; background: rgba(211,47,47,.06); border: 1px solid rgba(211,47,47,.2);
+  border-radius: 10px; font-size: 13px; color: var(--uc-red); margin-bottom: 16px;
+}
+.uc-dlg-list { flex: 1; overflow-y: auto; border: 1px solid var(--uc-border); border-radius: var(--uc-radius); margin-bottom: 20px; max-height: 300px; }
+.uc-dlg-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--uc-border); font-size: 13px; transition: background var(--uc-speed); }
+.uc-dlg-item:hover { background: var(--uc-bg); }
+.uc-dlg-item:last-child { border-bottom: none; }
+.uc-dlg-name { flex: 1; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.uc-dlg-ver { font-family: monospace; font-size: 12px; color: var(--uc-text2); white-space: nowrap; }
+.uc-dlg-lvl { font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 600; text-transform: uppercase; }
+.uc-lv-major { background: rgba(211,47,47,.1); color: #d32f2f; }
+.uc-lv-minor { background: rgba(25,118,210,.1); color: #1976d2; }
+.uc-lv-patch { background: rgba(56,142,60,.1); color: #388e3c; }
+.uc-dlg-acts { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* Progress */
+.uc-pm { display: flex; flex-direction: column; gap: 20px; }
+.uc-pm-hdr { display: flex; align-items: center; gap: 12px; }
+.uc-pm-hdr h2 { font-size: 20px; font-weight: 700; margin: 0; flex: 1; }
+.uc-timer { font-family: monospace; font-size: 15px; color: var(--uc-text2); background: var(--uc-bg2); padding: 5px 16px; border-radius: 8px; font-weight: 600; letter-spacing: .02em; }
+.uc-pcard { background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: 16px; padding: 24px; box-shadow: var(--uc-shadow-s); }
+.uc-prow { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.uc-pstate { font-size: 18px; font-weight: 600; transition: color .3s; }
+.uc-ppct { font-size: 32px; font-weight: 800; font-family: monospace; letter-spacing: -0.02em; transition: color .3s; }
+.uc-ptrack { height: 12px; background: var(--uc-bg2); border-radius: 99px; overflow: hidden; position: relative; }
+.uc-pfill { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); background: var(--uc-accent); background: linear-gradient(90deg, var(--uc-accent), color-mix(in srgb, var(--uc-accent) 70%, white)); animation: ucProgressPulse 2s ease-in-out infinite; position: relative; }
+.uc-pfill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%); background-size: 200% 100%; animation: ucShimmer 2s linear infinite; }
+.uc-pfill.done { background: var(--uc-green)!important; animation: none; }
+.uc-pfill.done::after { display: none; }
+.uc-pfill.err { background: var(--uc-red)!important; animation: none; }
+.uc-pfill.err::after { display: none; }
+.uc-perr { margin-top: 12px; font-size: 13px; color: var(--uc-red); font-weight: 500; padding: 10px 14px; background: rgba(211,47,47,.05); border-radius: 8px; }
+.uc-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.uc-pill { display: flex; align-items: center; gap: 8px; background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: 10px; padding: 8px 14px; font-size: 13px; box-shadow: var(--uc-shadow-s); transition: all var(--uc-speed); }
+.uc-pill:hover { box-shadow: var(--uc-shadow-m); }
+.uc-pill b { font-weight: 600; }
+.uc-pill span { font-family: monospace; font-size: 11px; color: var(--uc-text3); }
+.uc-log { background: #111827; border-radius: var(--uc-radius); padding: 16px; max-height: 320px; overflow-y: auto; font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 12px; box-shadow: inset 0 2px 8px rgba(0,0,0,.3); scroll-behavior: smooth; }
+.uc-log-empty { color: #4b5563; padding: 24px; text-align: center; font-style: italic; }
+.uc-le { display: flex; gap: 10px; padding: 4px 0; line-height: 1.6; animation: ucFadeUp .25s ease-out; }
+.uc-le-t { color: #6b7280; flex-shrink: 0; font-size: 11px; }
+.uc-le-info .uc-le-m { color: #9ca3af; }
+.uc-le-success .uc-le-m { color: #34d399; }
+.uc-le-error .uc-le-m { color: #f87171; }
+.uc-le-warning .uc-le-m { color: #fbbf24; }
+.uc-pdone { display: flex; justify-content: center; gap: 12px; animation: ucFadeUp .4s ease-out; }
+.uc-sec { font-size: 15px; font-weight: 600; margin: 0 0 10px; }
+
+/* History */
+.uc-fhdr { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.uc-fhdr h2 { font-size: 20px; font-weight: 700; margin: 0; flex: 1; }
+.uc-fl { display: flex; flex-direction: column; border: 1px solid var(--uc-border); border-radius: var(--uc-radius); overflow: hidden; box-shadow: var(--uc-shadow-s); }
+.uc-fi { display: flex; gap: 14px; padding: 16px 18px; background: var(--uc-surface); border-bottom: 1px solid var(--uc-border); transition: background var(--uc-speed); }
+.uc-fi:hover { background: var(--uc-bg); }
+.uc-fi:last-child { border-bottom: none; }
+.uc-fi-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; transition: transform .3s; }
+.uc-fi:hover .uc-fi-icon { transform: scale(1.1); }
+.uc-fi-body { flex: 1; min-width: 0; }
+.uc-fi-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.uc-fi-meta { display: flex; gap: 12px; font-size: 12px; color: var(--uc-text3); }
+.uc-fi-st { font-weight: 600; }
+.uc-fi-msg { margin-top: 6px; font-size: 13px; color: var(--uc-text2); line-height: 1.4; }
+.uc-s-ok .uc-fi-icon { background: rgba(56,142,60,.1); color: #388e3c; }
+.uc-s-ok .uc-fi-st { color: #388e3c; }
+.uc-s-err .uc-fi-icon { background: rgba(211,47,47,.1); color: #d32f2f; }
+.uc-s-err .uc-fi-st { color: #d32f2f; }
+.uc-s-run .uc-fi-icon { background: rgba(25,118,210,.1); color: #1976d2; }
+.uc-s-run .uc-fi-st { color: #1976d2; }
+.uc-s-oth .uc-fi-icon { background: var(--uc-bg2); color: var(--uc-text3); }
+.uc-fi-acts { display: flex; gap: 6px; margin-top: 8px; }
+.uc-btn-xs { padding: 5px 12px; font-size: 11px; border-radius: 6px; }
+.uc-btn-r { background: rgba(211,47,47,.08); color: var(--uc-red); }
+.uc-btn-r:hover { background: rgba(211,47,47,.15); }
+
+/* Scheduled */
+.uc-sched-item {
+  background: var(--uc-surface); border: 1px solid var(--uc-border); border-radius: var(--uc-radius);
+  padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+  box-shadow: var(--uc-shadow-s); transition: all .25s ease;
+}
+.uc-sched-item:hover { box-shadow: var(--uc-shadow-m); }
+.uc-sched-icon { width: 44px; height: 44px; border-radius: var(--uc-radius); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; background: rgba(25,118,210,.08); }
+.uc-sched-body { flex: 1; min-width: 0; }
+.uc-sched-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.uc-sched-time { font-size: 13px; color: var(--uc-accent); font-weight: 600; margin-bottom: 4px; }
+.uc-sched-apps { font-size: 12px; color: var(--uc-text2); line-height: 1.5; }
+.uc-sched-acts { display: flex; gap: 8px; margin-top: 10px; }
+.uc-sched-cancelled { opacity: .45; }
+
+/* Schedule dialog */
+.uc-dlg-sched { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; padding: 14px; background: var(--uc-bg); border-radius: 10px; }
+.uc-dlg-sched label { font-size: 13px; font-weight: 500; color: var(--uc-text2); }
+.uc-dt-input {
+  padding: 9px 12px; border: 1px solid var(--uc-border); border-radius: 8px; font-size: 14px;
+  background: var(--uc-surface); color: var(--uc-text); font-family: inherit; width: 100%;
+  transition: border-color var(--uc-speed), box-shadow var(--uc-speed);
+}
+.uc-dt-input:focus { border-color: var(--uc-accent); outline: none; box-shadow: 0 0 0 3px rgba(25,118,210,.1); }
+
+/* Release Notes Modal */
+.uc-rn-modal {
+  background: var(--uc-surface); border-radius: 20px; padding: 28px; width: 640px; max-width: 92vw;
+  max-height: 85vh; display: flex; flex-direction: column; box-shadow: var(--uc-shadow-l);
+  animation: ucScaleIn .25s ease-out;
+}
+.uc-rn-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.uc-rn-hdr h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.uc-rn-meta { display: flex; gap: 16px; font-size: 13px; color: var(--uc-text2); margin-bottom: 16px; flex-wrap: wrap; }
+.uc-rn-meta span { display: flex; align-items: center; gap: 4px; }
+.uc-rn-tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+.uc-rn-tbl th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: var(--uc-text3); text-transform: uppercase; letter-spacing: .06em; border-bottom: 2px solid var(--uc-border); }
+.uc-rn-tbl td { padding: 10px 12px; border-bottom: 1px solid var(--uc-border); vertical-align: middle; }
+.uc-rn-tbl tr:last-child td { border-bottom: none; }
+.uc-rn-tbl tr { transition: background var(--uc-speed); }
+.uc-rn-tbl tbody tr:hover { background: var(--uc-bg); }
+.uc-rn-ok { color: var(--uc-green); font-weight: 600; }
+.uc-rn-fail { color: var(--uc-red); font-weight: 600; }
+.uc-rn-summary { padding: 14px; background: var(--uc-bg); border-radius: 10px; font-size: 14px; font-weight: 600; text-align: center; }
+.uc-rn-pre { flex: 1; overflow-y: auto; }
+.uc-rn-acts { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.uc-rn-copied { font-size: 12px; color: var(--uc-green); font-weight: 500; margin-right: auto; animation: ucFadeIn .3s; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .uc-nav { padding: 0 16px; gap: 12px; }
+  .uc-content { padding: 20px 16px; }
+  .uc-th, .uc-tr { grid-template-columns: 32px 1.5fr 80px 20px 80px 70px; font-size: 12px; padding: 8px 10px; }
+  .uc-th > :nth-child(7), .uc-tr > :nth-child(7),
+  .uc-th > :nth-child(8), .uc-tr > :nth-child(8) { display: none; }
+  .uc-stats { grid-template-columns: repeat(2, 1fr); }
+  .uc-qa-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .uc-nav { height: 48px; }
+  .uc-nav-brand { font-size: 14px; }
+  .uc-nav-link { padding: 4px 8px; font-size: 12px; }
+  .uc-content { padding: 16px 12px; }
+  .uc-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .uc-stat { padding: 14px; }
+  .uc-stat-val { font-size: 28px; }
+  .uc-dash-title { font-size: 20px; }
+  .uc-th, .uc-tr { grid-template-columns: 28px 1fr 60px 20px 60px; font-size: 11px; }
+  .uc-th > :nth-child(n+6), .uc-tr > :nth-child(n+6) { display: none; }
+  .uc-dlg { padding: 20px; border-radius: 16px; }
+  .uc-rn-modal { padding: 20px; }
+}
+
+.uc-hidden { display: none !important; }
+</style>
+
+<div class="uc-root" id="ucRoot">
+  <nav class="uc-nav" aria-label="Update Center">
+    <div class="uc-nav-brand">Update Center</div>
+    <div class="uc-nav-links" id="ucNav" role="tablist"></div>
+  </nav>
+  <div id="ucError" class="uc-error uc-hidden" role="alert"><span id="ucErrTxt"></span><button class="uc-btn uc-btn-g" id="ucErrDismiss" aria-label="Dismiss error">Dismiss</button></div>
+  <main class="uc-content" id="ucContent" aria-live="polite"></main>
+</div>
+<div id="ucDialog"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  function detectTheme() {
+    var root = document.querySelector('.uc-root');
+    if (!root) return;
+    var cs = getComputedStyle(document.documentElement);
+    var hasPrimary = cs.getPropertyValue('--now-color--primary-1').trim();
+    if (hasPrimary) return;
+
+    var accent = null;
+    try {
+      var header = document.querySelector('.navbar-header,.navpage-header,.sn-polaris-header,[data-testid="chrome-header"]');
+      if (header) {
+        var bg = getComputedStyle(header).backgroundColor;
+        if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') accent = bg;
+      }
+    } catch (e) {}
+
+    if (!accent && window.NOW && window.NOW.brand_color) accent = window.NOW.brand_color;
+
+    if (!accent) {
+      try {
+        var x = new XMLHttpRequest();
+        x.open('GET', '/api/now/table/sys_properties?sysparm_query=name=css.base.color&sysparm_fields=value&sysparm_limit=1', false);
+        var tk = (window.g_ck || (window.NOW && window.NOW.g_ck) || '');
+        x.setRequestHeader('Accept', 'application/json');
+        if (tk) x.setRequestHeader('X-UserToken', tk);
+        x.send();
+        if (x.status === 200) {
+          var d = JSON.parse(x.responseText);
+          if (d.result && d.result[0] && d.result[0].value) accent = d.result[0].value;
+        }
+      } catch (e) {}
+    }
+
+    if (accent) {
+      root.style.setProperty('--uc-accent', accent);
+      root.style.setProperty('--uc-blue', accent);
+      try {
+        var temp = document.createElement('div');
+        temp.style.color = accent;
+        document.body.appendChild(temp);
+        var rgb = getComputedStyle(temp).color.match(/(\d+)/g);
+        document.body.removeChild(temp);
+        if (rgb && rgb.length >= 3) {
+          var r = Math.max(0, parseInt(rgb[0]) - 20), g = Math.max(0, parseInt(rgb[1]) - 20), b = Math.max(0, parseInt(rgb[2]) - 20);
+          root.style.setProperty('--uc-accent-h', 'rgb(' + r + ',' + g + ',' + b + ')');
+        }
+      } catch (e) {}
+    }
+  }
+
+  var S = {
+    view: 'dashboard', updates: [], loading: true, error: null, lastRefresh: null,
+    installing: false, batchId: null, installQueue: [], selected: {},
+    filter: 'all', search: '', pPct: 0, pState: 'Preparing...', pErr: '', pDone: false, logs: [], elapsed: 0,
+    serverStart: null
+  };
+  var clientStart = 0, pollT = null, tickT = null, searchTimer = null;
+
+  function getToken() {
+    if (window.g_ck) return window.g_ck;
+    if (window.NOW && window.NOW.g_ck) return window.NOW.g_ck;
+    try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) return m[1]; } catch(e){}
+    return '';
+  }
+
+  function hdrs() {
+    var h = { Accept: 'application/json', 'Content-Type': 'application/json' };
+    var t = getToken(); if (t) h['X-UserToken'] = t;
+    return h;
+  }
+
+  function api(url, opts) {
+    return fetch(url, Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
+      .then(function(r) {
+        if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);});
+        return r.json();
+      });
+  }
+
+  function fv(f){return f&&(f.value!==undefined?f.value:f);}
+  function fd(f){return f&&(f.display_value!==undefined?f.display_value:fv(f));}
+  function cmpVer(a,b){var f=(a||'0.0.0').split('.'),t=(b||'0.0.0').split('.');if(f[0]!==t[0])return'major';if(f[1]!==t[1])return'minor';return'patch';}
+  function risk(l){return l==='major'?'high':l==='minor'?'medium':'low';}
+  function fmtDur(s){if(s<60)return s+'s';var m=Math.floor(s/60),r=s%60;if(m<60)return m+'m '+r+'s';return Math.floor(m/60)+'h '+(m%60)+'m';}
+
+  function getUpdates() {
+    return api('/api/now/table/sys_store_app?sysparm_display_value=all&sysparm_fields=sys_id,name,scope,version,vendor,active&sysparm_query=active=true^update_available=true^ORDERBYname')
+      .then(function(d){
+        var apps=d.result||[];
+        return Promise.all(apps.map(function(app){
+          return api('/api/now/table/sys_app_version?sysparm_display_value=all&sysparm_fields=sys_id,version,source_app_id,publish_date&sysparm_query=source_app_id='+fv(app.sys_id)+'^ORDERBYversion')
+            .then(function(v){return{app:app,ver:v.result||[]};}).catch(function(){return{app:app,ver:[]};});
+        }));
+      }).then(function(res){
+        return res.filter(function(r){return r.ver.length>0;}).map(function(r){
+          var a=r.app,l=r.ver[r.ver.length-1],iv=fv(a.version),lv=fv(l.version),lev=cmpVer(iv,lv);
+          return{id:fv(a.sys_id),name:fd(a.name),scope:fv(a.scope),iv:iv,lv:lv,lvId:fv(l.sys_id),level:lev,risk:risk(lev),vendor:fd(a.vendor)||'ServiceNow',date:fd(l.publish_date)||''};
+        });
+      });
+  }
+
+  function fireInstallAjax(apps) {
+    if (typeof GlideAjax === 'undefined') {
+      console.warn('[UC] GlideAjax not available');
+      return;
+    }
+    var payload = JSON.stringify(apps.map(function(a) {
+      return { id: a.id, name: a.name, lv: a.lv, iv: a.iv };
+    }));
+    console.log('[UC] Firing installBatch with', payload);
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'installBatch');
+      ga.addParam('sysparm_apps', payload);
+      ga.getXMLAnswer(function(answer) {
+        console.log('[UC] GlideAjax callback answer:', answer);
+        if (answer && answer.length > 10 && !S.batchId) {
+          S.batchId = answer;
+          addLog('GlideAjax returned worker ID', 'success');
+        }
+      });
+    } catch (e) {
+      console.error('[UC] GlideAjax error:', e);
+    }
+  }
+
+  function fireScheduleAjax(apps, schedTime, cb) {
+    if (typeof GlideAjax === 'undefined') { cb(null); return; }
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'scheduleInstall');
+      ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
+      ga.addParam('sysparm_schedule_time', schedTime);
+      ga.getXMLAnswer(function(answer) { console.log('[UC] Schedule response:', answer); cb(answer); });
+    } catch (e) { console.error('[UC] Schedule error:', e); cb(null); }
+  }
+
+  function fireCancelAjax(workerId, cb) {
+    if (typeof GlideAjax === 'undefined') { cb(false); return; }
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'cancelScheduled');
+      ga.addParam('sysparm_worker_id', workerId);
+      ga.getXMLAnswer(function(answer) { console.log('[UC] Cancel response:', answer); cb(answer === 'cancelled'); });
+    } catch (e) { console.error('[UC] Cancel error:', e); cb(false); }
+  }
+
+  function findRecentWorker() {
+    var q = 'nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
+    return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
+      .then(function(d) {
+        var r = (d.result || [])[0];
+        return r ? fv(r.sys_id) : null;
+      }).catch(function() { return null; });
+  }
+
+  function pollWorker(id) {
+    return api('/api/now/table/sys_progress_worker/' + id + '?sysparm_display_value=all&sysparm_fields=sys_id,state,percent_complete,message,error_message,output_summary,sys_created_on')
+      .then(function(d) { return d.result; });
+  }
+
+  function el(t,a,c){var e=document.createElement(t);if(a)Object.keys(a).forEach(function(k){if(k==='className')e.className=a[k];else if(k.indexOf('on')===0)e.addEventListener(k.substring(2),a[k]);else if(k==='disabled'&&a[k])e.disabled=true;else if(k==='checked')e.checked=a[k];else if(k==='type'||k==='placeholder'||k==='value')e[k]=a[k];else e.setAttribute(k,a[k]);});if(c!=null){if(Array.isArray(c))c.forEach(function(x){if(x!=null)e.appendChild(typeof x==='string'?document.createTextNode(x):x);});else if(typeof c==='string')e.textContent=c;else e.appendChild(c);}return e;}
+
+  function renderNav(){
+    var n=document.getElementById('ucNav');n.innerHTML='';
+    [['dashboard','Dashboard'],['updates','Updates'],['scheduled','Scheduled'],['history','History']].forEach(function(t){
+      n.appendChild(el('button',{className:'uc-nav-link'+(S.view===t[0]?' active':''),role:'tab','aria-selected':S.view===t[0]?'true':'false',onclick:function(){nav(t[0]);}},t[1]));
+    });
+    if(S.installing)n.appendChild(el('button',{className:'uc-nav-link uc-nav-pulse',role:'tab','aria-selected':S.view==='progress'?'true':'false',onclick:function(){nav('progress');}},'Installing...'));
+  }
+
+  function renderErr(){
+    var e=document.getElementById('ucError');
+    if(S.error){e.classList.remove('uc-hidden');document.getElementById('ucErrTxt').textContent=S.error;}else e.classList.add('uc-hidden');
+  }
+
+  function renderDash(){
+    var u=S.updates,tot=u.length,maj=u.filter(function(x){return x.level==='major';}).length;
+    var min=u.filter(function(x){return x.level==='minor';}).length,pat=u.filter(function(x){return x.level==='patch';}).length;
+    var hi=u.filter(function(x){return x.risk==='high'||x.risk==='critical';}).length;
+    var vd={};u.forEach(function(x){vd[x.vendor]=(vd[x.vendor]||0)+1;});
+    var ve=Object.keys(vd).map(function(k){return[k,vd[k]];}).sort(function(a,b){return b[1]-a[1];});
+    return el('div',{className:'uc-dash'},[
+      el('div',{className:'uc-dash-hdr'},[
+        el('div',null,[el('h2',{className:'uc-dash-title'},'Update Center'),S.lastRefresh?el('span',{className:'uc-dash-sub'},'Last checked: '+S.lastRefresh.toLocaleTimeString()):null]),
+        el('div',{className:'uc-dash-acts'},[
+          el('button',{className:'uc-btn uc-btn-s',disabled:S.loading,onclick:refresh},S.loading?'Scanning...':'Check for Updates'),
+          S.installing?el('button',{className:'uc-btn uc-btn-p',onclick:function(){nav('progress');}},'View Progress'):null])]),
+      el('div',{className:'uc-stats'},[
+        el('button',{className:'uc-stat uc-c-accent',onclick:function(){nav('updates');}},[el('div',{className:'uc-stat-val'},''+tot),el('div',{className:'uc-stat-lbl'},'Updates Available'),el('div',{className:'uc-stat-hint'},'Click to view all')]),
+        el('div',{className:'uc-stat uc-c-red'},[el('div',{className:'uc-stat-val'},''+maj),el('div',{className:'uc-stat-lbl'},'Major'),el('div',{className:'uc-stat-tag uc-tag-r'},'Breaking changes possible')]),
+        el('div',{className:'uc-stat uc-c-blue'},[el('div',{className:'uc-stat-val'},''+min),el('div',{className:'uc-stat-lbl'},'Minor'),el('div',{className:'uc-stat-tag uc-tag-b'},'New features')]),
+        el('div',{className:'uc-stat uc-c-green'},[el('div',{className:'uc-stat-val'},''+pat),el('div',{className:'uc-stat-lbl'},'Patch'),el('div',{className:'uc-stat-tag uc-tag-g'},'Bug fixes')])]),
+      hi>0?el('div',{className:'uc-risk-ban'},[el('span',null,'\u26A0'),el('span',null,[el('strong',null,''+hi),document.createTextNode(' update'+(hi>1?'s':'')+' flagged as elevated risk.')])]):null,
+      el('div',{className:'uc-qa'},[el('h3',null,'Quick Actions'),el('div',{className:'uc-qa-grid'},[
+        el('button',{className:'uc-qa-card',disabled:tot===0,onclick:function(){nav('updates');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDCE6'),el('div',null,[el('div',{className:'uc-qa-title'},'Install Updates'),el('div',{className:'uc-qa-desc'},'Select and batch install store app updates')])]),
+        el('button',{className:'uc-qa-card',onclick:function(){nav('scheduled');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDD52'),el('div',null,[el('div',{className:'uc-qa-title'},'Scheduled Updates'),el('div',{className:'uc-qa-desc'},'View and manage scheduled installations')])]),
+        el('button',{className:'uc-qa-card',onclick:function(){nav('history');}},[el('div',{className:'uc-qa-icon'},'\uD83D\uDCCB'),el('div',null,[el('div',{className:'uc-qa-title'},'Installation History'),el('div',{className:'uc-qa-desc'},'View past activity and release notes')])])])]),
+      ve.length>0?el('div',{className:'uc-vs'},[el('h3',null,'By Vendor'),el('div',{className:'uc-vl'},ve.map(function(v){return el('div',{className:'uc-vr'},[el('span',{className:'uc-vn'},v[0]),el('span',{className:'uc-vc'},''+v[1])]);}))])  :null
+    ]);
+  }
+
+  function renderList(){
+    var fl=S.updates.filter(function(u){if(S.filter!=='all'&&u.level!==S.filter)return false;if(S.search){var q=S.search.toLowerCase();if(u.name.toLowerCase().indexOf(q)===-1&&u.scope.toLowerCase().indexOf(q)===-1)return false;}return true;});
+    var sc=Object.keys(S.selected).filter(function(k){return S.selected[k];}).length;
+    var allSel=fl.length>0&&fl.every(function(u){return S.selected[u.id];});
+    function li(l){return l==='major'?'\uD83D\uDD34':l==='minor'?'\uD83D\uDFE1':'\uD83D\uDFE2';}
+    return el('div',{className:'uc-ul'},[
+      el('div',{className:'uc-ul-hdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Available Updates'),el('div',{style:'width:60px'})]),
+      el('div',{className:'uc-toolbar'},[
+        el('input',{type:'text',className:'uc-search',placeholder:'Search apps...',value:S.search,oninput:function(e){S.search=e.target.value;clearTimeout(searchTimer);searchTimer=setTimeout(render,150);}}),
+        el('div',{className:'uc-fg'},['all','major','minor','patch'].map(function(f){return el('button',{className:'uc-fb'+(S.filter===f?' active':''),onclick:function(){S.filter=f;render();}},f==='all'?'All':f.charAt(0).toUpperCase()+f.slice(1));}))]),
+      el('div',{className:'uc-sel-bar'},[
+        el('label',{className:'uc-sel-lbl'},[el('input',{type:'checkbox',checked:allSel,onchange:function(){fl.forEach(function(u){S.selected[u.id]=!allSel;});render();}}),el('span',null,sc+' of '+S.updates.length+' selected')]),
+        el('button',{className:'uc-btn uc-btn-p',disabled:sc===0||S.loading,onclick:showDlg},'Install Selected ('+sc+')')]),
+      S.loading?el('div',{className:'uc-empty'},'Scanning for updates...'):
+      fl.length===0?el('div',{className:'uc-empty'},S.updates.length===0?'All apps are up to date!':'No updates match your filter.'):
+      el('div',{className:'uc-tbl'},[
+        el('div',{className:'uc-th'},[el('div',{className:'uc-cc'}),el('div',null,'Application'),el('div',null,'Installed'),el('div'),el('div',null,'Available'),el('div',null,'Type'),el('div',null,'Risk'),el('div',null,'Vendor')])
+      ].concat(fl.map(function(u){
+        return el('div',{className:'uc-tr'+(S.selected[u.id]?' uc-sel':'')},[
+          el('div',{className:'uc-cc'},el('input',{type:'checkbox',checked:!!S.selected[u.id],onchange:function(){S.selected[u.id]=!S.selected[u.id];render();}})),
+          el('div',{className:'uc-cn'},[el('span',{className:'uc-an'},u.name),el('span',{className:'uc-as'},u.scope)]),
+          el('div',{className:'uc-mono'},u.iv),el('div',{className:'uc-ar'},'\u2192'),el('div',{className:'uc-mono'},u.lv),
+          el('div',null,li(u.level)+' '+u.level),
+          el('div',null,el('span',{className:'uc-rb uc-rb-'+u.risk},u.risk)),
+          el('div',{className:'uc-cv'},u.vendor)]);
+      })))
+    ]);
+  }
+
+  function showDlg(){
+    var sel=S.updates.filter(function(u){return S.selected[u.id];});if(!sel.length)return;
+    var mc=sel.filter(function(u){return u.level==='major';}).length,c=document.getElementById('ucDialog');c.innerHTML='';
+    var showSched=false;
+    function rebuildDlg(){
+      c.innerHTML='';
+      var dtInput;
+      var schedSection=el('div',{className:'uc-dlg-sched',style:showSched?'':'display:none'},[
+        el('label',null,'Schedule date & time:'),
+        dtInput=el('input',{type:'datetime-local',className:'uc-dt-input'})
+      ]);
+      var minDt=new Date(Date.now()+300000).toISOString().slice(0,16);
+      setTimeout(function(){if(dtInput)dtInput.min=minDt;},0);
+      c.appendChild(el('div',{className:'uc-overlay',role:'dialog','aria-modal':'true',onclick:function(){c.innerHTML='';}},
+        el('div',{className:'uc-dlg',onclick:function(e){e.stopPropagation();}},[
+          el('h3',{className:'uc-dlg-title'},showSched?'Schedule Installation':'Confirm Batch Installation'),
+          el('p',{className:'uc-dlg-sub'},[document.createTextNode(showSched?'Schedule ':'Install '),el('strong',null,''+sel.length),document.createTextNode(' update'+(sel.length>1?'s':'')+(showSched?' for a future date/time.':' now.'))]),
+          mc>0?el('div',{className:'uc-dlg-warn'},'\u26A0 '+mc+' major update'+(mc>1?'s':'')+'. May contain breaking changes.'):null,
+          el('div',{className:'uc-dlg-list'},sel.map(function(u){return el('div',{className:'uc-dlg-item'},[el('span',{className:'uc-dlg-name'},u.name),el('span',{className:'uc-dlg-ver'},u.iv+' \u2192 '+u.lv),el('span',{className:'uc-dlg-lvl uc-lv-'+u.level},u.level)]);})),
+          schedSection,
+          el('div',{className:'uc-dlg-acts'},[
+            el('button',{className:'uc-btn uc-btn-s',onclick:function(){c.innerHTML='';}},'Cancel'),
+            showSched
+              ?el('button',{className:'uc-btn uc-btn-s',onclick:function(){showSched=false;rebuildDlg();}},'Back')
+              :el('button',{className:'uc-btn uc-btn-s',onclick:function(){showSched=true;rebuildDlg();}},'Schedule for Later'),
+            showSched
+              ?el('button',{className:'uc-btn uc-btn-p',onclick:function(){
+                  var v=dtInput?dtInput.value:'';
+                  if(!v){alert('Please select a date and time.');return;}
+                  var dt=new Date(v);
+                  var snDt=dt.toLocaleString('en-US',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).replace(/(\d+)\/(\d+)\/(\d+),\s*/,'$3-$1-$2 ');
+                  c.innerHTML='';
+                  doSchedule(sel,snDt,v);
+                }},'Confirm Schedule')
+              :el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';doInstall(sel);}},'Install Now')
+          ])])));
+    }
+    rebuildDlg();
+  }
+
+  function doSchedule(sel,snDt,localDt){
+    addLog('Scheduling '+sel.length+' update'+(sel.length>1?'s':'')+' for '+localDt+'...');
+    fireScheduleAjax(sel,snDt,function(answer){
+      if(answer&&answer.length>2){
+        S.error=null;
+        addLog('Updates scheduled successfully!','success');
+        nav('scheduled');
+      } else {
+        S.error='Failed to schedule updates. Check that the Script Include is deployed.';
+        render();
+      }
+    });
+  }
+
+  function renderProg(){
+    var f=S.pDone,e=S.pErr,sc=f?(e?'var(--uc-red)':'var(--uc-green)'):'var(--uc-accent)';
+    return el('div',{className:'uc-pm'},[
+      el('div',{className:'uc-pm-hdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Installation Progress'),el('div',{className:'uc-timer'},fmtDur(S.elapsed))]),
+      el('div',{className:'uc-pcard'},[
+        el('div',{className:'uc-prow'},[el('div',{className:'uc-pstate',style:'color:'+sc},f?(e?'\u2717 Failed':'\u2713 Complete'):S.pState),el('div',{className:'uc-ppct'},S.pPct+'%')]),
+        el('div',{className:'uc-ptrack'},el('div',{className:'uc-pfill'+(f&&!e?' done':'')+(e?' err':''),style:'width:'+S.pPct+'%'})),
+        e?el('div',{className:'uc-perr'},e):null]),
+      el('div',null,[el('h3',{className:'uc-sec'},'Applications ('+S.installQueue.length+')'),
+        el('div',{className:'uc-pills'},S.installQueue.map(function(u){return el('div',{className:'uc-pill'},[el('b',null,u.name),el('span',null,u.iv+' \u2192 '+u.lv)]);}))]),
+      el('div',null,[el('h3',{className:'uc-sec'},'Activity Log'),
+        el('div',{className:'uc-log',id:'ucLog'},S.logs.length===0?[el('div',{className:'uc-log-empty'},'Waiting for activity...')]
+          :S.logs.map(function(l){return el('div',{className:'uc-le uc-le-'+l.type},[el('span',{className:'uc-le-t'},l.time),el('span',{className:'uc-le-m'},l.message)]);}))]),
+      f?el('div',{className:'uc-pdone'},[el('button',{className:'uc-btn uc-btn-s',onclick:function(){nav('dashboard');}},'Return to Dashboard'),el('button',{className:'uc-btn uc-btn-p',onclick:function(){nav('updates');}},'Check for More Updates')]):null
+    ]);
+  }
+
+  function renderHist(){
+    var c=el('div',null,[el('div',{className:'uc-fhdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Installation History'),el('button',{className:'uc-btn uc-btn-s',onclick:loadHist},'Refresh')]),el('div',{id:'ucHist'},el('div',{className:'uc-empty'},'Loading history...'))]);
+    loadHist();return c;
+  }
+
+  function loadHist(){
+    var q='nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
+    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,percent_complete,message,output_summary,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
+      .then(function(d){
+        var es=(d.result||[]).map(function(r){
+          var stRaw=(''+(fv(r.state)||'')).toLowerCase();
+          var stDisp=(''+(fd(r.state)||'')).toLowerCase();
+          var sLabel=fd(r.state)||fv(r.state)||'Unknown';
+          var cls=(stRaw==='2'||stDisp.indexOf('complete')>-1||stDisp.indexOf('success')>-1)?'uc-s-ok'
+            :(stRaw==='3'||stRaw==='4'||stDisp.indexOf('fail')>-1||stDisp.indexOf('error')>-1)?'uc-s-err'
+            :(stRaw==='1'||stDisp.indexOf('running')>-1)?'uc-s-run':'uc-s-oth';
+          var summary=fv(r.output_summary)||'';
+          var hasNotes=false;
+          try{var p=JSON.parse(summary);hasNotes=p&&p.type==='release_notes'&&p.apps;}catch(e){}
+          return{id:fv(r.sys_id),name:fd(r.name)||'Unknown',state:sLabel,cls:cls,msg:fd(r.message)||'',created:fd(r.sys_created_on)||'',hasNotes:hasNotes,summary:summary};
+        });
+        var h=document.getElementById('ucHist');if(!h)return;
+        if(!es.length){h.innerHTML='<div class="uc-empty">No installation history found.</div>';return;}
+        h.innerHTML='';
+        h.appendChild(el('div',{className:'uc-fl'},es.map(function(e){
+          var ic=e.cls==='uc-s-ok'?'\u2713':e.cls==='uc-s-err'?'\u2717':e.cls==='uc-s-run'?'\u27F3':'\u2022';
+          return el('div',{className:'uc-fi '+e.cls},[
+            el('div',{className:'uc-fi-icon'},ic),
+            el('div',{className:'uc-fi-body'},[
+              el('div',{className:'uc-fi-name'},e.name),
+              el('div',{className:'uc-fi-meta'},[e.created?el('span',null,e.created):null,el('span',{className:'uc-fi-st'},e.state)]),
+              e.msg?el('div',{className:'uc-fi-msg'},e.msg):null,
+              e.hasNotes?el('div',{className:'uc-fi-acts'},[el('button',{className:'uc-btn uc-btn-xs uc-btn-s',onclick:(function(sum){return function(){showReleaseNotes(sum);};})(e.summary)},'Release Notes')]):null
+            ])
+          ]);
+        })));
+      }).catch(function(err){console.error('[UC] History load error:',err);var h=document.getElementById('ucHist');if(h)h.innerHTML='<div class="uc-empty">Failed to load history.</div>';});
+  }
+
+  function renderScheduled(){
+    var c=el('div',null,[
+      el('div',{className:'uc-fhdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Scheduled Updates'),el('button',{className:'uc-btn uc-btn-s',onclick:function(){loadScheduledView();}},'Refresh')]),
+      el('div',{id:'ucSched'},el('div',{className:'uc-empty'},'Loading scheduled updates...'))
+    ]);
+    loadScheduledView();return c;
+  }
+
+  function loadScheduledView(){
+    var q='nameSTARTSWITHUpdate Center Scheduled^ORDERBYDESCsys_created_on';
+    api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,name,state,message,output_summary,sys_created_on&sysparm_query='+encodeURIComponent(q)+'&sysparm_limit=50')
+      .then(function(d){
+        var items=(d.result||[]).map(function(r){
+          var stRaw=(''+(fv(r.state)||'')).toLowerCase();
+          var stDisp=(''+(fd(r.state)||'')).toLowerCase();
+          var isCancelled=stRaw==='cancelled'||stRaw==='4'||stDisp.indexOf('cancel')>-1;
+          var isDone=stRaw==='2'||stRaw==='complete'||stDisp.indexOf('complete')>-1||stDisp.indexOf('success')>-1;
+          var isRunning=stRaw==='1'||stRaw==='running'||stDisp.indexOf('running')>-1;
+          var isPending=!isCancelled&&!isDone&&!isRunning;
+          var meta=null;
+          try{meta=JSON.parse(fv(r.output_summary)||'');}catch(e){}
+          var apps=meta&&meta.apps?meta.apps:[];
+          var schedTime=meta&&meta.scheduled_time?meta.scheduled_time:(fd(r.message)||'');
+          var schedBy=meta&&meta.scheduled_by?meta.scheduled_by:'';
+          return{id:fv(r.sys_id),name:fd(r.name)||'Scheduled Install',schedTime:schedTime,schedBy:schedBy,apps:apps,isPending:isPending,isCancelled:isCancelled,isDone:isDone,isRunning:isRunning,state:fd(r.state)||fv(r.state)||'',created:fd(r.sys_created_on)||''};
+        });
+        var h=document.getElementById('ucSched');if(!h)return;
+        if(!items.length){h.innerHTML='<div class="uc-empty">No scheduled updates. Select updates and choose "Schedule for Later" to create one.</div>';return;}
+        h.innerHTML='';
+        items.forEach(function(it){
+          var statusTxt=it.isPending?'Pending':it.isRunning?'Running':it.isDone?'Completed':it.isCancelled?'Cancelled':it.state;
+          var ic=it.isPending?'\uD83D\uDD52':it.isRunning?'\u27F3':it.isDone?'\u2713':'\u2717';
+          var appList=it.apps.map(function(a){return(a.name||a.id)+' '+a.iv+' \u2192 '+a.lv;}).join(', ');
+          h.appendChild(el('div',{className:'uc-sched-item'+(it.isCancelled?' uc-sched-cancelled':'')},[
+            el('div',{className:'uc-sched-icon'},ic),
+            el('div',{className:'uc-sched-body'},[
+              el('div',{className:'uc-sched-title'},it.name),
+              el('div',{className:'uc-sched-time'},it.schedTime.replace('Scheduled for ','')),
+              it.apps.length?el('div',{className:'uc-sched-apps'},appList):null,
+              it.schedBy?el('div',{className:'uc-sched-apps'},'Scheduled by: '+it.schedBy):null,
+              el('div',{className:'uc-sched-apps'},'Status: '+statusTxt),
+              it.isPending?el('div',{className:'uc-sched-acts'},[
+                el('button',{className:'uc-btn uc-btn-xs uc-btn-r',onclick:(function(wid){return function(){
+                  if(!confirm('Cancel this scheduled install?'))return;
+                  fireCancelAjax(wid,function(ok){
+                    if(ok) addLog('Scheduled install cancelled.','success');
+                    else addLog('Failed to cancel scheduled install.','warning');
+                    loadScheduledView();
+                  });
+                };})(it.id)},'Cancel')
+              ]):null
+            ])
+          ]));
+        });
+      }).catch(function(err){console.error('[UC] Scheduled load error:',err);var h=document.getElementById('ucSched');if(h)h.innerHTML='<div class="uc-empty">Failed to load scheduled updates.</div>';});
+  }
+
+  function showReleaseNotes(summaryJson){
+    var data;
+    try{data=JSON.parse(summaryJson);}catch(e){alert('No release notes data available.');return;}
+    if(!data||!data.apps){alert('No release notes data available.');return;}
+    var c=document.getElementById('ucDialog');c.innerHTML='';
+    var tblRows=data.apps.map(function(a){
+      var tr=document.createElement('tr');
+      var ok=a.status==='success';
+      tr.innerHTML='<td>'+(ok?'\u2713':'\u2717')+'</td><td><b>'+esc(a.name)+'</b></td><td class="uc-mono">'+esc(a.from)+'</td><td>\u2192</td><td class="uc-mono">'+esc(a.to)+'</td><td class="'+(ok?'uc-rn-ok':'uc-rn-fail')+'">'+esc(a.status)+'</td>'+(a.error?'<td style="color:var(--uc-red);font-size:12px">'+esc(a.error)+'</td>':'<td></td>');
+      return tr;
+    });
+    var tbl=document.createElement('table');
+    tbl.className='uc-rn-tbl';
+    var thead=document.createElement('thead');
+    thead.innerHTML='<tr><th></th><th>Application</th><th>From</th><th></th><th>To</th><th>Status</th><th>Notes</th></tr>';
+    tbl.appendChild(thead);
+    var tbody=document.createElement('tbody');
+    tblRows.forEach(function(tr){tbody.appendChild(tr);});
+    tbl.appendChild(tbody);
+
+    var copiedEl=el('span',{className:'uc-rn-copied',style:'visibility:hidden'},'Copied!');
+    var sumText=data.completed+' of '+data.total+' installed successfully'+(data.failed>0?', '+data.failed+' failed':'');
+
+    c.appendChild(el('div',{className:'uc-overlay',role:'dialog','aria-modal':'true',onclick:function(){c.innerHTML='';}},
+      el('div',{className:'uc-rn-modal',onclick:function(e){e.stopPropagation();}},[
+        el('div',{className:'uc-rn-hdr'},[el('h3',null,'Release Notes'),el('button',{className:'uc-btn uc-btn-g',onclick:function(){c.innerHTML='';'}},'\u2715')]),
+        el('div',{className:'uc-rn-meta'},[
+          data.startTime?el('span',null,'Started: '+data.startTime):null,
+          data.endTime?el('span',null,'Ended: '+data.endTime):null
+        ]),
+        el('div',{className:'uc-rn-pre'},[tbl]),
+        el('div',{className:'uc-rn-summary'},sumText),
+        el('div',{className:'uc-rn-acts'},[
+          copiedEl,
+          el('button',{className:'uc-btn uc-btn-s',onclick:function(){
+            var txt='RELEASE NOTES\n'+(data.startTime?'Date: '+data.startTime+'\n':'')+'\n';
+            data.apps.forEach(function(a){txt+=(a.status==='success'?'[OK] ':'[FAIL] ')+a.name+' '+a.from+' -> '+a.to+(a.error?' ('+a.error+')':'')+'\n';});
+            txt+='\nSummary: '+sumText;
+            try{navigator.clipboard.writeText(txt);copiedEl.style.visibility='visible';setTimeout(function(){copiedEl.style.visibility='hidden';},2000);}catch(e){prompt('Copy:',txt);}
+          }},'Copy to Clipboard'),
+          el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';}},'Close')
+        ])
+      ])));
+  }
+  function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+
+  function nav(v){S.view=v;render();}
+  function refresh(){S.loading=true;S.error=null;render();getUpdates().then(function(d){S.updates=d;S.lastRefresh=new Date();}).catch(function(e){S.error='Failed to load updates: '+(e.message||'Unknown');}).finally(function(){S.loading=false;render();});}
+
+  function saveSession(){
+    try{sessionStorage.setItem('uc_session',JSON.stringify({
+      batchId:S.batchId,installQueue:S.installQueue,clientStart:clientStart
+    }));}catch(e){}
+  }
+  function clearSession(){try{sessionStorage.removeItem('uc_session');}catch(e){}}
+
+  function addLog(m,t){
+    S.logs.push({time:new Date().toLocaleTimeString(),message:m,type:t||'info'});
+    var logEl=document.getElementById('ucLog');
+    if(logEl){
+      var entry=S.logs[S.logs.length-1];
+      if(S.logs.length===1) logEl.innerHTML='';
+      logEl.appendChild(el('div',{className:'uc-le uc-le-'+entry.type},[el('span',{className:'uc-le-t'},entry.time),el('span',{className:'uc-le-m'},entry.message)]));
+      logEl.scrollTop=logEl.scrollHeight;
+    }
+  }
+
+  function isStateDone(p){
+    var raw=(''+(fv(p.state)||'')).toLowerCase();
+    var disp=(''+(fd(p.state)||'')).toLowerCase();
+    return raw==='2'||raw==='complete'||raw==='successful'||disp.indexOf('complete')>-1||disp.indexOf('success')>-1;
+  }
+  function isStateFailed(p){
+    var raw=(''+(fv(p.state)||'')).toLowerCase();
+    var disp=(''+(fd(p.state)||'')).toLowerCase();
+    return raw==='3'||raw==='4'||raw==='error'||raw==='failed'||raw==='cancelled'
+      ||disp.indexOf('error')>-1||disp.indexOf('fail')>-1||disp.indexOf('cancel')>-1;
+  }
+
+  function doInstall(sel){
+    S.installQueue=sel;S.installing=true;S.view='progress';
+    S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];
+    S.elapsed=0;S.serverStart=null;S.batchId=null;
+    clientStart=Date.now();
+    if(tickT)clearInterval(tickT);
+    if(pollT)clearInterval(pollT);
+    startTick();
+    render();
+
+    setTimeout(function(){
+      addLog('Triggering batch installation ('+sel.length+' app'+(sel.length>1?'s':'')+')...');
+      fireInstallAjax(sel);
+      addLog('Install request sent to server');
+      addLog('Searching for progress worker...','info');
+      searchForWorker(0);
+    },100);
+  }
+
+  function startTick(){
+    if(tickT)clearInterval(tickT);
+    tickT=setInterval(function(){
+      if(S.serverStart) S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
+      else S.elapsed=Math.floor((Date.now()-clientStart)/1000);
+      var t=document.querySelector('.uc-timer');
+      if(t)t.textContent=fmtDur(S.elapsed);
+    },1000);
+  }
+
+  function searchForWorker(attempt){
+    if(S.batchId){saveSession();startPoll();return;}
+    findRecentWorker().then(function(id){
+      if(id){
+        S.batchId=id;
+        saveSession();
+        addLog('Found progress worker: '+id.substring(0,8)+'...','success');
+        startPoll();
+      } else if(attempt<10){
+        var delay=attempt<3?2000:3000;
+        if(attempt>0) addLog('Worker not found yet, retrying... ('+(attempt+1)+'/10)','info');
+        setTimeout(function(){searchForWorker(attempt+1);},delay);
+      } else {
+        addLog('Could not locate progress worker.','error');
+        addLog('The install may have completed. Check History tab.','warning');
+        S.pDone=true;S.pState='Unknown';
+        if(tickT)clearInterval(tickT);
+        clearSession();
+        render();
+      }
+    }).catch(function(e){
+      addLog('Search error: '+e.message,'warning');
+      if(attempt<10) setTimeout(function(){searchForWorker(attempt+1);},3000);
+    });
+  }
+
+  function startPoll(){
+    var lastMsg='';
+    console.log('[UC] Polling worker:', S.batchId);
+    addLog('Monitoring installation progress...','info');
+    function doPoll(){
+      if(!S.batchId)return;
+      pollWorker(S.batchId).then(function(p){
+        var pct=parseInt(fv(p.percent_complete))||0;
+        S.pPct=pct;
+
+        var created=fd(p.sys_created_on);
+        if(created&&!S.serverStart){
+          try{S.serverStart=new Date(created);}catch(e){}
+        }
+
+        var stateDisplay=fd(p.state)||fv(p.state)||'Running';
+        var msg=fd(p.message)||fv(p.message)||'';
+
+        if(msg&&msg!==lastMsg){lastMsg=msg;addLog(msg);}
+        S.pState=stateDisplay;
+
+        if(isStateDone(p)){
+          clearInterval(pollT);if(tickT)clearInterval(tickT);
+          S.pPct=100;S.pDone=true;
+          addLog('Batch installation completed!','success');
+          S.installing=false;S.batchId=null;
+          clearSession();
+          render();refresh();
+        } else if(isStateFailed(p)){
+          clearInterval(pollT);if(tickT)clearInterval(tickT);
+          S.pDone=true;
+          var errMsg=fd(p.error_message)||fv(p.error_message)||'Installation encountered an issue.';
+          S.pErr=errMsg;
+          addLog('Installation issue: '+errMsg,'error');
+          clearSession();
+          render();
+        } else {
+          updateProgressUI();
+        }
+      }).catch(function(e){
+        console.error('[UC] Poll error:', e);
+        addLog('Poll error: '+e.message,'warning');
+      });
+    }
+    doPoll();
+    pollT=setInterval(doPoll,2500);
+  }
+
+  function updateProgressUI(){
+    var pctEl=document.querySelector('.uc-ppct');
+    if(pctEl)pctEl.textContent=S.pPct+'%';
+    var fillEl=document.querySelector('.uc-pfill');
+    if(fillEl)fillEl.style.width=S.pPct+'%';
+    var stateEl=document.querySelector('.uc-pstate');
+    if(stateEl)stateEl.textContent=S.pState;
+  }
+
+  function render(){renderNav();renderErr();var c=document.getElementById('ucContent');
+    if(S.view==='dashboard'){c.innerHTML='';c.appendChild(renderDash());}
+    else if(S.view==='updates'){c.innerHTML='';c.appendChild(renderList());}
+    else if(S.view==='progress'){c.innerHTML='';c.appendChild(renderProg());}
+    else if(S.view==='scheduled'){c.innerHTML='';c.appendChild(renderScheduled());}
+    else if(S.view==='history'){c.innerHTML='';c.appendChild(renderHist());}
+  }
+
+  function resumeSession(){
+    try{
+      var raw=sessionStorage.getItem('uc_session');
+      if(!raw) return false;
+      var sess=JSON.parse(raw);
+      if(!sess||typeof sess.batchId!=='string'||!sess.batchId) return false;
+      S.batchId=sess.batchId;
+      S.installQueue=Array.isArray(sess.installQueue)?sess.installQueue:[];
+      S.installing=true;
+      S.view='progress';
+      S.pPct=0;S.pState='Resuming...';S.pDone=false;S.pErr='';S.logs=[];
+      clientStart=sess.clientStart||Date.now();
+      startTick();
+      render();
+      addLog('Resuming monitoring of active installation...','info');
+      startPoll();
+      return true;
+    }catch(e){return false;}
+  }
+
+  document.getElementById('ucErrDismiss').addEventListener('click',function(){S.error=null;renderErr();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('ucDialog');if(d&&d.innerHTML)d.innerHTML='';}});
+  detectTheme();
+  if(!resumeSession()){render();refresh();}else{refresh();}
+})();
+</script>
