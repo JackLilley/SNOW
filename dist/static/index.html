@@ -289,40 +289,47 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
       });
   }
 
-  function triggerInstall(apps) {
-    return new Promise(function(resolve, reject) {
-      if (typeof GlideAjax === 'undefined') {
-        reject(new Error('GlideAjax not available — page must be loaded within ServiceNow.'));
-        return;
-      }
-      var payload = JSON.stringify(apps.map(function(a) {
-        return { id: a.id, name: a.name, lv: a.lv, iv: a.iv };
-      }));
-      console.log('[UpdateCenter] Calling UpdateCenterInstaller.installBatch with', payload);
-      var timedOut = false;
-      var timer = setTimeout(function() {
-        timedOut = true;
-        reject(new Error('GlideAjax call timed out after 30s. Verify UpdateCenterInstaller Script Include exists in scope x_g_s7s_updater.'));
-      }, 30000);
-      try {
-        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-        ga.addParam('sysparm_name', 'installBatch');
-        ga.addParam('sysparm_apps', payload);
-        ga.getXMLAnswer(function(answer) {
-          if (timedOut) return;
-          clearTimeout(timer);
-          console.log('[UpdateCenter] GlideAjax response:', answer);
-          if (answer && answer.length > 10) {
-            resolve(answer);
-          } else {
-            reject(new Error('Server returned empty worker ID ("' + (answer || '') + '"). Check Script Include logs.'));
-          }
-        });
-      } catch (e) {
-        clearTimeout(timer);
-        reject(new Error('GlideAjax error: ' + e.message));
-      }
-    });
+  function fireInstallAjax(apps) {
+    if (typeof GlideAjax === 'undefined') {
+      console.warn('[UC] GlideAjax not available');
+      return;
+    }
+    var payload = JSON.stringify(apps.map(function(a) {
+      return { id: a.id, name: a.name, lv: a.lv, iv: a.iv };
+    }));
+    console.log('[UC] Firing installBatch with', payload);
+    try {
+      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+      ga.addParam('sysparm_name', 'installBatch');
+      ga.addParam('sysparm_apps', payload);
+      ga.getXMLAnswer(function(answer) {
+        console.log('[UC] GlideAjax callback answer:', answer);
+        if (answer && answer.length > 10 && !S.batchId) {
+          S.batchId = answer;
+          addLog('GlideAjax returned worker ID', 'success');
+        }
+      });
+    } catch (e) {
+      console.error('[UC] GlideAjax error:', e);
+    }
+  }
+
+  function findRecentWorker() {
+    var q = 'nameSTARTSWITHUpdate Center^stateINrunning,Running^ORDERBYDESCsys_created_on';
+    return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
+      .then(function(d) {
+        var r = (d.result || [])[0];
+        return r ? fv(r.sys_id) : null;
+      }).catch(function() { return null; });
+  }
+
+  function findAnyRecentWorker() {
+    var q = 'nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
+    return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
+      .then(function(d) {
+        var r = (d.result || [])[0];
+        return r ? fv(r.sys_id) : null;
+      }).catch(function() { return null; });
   }
 
   function pollWorker(id) {
@@ -451,35 +458,81 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 
   function nav(v){S.view=v;render();}
   function refresh(){S.loading=true;S.error=null;render();getUpdates().then(function(d){S.updates=d;S.lastRefresh=new Date();}).catch(function(e){S.error='Failed to load updates: '+(e.message||'Unknown');}).finally(function(){S.loading=false;render();});}
+
+  function addLog(m,t){
+    S.logs.push({time:new Date().toLocaleTimeString(),message:m,type:t||'info'});
+    var logEl=document.getElementById('ucLog');
+    if(logEl){
+      var entry=S.logs[S.logs.length-1];
+      if(S.logs.length===1) logEl.innerHTML='';
+      logEl.appendChild(el('div',{className:'uc-le uc-le-'+entry.type},[el('span',{className:'uc-le-t'},entry.time),el('span',{className:'uc-le-m'},entry.message)]));
+      logEl.scrollTop=logEl.scrollHeight;
+    }
+  }
+
   function doInstall(sel){
-    S.installQueue=sel;S.installing=true;S.view='progress';S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];S.elapsed=0;S.serverStart=null;
+    S.installQueue=sel;S.installing=true;S.view='progress';
+    S.pPct=0;S.pState='Preparing...';S.pErr='';S.pDone=false;S.logs=[];
+    S.elapsed=0;S.serverStart=null;S.batchId=null;
     clientStart=Date.now();
     if(tickT)clearInterval(tickT);
+    if(pollT)clearInterval(pollT);
     tickT=setInterval(function(){
       if(S.serverStart) S.elapsed=Math.floor((Date.now()-S.serverStart.getTime())/1000);
       else S.elapsed=Math.floor((Date.now()-clientStart)/1000);
-      var el=document.querySelector('.uc-timer');
-      if(el)el.textContent=fmtDur(S.elapsed);
+      var t=document.querySelector('.uc-timer');
+      if(t)t.textContent=fmtDur(S.elapsed);
     },1000);
     render();
-    addLog('Triggering batch installation ('+sel.length+' app'+(sel.length>1?'s':'')+')...');
-    triggerInstall(sel).then(function(workerId){
-      S.batchId=workerId;
-      addLog('Server accepted request (worker: '+workerId.substring(0,8)+'...)');
-      startPoll();
+
+    setTimeout(function(){
+      addLog('Triggering batch installation ('+sel.length+' app'+(sel.length>1?'s':'')+')...');
+      fireInstallAjax(sel);
+      addLog('Install request sent to server');
+      addLog('Searching for progress worker...','info');
+      searchForWorker(0);
+    },100);
+  }
+
+  function searchForWorker(attempt){
+    if(S.batchId){startPoll();return;}
+    findRecentWorker().then(function(id){
+      if(!id) id=null;
+      if(id){
+        S.batchId=id;
+        addLog('Found active progress worker: '+id.substring(0,8)+'...','success');
+        startPoll();
+      } else if(attempt<8){
+        var delay=attempt<3?2000:3000;
+        addLog('Worker not found yet, retrying... (attempt '+(attempt+2)+')','info');
+        setTimeout(function(){searchForWorker(attempt+1);},delay);
+      } else {
+        findAnyRecentWorker().then(function(id2){
+          if(id2){
+            S.batchId=id2;
+            addLog('Found completed worker: '+id2.substring(0,8)+'...','info');
+            startPoll();
+          } else {
+            addLog('Could not locate progress worker after multiple attempts.','error');
+            addLog('The install may have completed. Check History tab.','warning');
+            S.pDone=true;S.pState='Unknown';
+            if(tickT)clearInterval(tickT);
+            render();
+          }
+        });
+      }
     }).catch(function(e){
-      clearInterval(tickT);
-      S.error='Failed to start installation: '+(e.message||'Unknown');
-      addLog('ERROR: '+(e.message||'Unknown'),'error');
-      S.installing=false;S.pDone=true;S.pErr=e.message||'Unknown';
-      render();
+      addLog('Search error: '+e.message,'warning');
+      if(attempt<8) setTimeout(function(){searchForWorker(attempt+1);},3000);
     });
   }
-  function addLog(m,t){S.logs.push({time:new Date().toLocaleTimeString(),message:m,type:t||'info'});render();setTimeout(function(){var l=document.getElementById('ucLog');if(l)l.scrollTop=l.scrollHeight;},50);}
+
   function startPoll(){
     var lastMsg='';
-    console.log('[UpdateCenter] Starting poll for worker:', S.batchId);
-    pollT=setInterval(function(){if(!S.batchId)return;
+    console.log('[UC] Polling worker:', S.batchId);
+    addLog('Monitoring installation progress...','info');
+    function doPoll(){
+      if(!S.batchId)return;
       pollWorker(S.batchId).then(function(p){
         var pct=parseInt(fv(p.percent_complete))||0;
         S.pPct=pct;
@@ -487,34 +540,48 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
         var created=fd(p.sys_created_on);
         if(created&&!S.serverStart){
           try{S.serverStart=new Date(created);}catch(e){}
-          addLog('Install process started on server','info');
         }
 
-        var stateVal=fv(p.state)||'';
+        var stateVal=(fv(p.state)||'').toLowerCase();
+        var stateDisplay=fd(p.state)||fv(p.state)||'running';
         var msg=fd(p.message)||fv(p.message)||'';
 
         if(msg&&msg!==lastMsg){lastMsg=msg;addLog(msg);}
 
-        if(stateVal!==S.pState){S.pState=stateVal;}
+        S.pState=stateDisplay;
 
-        if(stateVal==='complete'||stateVal==='Complete'||stateVal==='Successful'){
+        if(stateVal==='complete'||stateVal==='successful'){
           clearInterval(pollT);if(tickT)clearInterval(tickT);
           S.pPct=100;S.pDone=true;
           addLog('Batch installation completed!','success');
-          S.installing=false;S.batchId=null;refresh();
-        } else if(stateVal==='error'||stateVal==='Error'||stateVal==='Failed'){
+          S.installing=false;S.batchId=null;
+          render();refresh();
+        } else if(stateVal==='error'||stateVal==='failed'||stateVal==='cancelled'){
           clearInterval(pollT);if(tickT)clearInterval(tickT);
           S.pDone=true;
-          var errMsg=fd(p.error_message)||fv(p.error_message)||'Installation failed.';
+          var errMsg=fd(p.error_message)||fv(p.error_message)||'Installation encountered an issue.';
           S.pErr=errMsg;
-          addLog('Installation failed: '+errMsg,'error');
+          addLog('Installation issue: '+errMsg,'error');
+          render();
+        } else {
+          updateProgressUI();
         }
-        render();
       }).catch(function(e){
-        console.error('[UpdateCenter] Poll error:', e);
+        console.error('[UC] Poll error:', e);
         addLog('Poll error: '+e.message,'warning');
       });
-    },3000);
+    }
+    doPoll();
+    pollT=setInterval(doPoll,2500);
+  }
+
+  function updateProgressUI(){
+    var pctEl=document.querySelector('.uc-ppct');
+    if(pctEl)pctEl.textContent=S.pPct+'%';
+    var fillEl=document.querySelector('.uc-pfill');
+    if(fillEl)fillEl.style.width=S.pPct+'%';
+    var stateEl=document.querySelector('.uc-pstate');
+    if(stateEl)stateEl.textContent=S.pState;
   }
 
   function render(){renderNav();renderErr();var c=document.getElementById('ucContent');
