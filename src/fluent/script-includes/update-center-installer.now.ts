@@ -5,7 +5,7 @@ ScriptInclude({
   $id: Now.ID['update-center-installer'],
   name: 'UpdateCenterInstaller',
   description: 'Handles batch installation of store app updates for Update Center',
-  client_callable: true,
+  clientCallable: true,
   access: 'public',
   script: `
 var UpdateCenterInstaller = Class.create();
