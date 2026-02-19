@@ -6,7 +6,6 @@ ScriptInclude({
   name: 'UpdateCenterInstaller',
   description: 'Handles batch installation of store app updates for Update Center',
   clientCallable: true,
-  access: 'public',
   script: `
 var UpdateCenterInstaller = Class.create();
 UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
