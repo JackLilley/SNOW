@@ -69,14 +69,28 @@ SNOW Update Center improves upon the standard Application Manager experience by 
 
 This repo is structured for ServiceNow's source control integration.
 
-### Step 1: Clone into ServiceNow
+### Option A: Link from Instance (Recommended)
 
-1. Open **ServiceNow IDE** (or App Engine Studio)
+ServiceNow source control works best when the app is created on the instance first:
+
+1. Open **App Engine Studio** (or classic **Studio**) on your instance
+2. **Create a new app**: Name = `SNOW Update Center`, Scope = `x_snc_update_center`
+3. Go to **Source Control settings** and link to this Git repo URL
+4. ServiceNow will sync and detect the `update/` XML records
+5. Click **Apply Remote Changes** to import all Script Includes, REST API, roles, etc.
+
+### Option B: Clone Git Repository (IDE)
+
+If your instance supports it:
+
+1. Open **ServiceNow IDE**
 2. Click **Clone Git repository**
 3. Enter this repo's URL and credentials
 4. ServiceNow will import the application scope and all records from `update/`
 
-### Step 2: Post-Import Setup
+> **Note:** If you get "No fluent app found", use Option A instead. The IDE clone feature requires the app to have been originally created via App Engine Studio.
+
+### Post-Import Setup
 
 The Git import creates the app scope, Script Includes, REST API, roles, UI action, scheduled job, and system properties. However, some artifacts **must be built on the platform** after import:
 
