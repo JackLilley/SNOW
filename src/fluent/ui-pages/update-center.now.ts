@@ -1,12 +1,15 @@
 import '@servicenow/sdk/global'
-import { UiPage } from '@servicenow/sdk/core'
-import updateCenterPage from '../../client/index.html'
+import { Record } from '@servicenow/sdk/core'
 
-UiPage({
+Record({
   $id: Now.ID['update-center-page'],
-  endpoint: 'x_g_s7s_updater_update_center.do',
-  description: 'Batch Store update installer with real-time progress monitoring',
-  category: 'general',
-  html: updateCenterPage,
-  direct: false,
+  table: 'sys_ui_page',
+  data: {
+    name: 'x_g_s7s_updater_update_center',
+    description: 'Batch Store update installer with real-time progress monitoring',
+    category: 'general',
+    direct: false,
+    html: Now.include('./update-center.html'),
+    client_script: Now.include('./update-center.client.js'),
+  },
 })
