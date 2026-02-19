@@ -1,19 +1,19 @@
 <style>
 .uc-root {
-  --uc-bg: #f5f6fa;
-  --uc-bg2: #ebedf3;
-  --uc-surface: #ffffff;
-  --uc-border: #e0e2ea;
-  --uc-text: #1a1a2e;
-  --uc-text2: #5a5d70;
-  --uc-text3: #8b8ea3;
-  --uc-accent: #1976d2;
-  --uc-accent-h: #1565c0;
-  --uc-red: #d32f2f;
-  --uc-orange: #f57c00;
-  --uc-blue: #1976d2;
-  --uc-green: #388e3c;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --uc-bg: var(--now-color_background--secondary, var(--now-color--neutral-1, #f5f6fa));
+  --uc-bg2: var(--now-color_background--tertiary, var(--now-color--neutral-2, #ebedf3));
+  --uc-surface: var(--now-color_background--primary, var(--now-color--neutral-0, #ffffff));
+  --uc-border: var(--now-color_divider--color-primary, var(--now-color--neutral-3, #e0e2ea));
+  --uc-text: var(--now-color_text--primary, var(--now-color--neutral-18, #1a1a2e));
+  --uc-text2: var(--now-color_text--secondary, var(--now-color--neutral-12, #5a5d70));
+  --uc-text3: var(--now-color_text--tertiary, var(--now-color--neutral-8, #8b8ea3));
+  --uc-accent: var(--now-color--primary-1, var(--now-color_brand--primary, #1976d2));
+  --uc-accent-h: var(--now-color--primary-2, var(--now-color_brand--secondary, #1565c0));
+  --uc-red: var(--now-color_alert--critical-2, var(--now-color--alert-critical-2, #d32f2f));
+  --uc-orange: var(--now-color_alert--warning-2, var(--now-color--alert-warning-2, #f57c00));
+  --uc-blue: var(--now-color--primary-1, var(--now-color_brand--primary, #1976d2));
+  --uc-green: var(--now-color_alert--positive-2, var(--now-color--alert-positive-2, #388e3c));
+  font-family: var(--now-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif);
   font-size: 14px; line-height: 1.5; color: var(--uc-text); background: var(--uc-bg);
   -webkit-font-smoothing: antialiased; min-height: 100vh;
 }
@@ -283,6 +283,56 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
 <script>
 (function () {
   'use strict';
+
+  function detectTheme() {
+    var root = document.querySelector('.uc-root');
+    if (!root) return;
+    var cs = getComputedStyle(document.documentElement);
+    var hasPrimary = cs.getPropertyValue('--now-color--primary-1').trim();
+    if (hasPrimary) return;
+
+    var accent = null;
+    try {
+      var header = document.querySelector('.navbar-header,.navpage-header,.sn-polaris-header,[data-testid="chrome-header"]');
+      if (header) {
+        var bg = getComputedStyle(header).backgroundColor;
+        if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') accent = bg;
+      }
+    } catch (e) {}
+
+    if (!accent && window.NOW && window.NOW.brand_color) accent = window.NOW.brand_color;
+
+    if (!accent) {
+      try {
+        var x = new XMLHttpRequest();
+        x.open('GET', '/api/now/table/sys_properties?sysparm_query=name=css.base.color&sysparm_fields=value&sysparm_limit=1', false);
+        var tk = (window.g_ck || (window.NOW && window.NOW.g_ck) || '');
+        x.setRequestHeader('Accept', 'application/json');
+        if (tk) x.setRequestHeader('X-UserToken', tk);
+        x.send();
+        if (x.status === 200) {
+          var d = JSON.parse(x.responseText);
+          if (d.result && d.result[0] && d.result[0].value) accent = d.result[0].value;
+        }
+      } catch (e) {}
+    }
+
+    if (accent) {
+      root.style.setProperty('--uc-accent', accent);
+      root.style.setProperty('--uc-blue', accent);
+      try {
+        var temp = document.createElement('div');
+        temp.style.color = accent;
+        document.body.appendChild(temp);
+        var rgb = getComputedStyle(temp).color.match(/(\d+)/g);
+        document.body.removeChild(temp);
+        if (rgb && rgb.length >= 3) {
+          var r = Math.max(0, parseInt(rgb[0]) - 20), g = Math.max(0, parseInt(rgb[1]) - 20), b = Math.max(0, parseInt(rgb[2]) - 20);
+          root.style.setProperty('--uc-accent-h', 'rgb(' + r + ',' + g + ',' + b + ')');
+        }
+      } catch (e) {}
+    }
+  }
 
   var S = {
     view: 'dashboard', updates: [], loading: true, error: null, lastRefresh: null,
@@ -852,6 +902,7 @@ button.uc-stat:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: transl
   }
 
   document.getElementById('ucErrDismiss').addEventListener('click',function(){S.error=null;renderErr();});
+  detectTheme();
   if(!resumeSession()){render();refresh();}else{refresh();}
 })();
 </script>
