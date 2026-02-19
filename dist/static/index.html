@@ -31,7 +31,6 @@
 @keyframes ucSlideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
 @keyframes ucScaleIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:none} }
 @keyframes ucProgressPulse { 0%{opacity:.85} 50%{opacity:1} 100%{opacity:.85} }
-@keyframes ucGradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
 .uc-nav {
   display: flex; align-items: center; gap: 24px; padding: 0 32px; height: 56px;
@@ -213,7 +212,7 @@ button.uc-stat:active { transform: translateY(-1px); }
 .uc-pstate { font-size: 18px; font-weight: 600; transition: color .3s; }
 .uc-ppct { font-size: 32px; font-weight: 800; font-family: monospace; letter-spacing: -0.02em; transition: color .3s; }
 .uc-ptrack { height: 12px; background: var(--uc-bg2); border-radius: 99px; overflow: hidden; position: relative; }
-.uc-pfill { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); background: linear-gradient(90deg, var(--uc-accent), color-mix(in srgb, var(--uc-accent) 70%, white)); animation: ucProgressPulse 2s ease-in-out infinite; position: relative; }
+.uc-pfill { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); background: var(--uc-accent); background: linear-gradient(90deg, var(--uc-accent), color-mix(in srgb, var(--uc-accent) 70%, white)); animation: ucProgressPulse 2s ease-in-out infinite; position: relative; }
 .uc-pfill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%); background-size: 200% 100%; animation: ucShimmer 2s linear infinite; }
 .uc-pfill.done { background: var(--uc-green)!important; animation: none; }
 .uc-pfill.done::after { display: none; }
@@ -339,12 +338,12 @@ button.uc-stat:active { transform: translateY(-1px); }
 </style>
 
 <div class="uc-root" id="ucRoot">
-  <nav class="uc-nav">
+  <nav class="uc-nav" aria-label="Update Center">
     <div class="uc-nav-brand">Update Center</div>
-    <div class="uc-nav-links" id="ucNav"></div>
+    <div class="uc-nav-links" id="ucNav" role="tablist"></div>
   </nav>
-  <div id="ucError" class="uc-error uc-hidden"><span id="ucErrTxt"></span><button class="uc-btn uc-btn-g" id="ucErrDismiss">Dismiss</button></div>
-  <main class="uc-content" id="ucContent"></main>
+  <div id="ucError" class="uc-error uc-hidden" role="alert"><span id="ucErrTxt"></span><button class="uc-btn uc-btn-g" id="ucErrDismiss" aria-label="Dismiss error">Dismiss</button></div>
+  <main class="uc-content" id="ucContent" aria-live="polite"></main>
 </div>
 <div id="ucDialog"></div>
 
@@ -408,7 +407,7 @@ button.uc-stat:active { transform: translateY(-1px); }
     filter: 'all', search: '', pPct: 0, pState: 'Preparing...', pErr: '', pDone: false, logs: [], elapsed: 0,
     serverStart: null
   };
-  var clientStart = 0, pollT = null, tickT = null;
+  var clientStart = 0, pollT = null, tickT = null, searchTimer = null;
 
   function getToken() {
     if (window.g_ck) return window.g_ck;
@@ -518,9 +517,9 @@ button.uc-stat:active { transform: translateY(-1px); }
   function renderNav(){
     var n=document.getElementById('ucNav');n.innerHTML='';
     [['dashboard','Dashboard'],['updates','Updates'],['scheduled','Scheduled'],['history','History']].forEach(function(t){
-      n.appendChild(el('button',{className:'uc-nav-link'+(S.view===t[0]?' active':''),onclick:function(){nav(t[0]);}},t[1]));
+      n.appendChild(el('button',{className:'uc-nav-link'+(S.view===t[0]?' active':''),role:'tab','aria-selected':S.view===t[0]?'true':'false',onclick:function(){nav(t[0]);}},t[1]));
     });
-    if(S.installing)n.appendChild(el('button',{className:'uc-nav-link uc-nav-pulse',onclick:function(){nav('progress');}},'Installing...'));
+    if(S.installing)n.appendChild(el('button',{className:'uc-nav-link uc-nav-pulse',role:'tab','aria-selected':S.view==='progress'?'true':'false',onclick:function(){nav('progress');}},'Installing...'));
   }
 
   function renderErr(){
@@ -562,7 +561,7 @@ button.uc-stat:active { transform: translateY(-1px); }
     return el('div',{className:'uc-ul'},[
       el('div',{className:'uc-ul-hdr'},[el('button',{className:'uc-btn uc-btn-g',onclick:function(){nav('dashboard');'}},'\u2190 Back'),el('h2',null,'Available Updates'),el('div',{style:'width:60px'})]),
       el('div',{className:'uc-toolbar'},[
-        el('input',{type:'text',className:'uc-search',placeholder:'Search apps...',value:S.search,oninput:function(e){S.search=e.target.value;render();}}),
+        el('input',{type:'text',className:'uc-search',placeholder:'Search apps...',value:S.search,oninput:function(e){S.search=e.target.value;clearTimeout(searchTimer);searchTimer=setTimeout(render,150);}}),
         el('div',{className:'uc-fg'},['all','major','minor','patch'].map(function(f){return el('button',{className:'uc-fb'+(S.filter===f?' active':''),onclick:function(){S.filter=f;render();}},f==='all'?'All':f.charAt(0).toUpperCase()+f.slice(1));}))]),
       el('div',{className:'uc-sel-bar'},[
         el('label',{className:'uc-sel-lbl'},[el('input',{type:'checkbox',checked:allSel,onchange:function(){fl.forEach(function(u){S.selected[u.id]=!allSel;});render();}}),el('span',null,sc+' of '+S.updates.length+' selected')]),
@@ -596,7 +595,7 @@ button.uc-stat:active { transform: translateY(-1px); }
       ]);
       var minDt=new Date(Date.now()+300000).toISOString().slice(0,16);
       setTimeout(function(){if(dtInput)dtInput.min=minDt;},0);
-      c.appendChild(el('div',{className:'uc-overlay',onclick:function(){c.innerHTML='';}},
+      c.appendChild(el('div',{className:'uc-overlay',role:'dialog','aria-modal':'true',onclick:function(){c.innerHTML='';}},
         el('div',{className:'uc-dlg',onclick:function(e){e.stopPropagation();}},[
           el('h3',{className:'uc-dlg-title'},showSched?'Schedule Installation':'Confirm Batch Installation'),
           el('p',{className:'uc-dlg-sub'},[document.createTextNode(showSched?'Schedule ':'Install '),el('strong',null,''+sel.length),document.createTextNode(' update'+(sel.length>1?'s':'')+(showSched?' for a future date/time.':' now.'))]),
@@ -773,7 +772,7 @@ button.uc-stat:active { transform: translateY(-1px); }
     var copiedEl=el('span',{className:'uc-rn-copied',style:'visibility:hidden'},'Copied!');
     var sumText=data.completed+' of '+data.total+' installed successfully'+(data.failed>0?', '+data.failed+' failed':'');
 
-    c.appendChild(el('div',{className:'uc-overlay',onclick:function(){c.innerHTML='';}},
+    c.appendChild(el('div',{className:'uc-overlay',role:'dialog','aria-modal':'true',onclick:function(){c.innerHTML='';}},
       el('div',{className:'uc-rn-modal',onclick:function(e){e.stopPropagation();}},[
         el('div',{className:'uc-rn-hdr'},[el('h3',null,'Release Notes'),el('button',{className:'uc-btn uc-btn-g',onclick:function(){c.innerHTML='';'}},'\u2715')]),
         el('div',{className:'uc-rn-meta'},[
@@ -785,9 +784,9 @@ button.uc-stat:active { transform: translateY(-1px); }
         el('div',{className:'uc-rn-acts'},[
           copiedEl,
           el('button',{className:'uc-btn uc-btn-s',onclick:function(){
-            var txt='RELEASE NOTES\\n'+(data.startTime?'Date: '+data.startTime+'\\n':'')+'\\n';
-            data.apps.forEach(function(a){txt+=(a.status==='success'?'[OK] ':'[FAIL] ')+a.name+' '+a.from+' -> '+a.to+(a.error?' ('+a.error+')':'')+'\\n';});
-            txt+='\\nSummary: '+sumText;
+            var txt='RELEASE NOTES\n'+(data.startTime?'Date: '+data.startTime+'\n':'')+'\n';
+            data.apps.forEach(function(a){txt+=(a.status==='success'?'[OK] ':'[FAIL] ')+a.name+' '+a.from+' -> '+a.to+(a.error?' ('+a.error+')':'')+'\n';});
+            txt+='\nSummary: '+sumText;
             try{navigator.clipboard.writeText(txt);copiedEl.style.visibility='visible';setTimeout(function(){copiedEl.style.visibility='hidden';},2000);}catch(e){prompt('Copy:',txt);}
           }},'Copy to Clipboard'),
           el('button',{className:'uc-btn uc-btn-p',onclick:function(){c.innerHTML='';}},'Close')
@@ -954,9 +953,9 @@ button.uc-stat:active { transform: translateY(-1px); }
       var raw=sessionStorage.getItem('uc_session');
       if(!raw) return false;
       var sess=JSON.parse(raw);
-      if(!sess.batchId) return false;
+      if(!sess||typeof sess.batchId!=='string'||!sess.batchId) return false;
       S.batchId=sess.batchId;
-      S.installQueue=sess.installQueue||[];
+      S.installQueue=Array.isArray(sess.installQueue)?sess.installQueue:[];
       S.installing=true;
       S.view='progress';
       S.pPct=0;S.pState='Resuming...';S.pDone=false;S.pErr='';S.logs=[];
@@ -970,6 +969,7 @@ button.uc-stat:active { transform: translateY(-1px); }
   }
 
   document.getElementById('ucErrDismiss').addEventListener('click',function(){S.error=null;renderErr();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('ucDialog');if(d&&d.innerHTML)d.innerHTML='';}});
   detectTheme();
   if(!resumeSession()){render();refresh();}else{refresh();}
 })();

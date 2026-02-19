@@ -11,6 +11,7 @@ var UpdateCenterInstaller = Class.create();
 UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
     installBatch: function() {
+        if (!gs.hasRole('admin')) { gs.warn('UpdateCenterInstaller: admin role required'); return ''; }
         var appsJson = this.getParameter('sysparm_apps');
         if (!appsJson) return '';
         var apps;
@@ -38,6 +39,7 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
     },
 
     scheduleInstall: function() {
+        if (!gs.hasRole('admin')) return '';
         var appsJson = this.getParameter('sysparm_apps');
         var schedTime = this.getParameter('sysparm_schedule_time');
         if (!appsJson || !schedTime) return '';
@@ -70,6 +72,7 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
     },
 
     cancelScheduled: function() {
+        if (!gs.hasRole('admin')) return 'error';
         var workerId = this.getParameter('sysparm_worker_id');
         if (!workerId) return 'error';
 
@@ -135,8 +138,8 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
             "                        if (storeApp.get(appId) && storeApp.getValue('version') == version) { installed = true; break; }\\n" +
             "                        updateWorker('Installing (' + (i + 1) + '/' + totalApps + '): ' + appName + ' (' + waited + 's)...', pctBefore, 'running');\\n" +
             "                    }\\n" +
-            "                    if (!installed) installed = true;\\n" +
-            "                    res.method = 'InstallAppWorker';\\n" +
+"                    if (installed) { res.method = 'InstallAppWorker'; }\\n" +
+"                    else { res.method = 'InstallAppWorker (async)'; installed = true; }\\n" +
             "                }\\n" +
             "            } catch (e1) { gs.info('UpdateCenterInstaller: sn_appclient not available'); }\\n" +
             "\\n" +
