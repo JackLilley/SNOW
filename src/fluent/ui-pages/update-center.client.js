@@ -618,8 +618,17 @@
     }catch(e){return false;}
   }
 
-  document.getElementById('ucErrDismiss').addEventListener('click',function(){S.error=null;renderErr();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('ucDialog');if(d&&d.innerHTML)d.innerHTML='';}});
-  detectTheme();
-  if(!resumeSession()){render();refresh();}else{refresh();}
+  function init(){
+    var dismissBtn=document.getElementById('ucErrDismiss');
+    if(dismissBtn) dismissBtn.addEventListener('click',function(){S.error=null;renderErr();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('ucDialog');if(d&&d.innerHTML)d.innerHTML='';}});
+    detectTheme();
+    if(!resumeSession()){render();refresh();}else{refresh();}
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init);
+  } else {
+    init();
+  }
 })();

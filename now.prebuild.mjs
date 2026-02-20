@@ -1,11 +1,18 @@
 import { servicenowFrontEndPlugins, rollup, glob } from '@servicenow/isomorphic-rollup'
 
-export default async ({ rootDir, config, fs, path, logger, registerExplicitId }) => {
+export default async ({ rootDir, config, fs, path, logger }) => {
   const clientDir = path.join(rootDir, config.clientDir)
-  const htmlFilePattern = path.join(clientDir, '**', '*.html')
-  const htmlFiles = await glob(htmlFilePattern, { fs })
+
+  let htmlFiles = []
+  try {
+    const htmlFilePattern = path.join(clientDir, '**', '*.html')
+    htmlFiles = await glob(htmlFilePattern, { fs })
+  } catch (e) {
+    // clientDir may not exist
+  }
+
   if (!htmlFiles.length) {
-    logger.warn(`No HTML files found in ${clientDir}, skipping UI build.`)
+    logger.info('No client HTML entry points found, skipping Rollup prebuild.')
     return
   }
 
@@ -14,8 +21,8 @@ export default async ({ rootDir, config, fs, path, logger, registerExplicitId })
 
   const rollupBundle = await rollup({
     fs,
-    input: htmlFilePattern,
-    plugins: servicenowFrontEndPlugins({ scope: config.scope, rootDir: clientDir, registerExplicitId }),
+    input: path.join(clientDir, '**', '*.html'),
+    plugins: servicenowFrontEndPlugins({ scope: config.scope, rootDir: clientDir }),
   })
   const rollupOutput = await rollupBundle.write({
     dir: staticContentDir,
