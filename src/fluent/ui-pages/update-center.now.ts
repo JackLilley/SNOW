@@ -8,7 +8,7 @@ Record({
     name: 'x_g_s7s_updater_update_center',
     description: 'Batch Store update installer with real-time progress monitoring',
     category: 'general',
-    direct: 'false',
+    direct: false,
     html: Now.include('./update-center.html'),
     client_script: Now.include('./update-center.client.js'),
   },
