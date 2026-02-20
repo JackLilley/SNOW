@@ -69,18 +69,7 @@
       if (header) { var bg = getComputedStyle(header).backgroundColor; if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') accent = bg; }
     } catch (e) {}
     if (!accent && window.NOW && window.NOW.brand_color) accent = window.NOW.brand_color;
-    if (!accent) {
-      try {
-        var x = new XMLHttpRequest();
-        x.open('GET', '/api/now/table/sys_properties?sysparm_query=name=css.base.color&sysparm_fields=value&sysparm_limit=1', false);
-        var tk = (window.g_ck || (window.NOW && window.NOW.g_ck) || '');
-        x.setRequestHeader('Accept', 'application/json');
-        x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        if (tk) x.setRequestHeader('X-UserToken', tk);
-        x.send();
-        if (x.status === 200) { var d = JSON.parse(x.responseText); if (d.result && d.result[0] && d.result[0].value) accent = d.result[0].value; }
-      } catch (e) {}
-    }
+    if (!accent) accent = '#2563eb';
     if (accent) {
       root.style.setProperty('--uc-accent', accent);
       root.style.setProperty('--uc-blue', accent);
