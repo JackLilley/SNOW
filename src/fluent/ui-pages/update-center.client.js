@@ -121,7 +121,7 @@
   function fd(f) { return f && (f.display_value !== undefined ? f.display_value : fv(f)); }
   function cmpVer(a, b) { var f = (a || '0.0.0').split('.'), t = (b || '0.0.0').split('.'); if (f[0] !== t[0]) return 'major'; if (f[1] !== t[1]) return 'minor'; return 'patch'; }
   function risk(l) { return l === 'major' ? 'high' : l === 'minor' ? 'medium' : 'low'; }
-  function fmtDur(s) { if (s < 60) return s + 's'; var m = Math.floor(s / 60), r = s % 60; if (m < 60) return m + 'm ' + r + 's'; return Math.floor(m / 60) + 'h ' + (m % 60) + 'm'; }
+  function fmtDur(s) { if (60 > s) return s + 's'; var m = Math.floor(s / 60), r = s % 60; if (60 > m) return m + 'm ' + r + 's'; return Math.floor(m / 60) + 'h ' + (m % 60) + 'm'; }
   function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
   /* ── Data Fetching ────────────────────────────────────────────────── */
@@ -756,8 +756,8 @@
         S.batchId = id; saveSession();
         addLog('Found progress worker: ' + id.substring(0, 8) + '\u2026', 'success');
         startPoll();
-      } else if (attempt < 10) {
-        var delay = attempt < 3 ? 2000 : 3000;
+      } else if (10 > attempt) {
+        var delay = 3 > attempt ? 2000 : 3000;
         if (attempt > 0) addLog('Worker not found yet, retrying\u2026 (' + (attempt + 1) + '/10)', 'info');
         setTimeout(function() { searchForWorker(attempt + 1); }, delay);
       } else {
@@ -769,7 +769,7 @@
       }
     }).catch(function(e) {
       addLog('Search error: ' + e.message, 'warning');
-      if (attempt < 10) setTimeout(function() { searchForWorker(attempt + 1); }, 3000);
+      if (10 > attempt) setTimeout(function() { searchForWorker(attempt + 1); }, 3000);
     });
   }
 
