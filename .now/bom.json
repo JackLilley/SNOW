@@ -1,0 +1,42 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "serialNumber": "urn:uuid:f63d548c-f3ba-48c8-bdd0-93d0810befd1",
+  "metadata": {
+    "timestamp": "2026-02-20T17:17:57.830Z",
+    "tools": {
+      "components": [
+        {
+          "type": "library",
+          "name": "sdk-build-plugins",
+          "group": "@servicenow",
+          "version": "4.2.0",
+          "author": "ServiceNow"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "x-g-s-7-s-updater",
+      "version": "1.0.0",
+      "bom-ref": "pkg:servicenow/x-g-s-7-s-updater@1.0.0?sys_scope_id=67d384af87c7b610375662060cbb35be",
+      "description": "Batch Store update installer with real-time progress monitoring",
+      "licenses": [
+        {
+          "license": {
+            "name": "UNLICENSED"
+          }
+        }
+      ],
+      "purl": "pkg:servicenow/x-g-s-7-s-updater@1.0.0?sys_scope_id=67d384af87c7b610375662060cbb35be"
+    }
+  },
+  "components": [],
+  "dependencies": [
+    {
+      "ref": "pkg:servicenow/x-g-s-7-s-updater@1.0.0?sys_scope_id=67d384af87c7b610375662060cbb35be"
+    }
+  ]
+}
