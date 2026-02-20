@@ -133,13 +133,14 @@
       .then(function(d) {
         var apps = d.result || [];
         return Promise.all(apps.map(function(app) {
-          return api('/api/now/table/sys_app_version?sysparm_display_value=all&sysparm_fields=sys_id,version,source_app_id,publish_date&sysparm_query=source_app_id=' + fv(app.sys_id) + '^ORDERBYversion')
+          return api('/api/now/table/sys_app_version?sysparm_display_value=all&sysparm_fields=sys_id,version,source_app_id,publish_date,description,short_description&sysparm_query=source_app_id=' + fv(app.sys_id) + '^ORDERBYversion')
             .then(function(v) { return { app: app, ver: v.result || [] }; }).catch(function() { return { app: app, ver: [] }; });
         }));
       }).then(function(res) {
         return res.filter(function(r) { return r.ver.length > 0; }).map(function(r) {
           var a = r.app, l = r.ver[r.ver.length - 1], iv = fv(a.version), lv = fv(l.version), lev = cmpVer(iv, lv);
-          return { id: fv(a.sys_id), name: fd(a.name), scope: fv(a.scope), iv: iv, lv: lv, lvId: fv(l.sys_id), level: lev, risk: risk(lev), vendor: fd(a.vendor) || 'ServiceNow', date: fd(l.publish_date) || '' };
+          var notes = fd(l.description) || fd(l.short_description) || '';
+          return { id: fv(a.sys_id), name: fd(a.name), scope: fv(a.scope), iv: iv, lv: lv, lvId: fv(l.sys_id), level: lev, risk: risk(lev), vendor: fd(a.vendor) || 'ServiceNow', date: fd(l.publish_date) || '', notes: notes };
         });
       });
   }
@@ -410,7 +411,7 @@
       : el('div', { className: 'uc-tbl' }, [
           el('div', { className: 'uc-th' }, [
             el('div', { className: 'uc-cc' }), el('div', null, 'Application'), el('div', null, 'Installed'),
-            el('div'), el('div', null, 'Available'), el('div', null, 'Type'), el('div', null, 'Risk'), el('div', null, 'Vendor')
+            el('div'), el('div', null, 'Available'), el('div', null, 'Type'), el('div', null, 'Risk'), el('div', null, '')
           ])
         ].concat(fl.map(function(u) {
           return el('div', { className: 'uc-tr' + (S.selected[u.id] ? ' uc-sel' : '') }, [
@@ -421,10 +422,42 @@
             el('div', { className: 'uc-mono' }, u.lv),
             el('div', null, levelDot(u.level)),
             el('div', null, el('span', { className: 'uc-rb uc-rb-' + u.risk }, u.risk)),
-            el('div', { className: 'uc-cv' }, u.vendor)
+            el('div', null, el('button', { className: 'uc-btn uc-btn-xs uc-btn-s', onclick: (function(app) { return function(e) { e.stopPropagation(); showAppNotes(app); }; })(u) }, [ic('file-text', 12), document.createTextNode(' Notes')]))
           ]);
         })))
     ]);
+  }
+
+  /* ── Vendor Release Notes Preview ─────────────────────────────────── */
+  function showAppNotes(u) {
+    var c = document.getElementById('ucDialog');
+    c.innerHTML = '';
+    c.appendChild(el('div', { className: 'uc-overlay', role: 'dialog', 'aria-modal': 'true', onclick: function() { c.innerHTML = ''; } },
+      el('div', { className: 'uc-rn-modal', onclick: function(e) { e.stopPropagation(); } }, [
+        el('div', { className: 'uc-rn-hdr' }, [
+          el('h3', null, [document.createTextNode(u.name + ' '), el('span', { className: 'uc-mono', style: 'font-size:13px;color:var(--uc-text3)' }, u.lv)]),
+          el('button', { className: 'uc-btn uc-btn-g', onclick: function() { c.innerHTML = ''; } }, ic('x', 18))
+        ]),
+        el('div', { className: 'uc-rn-meta' }, [
+          el('span', null, [ic('package', 13), document.createTextNode(' ' + u.vendor)]),
+          u.date ? el('span', null, [ic('calendar', 13), document.createTextNode(' Published: ' + u.date)]) : null,
+          el('span', null, [ic('arrow-right', 13), document.createTextNode(' ' + u.iv + ' \u2192 ' + u.lv)]),
+          el('span', null, [el('span', { className: 'uc-rb uc-rb-' + u.risk, style: 'font-size:10px' }, u.level + ' / ' + u.risk)])
+        ]),
+        el('div', { className: 'uc-app-notes-body' },
+          u.notes
+            ? el('div', { className: 'uc-app-notes-content' }, u.notes)
+            : el('div', { className: 'uc-app-notes-empty' }, [ic('file-text', 32), el('p', null, 'No release notes available from the vendor for this version.')])
+        ),
+        el('div', { className: 'uc-rn-acts' }, [
+          u.notes ? el('button', { className: 'uc-btn uc-btn-s', onclick: function() {
+            var txt = u.name + ' ' + u.lv + '\nVendor: ' + u.vendor + '\n\n' + u.notes;
+            try { navigator.clipboard.writeText(txt); toast('Copied!', 'success'); } catch(e) { prompt('Copy:', txt); }
+          } }, [ic('clipboard', 14), document.createTextNode(' Copy')]) : null,
+          el('button', { className: 'uc-btn uc-btn-p', onclick: function() { c.innerHTML = ''; } }, 'Close')
+        ])
+      ])
+    ));
   }
 
   /* ── Confirm Dialog ──────────────────────────────────────────────── */
@@ -490,10 +523,19 @@
           ]),
           mc > 0 ? el('div', { className: 'uc-dlg-warn' }, [ic('alert-triangle', 16), el('span', null, mc + ' major update' + (mc > 1 ? 's' : '') + '. May contain breaking changes.')]) : null,
           el('div', { className: 'uc-dlg-list' }, sel.map(function(u) {
+            var notesTrunc = u.notes ? (u.notes.length > 80 ? u.notes.substring(0, 80) + '\u2026' : u.notes) : '';
             return el('div', { className: 'uc-dlg-item' }, [
-              el('span', { className: 'uc-dlg-name' }, u.name),
-              el('span', { className: 'uc-dlg-ver' }, [document.createTextNode(u.iv + ' '), ic('arrow-right', 12), document.createTextNode(' ' + u.lv)]),
-              el('span', { className: 'uc-dlg-lvl uc-lv-' + u.level }, u.level)
+              el('div', { style: 'flex:1;min-width:0' }, [
+                el('div', { style: 'display:flex;align-items:center;gap:8px' }, [
+                  el('span', { className: 'uc-dlg-name' }, u.name),
+                  el('span', { className: 'uc-dlg-lvl uc-lv-' + u.level }, u.level)
+                ]),
+                el('div', { style: 'display:flex;align-items:center;gap:8px;margin-top:2px' }, [
+                  el('span', { className: 'uc-dlg-ver' }, [document.createTextNode(u.iv + ' '), ic('arrow-right', 12), document.createTextNode(' ' + u.lv)]),
+                  notesTrunc ? el('span', { style: 'font-size:11px;color:var(--uc-text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap' }, notesTrunc) : null
+                ])
+              ]),
+              u.notes ? el('button', { className: 'uc-btn uc-btn-xs uc-btn-g', style: 'flex-shrink:0', onclick: (function(app) { return function(e) { e.stopPropagation(); showAppNotes(app); }; })(u) }, [ic('file-text', 11)]) : null
             ]);
           })),
           schedSection,

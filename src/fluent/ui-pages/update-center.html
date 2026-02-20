@@ -502,6 +502,13 @@ button.uc-stat:hover .uc-stat-ic { transform: scale(1.12) rotate(3deg); }
 .uc-rn-detail-row { display: flex; gap: 8px; font-size: 12px; padding: 3px 0; }
 .uc-rn-detail-lbl { font-weight: 600; color: var(--uc-text2); min-width: 100px; }
 
+/* Vendor Release Notes */
+.uc-app-notes-body { flex: 1; overflow-y: auto; min-height: 120px; }
+.uc-app-notes-content { font-size: 14px; line-height: 1.7; color: var(--uc-text); padding: 16px; background: var(--uc-bg); border-radius: var(--uc-radius-sm); white-space: pre-wrap; word-wrap: break-word; }
+.uc-app-notes-empty { text-align: center; padding: 40px 20px; color: var(--uc-text3); }
+.uc-app-notes-empty .uc-icon { display: block; margin: 0 auto 8px; color: var(--uc-border); }
+.uc-app-notes-empty p { margin: 0; font-size: 14px; }
+
 @media (max-width: 600px) {
   .uc-presets-grid { grid-template-columns: repeat(2, 1fr); }
   .uc-rn-stats { flex-wrap: wrap; }
