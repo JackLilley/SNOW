@@ -145,52 +145,33 @@
       });
   }
 
-  /* ── Server Calls (via fetch to avoid XMLHttpRequest auth popups) ── */
-  function callScriptInclude(method, params) {
-    var qs = 'sysparm_name=' + encodeURIComponent(method);
-    Object.keys(params).forEach(function(k) { qs += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); });
-    return api('/api/now/sp/widget/widget_rq?id=x_g_s7s_updater.UpdateCenterInstaller&' + qs)
-      .then(function(d) { return d.result || null; })
-      .catch(function() { return null; });
-  }
-
-  function fireInstallAjax(apps) {
-    var payload = JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
-    var bs = S.bannerSettings || BANNER_DEFAULTS;
-    if (typeof GlideAjax !== 'undefined') {
-      try {
-        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-        ga.addParam('sysparm_name', 'installBatch');
-        ga.addParam('sysparm_apps', payload);
-        ga.addParam('sysparm_banner_settings', JSON.stringify(bs));
-        ga.getXMLAnswer(function(answer) { if (answer && answer.length > 10 && !S.batchId) { S.batchId = answer; addLog('GlideAjax returned worker ID', 'success'); } });
-      } catch (e) { console.error('[UC] GlideAjax error:', e); }
-    }
-  }
-
-  function fireScheduleAjax(apps, schedTime, cb) {
-    var bs = S.bannerSettings || BANNER_DEFAULTS;
-    if (typeof GlideAjax !== 'undefined') {
-      try {
-        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-        ga.addParam('sysparm_name', 'scheduleInstall');
-        ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
-        ga.addParam('sysparm_schedule_time', schedTime);
-        ga.addParam('sysparm_banner_settings', JSON.stringify(bs));
-        ga.getXMLAnswer(function(answer) { cb(answer); });
-      } catch (e) { cb(null); }
-    } else { cb(null); }
-  }
-
-  function fireCancelAjax(workerId, cb) {
-    if (typeof GlideAjax !== 'undefined') {
-      try {
-        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-        ga.addParam('sysparm_name', 'cancelScheduled');
-        ga.addParam('sysparm_worker_id', workerId);
-        ga.getXMLAnswer(function(answer) { cb(answer === 'cancelled'); });
-      } catch (e) { cb(false); }
-    } else { cb(false); }
+  /* ── Server Calls (fetch-based, mirrors GlideAjax via /xmlhttp.do) ── */
+  function callGlideAjax(method, params) {
+    var body = 'sysparm_processor=x_g_s7s_updater.UpdateCenterInstaller';
+    body += '&sysparm_name=' + encodeURIComponent(method);
+    body += '&sysparm_scope=x_g_s7s_updater';
+    var token = getToken();
+    if (token) body += '&ni.nolog.x_csrf_token=' + encodeURIComponent(token);
+    Object.keys(params).forEach(function(k) {
+      body += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    });
+    return fetch('/xmlhttp.do', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-UserToken': token || ''
+      },
+      credentials: 'same-origin',
+      body: body
+    }).then(function(r) {
+      if (r.status === 401) throw new Error('Session expired. Please refresh the page.');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    }).then(function(text) {
+      var match = text.match(/<answer>([\s\S]*?)<\/answer>/);
+      return match ? match[1] : '';
+    });
   }
 
   function findRecentWorker() {
@@ -563,7 +544,13 @@
 
   function doSchedule(sel, snDt, localDt) {
     addLog('Scheduling ' + sel.length + ' update' + (sel.length > 1 ? 's' : '') + ' for ' + localDt + '...');
-    fireScheduleAjax(sel, snDt, function(answer) {
+    var payload = JSON.stringify(sel.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
+    var bs = S.bannerSettings || BANNER_DEFAULTS;
+    callGlideAjax('scheduleInstall', {
+      sysparm_apps: payload,
+      sysparm_schedule_time: snDt,
+      sysparm_banner_settings: JSON.stringify(bs)
+    }).then(function(answer) {
       if (answer && answer.length > 2) {
         S.error = null;
         addLog('Updates scheduled successfully!', 'success');
@@ -574,6 +561,10 @@
         toast('Failed to schedule updates.', 'error');
         render();
       }
+    }).catch(function(e) {
+      S.error = 'Failed to schedule: ' + e.message;
+      toast('Failed to schedule: ' + e.message, 'error');
+      render();
     });
   }
 
@@ -710,11 +701,11 @@
               it.isPending ? el('div', { className: 'uc-sched-acts' }, [
                 el('button', { className: 'uc-btn uc-btn-xs uc-btn-r', onclick: (function(wid) { return function() {
                   if (!confirm('Cancel this scheduled install?')) return;
-                  fireCancelAjax(wid, function(ok) {
-                    if (ok) { addLog('Scheduled install cancelled.', 'success'); toast('Scheduled install cancelled.', 'success'); }
+                  callGlideAjax('cancelScheduled', { sysparm_worker_id: wid }).then(function(answer) {
+                    if (answer === 'cancelled') { addLog('Scheduled install cancelled.', 'success'); toast('Scheduled install cancelled.', 'success'); }
                     else { addLog('Failed to cancel.', 'warning'); toast('Failed to cancel scheduled install.', 'error'); }
                     loadScheduledView();
-                  });
+                  }).catch(function() { toast('Failed to cancel scheduled install.', 'error'); loadScheduledView(); });
                 }; })(it.id) }, [ic('ban', 12), document.createTextNode(' Cancel')])
               ]) : null
             ])
@@ -936,10 +927,27 @@
 
     setTimeout(function() {
       addLog('Triggering batch installation (' + sel.length + ' app' + (sel.length > 1 ? 's' : '') + ')\u2026');
-      fireInstallAjax(sel);
-      addLog('Install request sent to server');
-      addLog('Searching for progress worker\u2026', 'info');
-      searchForWorker(0);
+      var payload = JSON.stringify(sel.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
+      var bs = S.bannerSettings || BANNER_DEFAULTS;
+      callGlideAjax('installBatch', {
+        sysparm_apps: payload,
+        sysparm_banner_settings: JSON.stringify(bs)
+      }).then(function(answer) {
+        addLog('Install request sent to server', 'success');
+        if (answer && answer.length > 10 && !S.batchId) {
+          S.batchId = answer;
+          addLog('Server returned worker ID: ' + answer.substring(0, 8) + '\u2026', 'success');
+        }
+        addLog('Searching for progress worker\u2026', 'info');
+        searchForWorker(0);
+      }).catch(function(e) {
+        addLog('Install request failed: ' + e.message, 'error');
+        toast('Install request failed: ' + e.message, 'error');
+        S.pDone = true; S.pErr = 'Install request failed: ' + e.message;
+        S.installing = false;
+        if (tickT) clearInterval(tickT);
+        clearSession(); render();
+      });
     }, 100);
   }
 
@@ -965,9 +973,10 @@
         if (attempt > 0) addLog('Worker not found yet, retrying\u2026 (' + (attempt + 1) + '/10)', 'info');
         setTimeout(function() { searchForWorker(attempt + 1); }, delay);
       } else {
-        addLog('Could not locate progress worker.', 'error');
-        addLog('The install may have completed. Check History tab.', 'warning');
-        S.pDone = true; S.pState = 'Unknown';
+        addLog('Could not locate progress worker after 10 attempts.', 'error');
+        addLog('The install may not have started. Try again or check the History tab.', 'warning');
+        S.pDone = true; S.pErr = 'Could not locate progress worker. The install may not have started.';
+        S.installing = false;
         if (tickT) clearInterval(tickT);
         clearSession(); render();
       }
