@@ -10,5 +10,6 @@ Record({
     category: 'general',
     direct: false,
     html: Now.include('./update-center.html'),
+    client_script: Now.include('./update-center.client.js'),
   },
 })
