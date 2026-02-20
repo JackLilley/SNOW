@@ -56,36 +56,6 @@
     return span;
   }
 
-  /* ── Theme Detection ─────────────────────────────────────────────── */
-  function detectTheme() {
-    var root = document.querySelector('.uc-root');
-    if (!root) return;
-    var cs = getComputedStyle(document.documentElement);
-    var hasPrimary = cs.getPropertyValue('--now-color--primary-1').trim();
-    if (hasPrimary) return;
-    var accent = null;
-    try {
-      var header = document.querySelector('.navbar-header,.navpage-header,.sn-polaris-header,[data-testid="chrome-header"]');
-      if (header) { var bg = getComputedStyle(header).backgroundColor; if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') accent = bg; }
-    } catch (e) {}
-    if (!accent && window.NOW && window.NOW.brand_color) accent = window.NOW.brand_color;
-    if (!accent) accent = '#2563eb';
-    if (accent) {
-      root.style.setProperty('--uc-accent', accent);
-      root.style.setProperty('--uc-blue', accent);
-      try {
-        var temp = document.createElement('div'); temp.style.color = accent;
-        document.body.appendChild(temp);
-        var rgb = getComputedStyle(temp).color.match(/(\d+)/g);
-        document.body.removeChild(temp);
-        if (rgb && rgb.length >= 3) {
-          var r = Math.max(0, parseInt(rgb[0]) - 20), g = Math.max(0, parseInt(rgb[1]) - 20), b = Math.max(0, parseInt(rgb[2]) - 20);
-          root.style.setProperty('--uc-accent-h', 'rgb(' + r + ',' + g + ',' + b + ')');
-        }
-      } catch (e) {}
-    }
-  }
-
   /* ── State ────────────────────────────────────────────────────────── */
   var S = {
     view: 'dashboard', updates: [], loading: true, error: null, lastRefresh: null,
@@ -102,10 +72,19 @@
     try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) return m[1]; } catch(e){}
     return '';
   }
-  function hdrs() { var h = { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }; var t = getToken(); if (t) h['X-UserToken'] = t; return h; }
+  function hdrs() {
+    var t = getToken();
+    var h = { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
+    if (t) h['X-UserToken'] = t;
+    return h;
+  }
   function api(url, opts) {
     return fetch(url, Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
-      .then(function(r) { if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);}); return r.json(); });
+      .then(function(r) {
+        if (r.status === 401) throw new Error('Session expired. Please refresh the page.');
+        if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);});
+        return r.json();
+      });
   }
   function fv(f) { return f && (f.value !== undefined ? f.value : f); }
   function fd(f) { return f && (f.display_value !== undefined ? f.display_value : fv(f)); }
@@ -131,37 +110,48 @@
       });
   }
 
-  /* ── GlideAjax Calls ─────────────────────────────────────────────── */
+  /* ── Server Calls (via fetch to avoid XMLHttpRequest auth popups) ── */
+  function callScriptInclude(method, params) {
+    var qs = 'sysparm_name=' + encodeURIComponent(method);
+    Object.keys(params).forEach(function(k) { qs += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); });
+    return api('/api/now/sp/widget/widget_rq?id=x_g_s7s_updater.UpdateCenterInstaller&' + qs)
+      .then(function(d) { return d.result || null; })
+      .catch(function() { return null; });
+  }
+
   function fireInstallAjax(apps) {
-    if (typeof GlideAjax === 'undefined') { console.warn('[UC] GlideAjax not available'); return; }
     var payload = JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
-    try {
-      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-      ga.addParam('sysparm_name', 'installBatch');
-      ga.addParam('sysparm_apps', payload);
-      ga.getXMLAnswer(function(answer) { if (answer && answer.length > 10 && !S.batchId) { S.batchId = answer; addLog('GlideAjax returned worker ID', 'success'); } });
-    } catch (e) { console.error('[UC] GlideAjax error:', e); }
+    if (typeof GlideAjax !== 'undefined') {
+      try {
+        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+        ga.addParam('sysparm_name', 'installBatch');
+        ga.addParam('sysparm_apps', payload);
+        ga.getXMLAnswer(function(answer) { if (answer && answer.length > 10 && !S.batchId) { S.batchId = answer; addLog('GlideAjax returned worker ID', 'success'); } });
+      } catch (e) { console.error('[UC] GlideAjax error:', e); }
+    }
   }
 
   function fireScheduleAjax(apps, schedTime, cb) {
-    if (typeof GlideAjax === 'undefined') { cb(null); return; }
-    try {
-      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-      ga.addParam('sysparm_name', 'scheduleInstall');
-      ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
-      ga.addParam('sysparm_schedule_time', schedTime);
-      ga.getXMLAnswer(function(answer) { cb(answer); });
-    } catch (e) { cb(null); }
+    if (typeof GlideAjax !== 'undefined') {
+      try {
+        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+        ga.addParam('sysparm_name', 'scheduleInstall');
+        ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
+        ga.addParam('sysparm_schedule_time', schedTime);
+        ga.getXMLAnswer(function(answer) { cb(answer); });
+      } catch (e) { cb(null); }
+    } else { cb(null); }
   }
 
   function fireCancelAjax(workerId, cb) {
-    if (typeof GlideAjax === 'undefined') { cb(false); return; }
-    try {
-      var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
-      ga.addParam('sysparm_name', 'cancelScheduled');
-      ga.addParam('sysparm_worker_id', workerId);
-      ga.getXMLAnswer(function(answer) { cb(answer === 'cancelled'); });
-    } catch (e) { cb(false); }
+    if (typeof GlideAjax !== 'undefined') {
+      try {
+        var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
+        ga.addParam('sysparm_name', 'cancelScheduled');
+        ga.addParam('sysparm_worker_id', workerId);
+        ga.getXMLAnswer(function(answer) { cb(answer === 'cancelled'); });
+      } catch (e) { cb(false); }
+    } else { cb(false); }
   }
 
   function findRecentWorker() {
@@ -852,7 +842,6 @@
     var dismissBtn = document.getElementById('ucErrDismiss');
     if (dismissBtn) dismissBtn.addEventListener('click', function() { S.error = null; renderErr(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { var d = document.getElementById('ucDialog'); if (d && d.innerHTML) d.innerHTML = ''; } });
-    detectTheme();
     if (!resumeSession()) { render(); refresh(); } else { refresh(); }
   }
 
