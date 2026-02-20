@@ -1,4 +1,6 @@
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:evaluate var="jvar_ck" expression="gs.getSessionToken()" />
+<g:evaluate var="jvar_user" expression="gs.getUserName()" />
 <style>
 .uc-root {
   --uc-bg: var(--now-color_background--secondary, var(--now-color--neutral-1, #f4f5f9));
@@ -433,7 +435,7 @@ button.uc-stat:hover .uc-stat-ic { transform: scale(1.12) rotate(3deg); }
 .uc-hidden { display: none !important; }
 </style>
 
-<div class="uc-root" id="ucRoot">
+<div class="uc-root" id="ucRoot" data-ck="$[jvar_ck]" data-user="$[jvar_user]">
   <nav class="uc-nav" aria-label="Update Center">
     <div class="uc-nav-brand" id="ucBrand">Update Center</div>
     <div class="uc-nav-links" id="ucNav" role="tablist"></div>

@@ -66,10 +66,14 @@
   var clientStart = 0, pollT = null, tickT = null, searchTimer = null;
 
   /* ── API Helpers ──────────────────────────────────────────────────── */
+  var _cachedToken = '';
   function getToken() {
-    if (window.g_ck) return window.g_ck;
-    if (window.NOW && window.NOW.g_ck) return window.NOW.g_ck;
-    try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) return m[1]; } catch(e){}
+    if (_cachedToken) return _cachedToken;
+    var root = document.getElementById('ucRoot');
+    if (root && root.getAttribute('data-ck')) { _cachedToken = root.getAttribute('data-ck'); return _cachedToken; }
+    if (window.g_ck) { _cachedToken = window.g_ck; return _cachedToken; }
+    if (window.NOW && window.NOW.g_ck) { _cachedToken = window.NOW.g_ck; return _cachedToken; }
+    try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) { _cachedToken = m[1]; return _cachedToken; } } catch(e){}
     return '';
   }
   function hdrs() {
