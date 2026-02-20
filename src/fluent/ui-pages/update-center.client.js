@@ -209,7 +209,7 @@
     if (a) Object.keys(a).forEach(function(k) {
       if (k === 'className') e.className = a[k];
       else if (k.indexOf('on') === 0) e.addEventListener(k.substring(2), a[k]);
-      else if (k === 'disabled' && a[k]) e.disabled = true;
+      else if (k === 'disabled') { e.disabled = !!a[k]; }
       else if (k === 'checked') e.checked = a[k];
       else if (k === 'type' || k === 'placeholder' || k === 'value') e[k] = a[k];
       else e.setAttribute(k, a[k]);
