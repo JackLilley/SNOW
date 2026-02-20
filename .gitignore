@@ -2,6 +2,9 @@ node_modules/
 dist/
 target/
 .now-sdk/
+.now/
+.cursor/
 src/client/
 src/fluent/generated/
+package-lock.json
 *.log

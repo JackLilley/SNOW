@@ -12,15 +12,8 @@
  "devDependencies": {
   "@servicenow/eslint-plugin-sdk-app-plugin": "4.2.0",
   "@servicenow/glide": "26.0.1",
-  "@servicenow/isomorphic-rollup": "^1.2.3",
   "@servicenow/sdk": "^4.2.0",
-  "@types/react": "19.x",
-  "@types/react-dom": "19.x",
   "eslint": "8.50.0",
   "typescript": "5.5.4"
- },
- "dependencies": {
-  "react": "19.x",
-  "react-dom": "19.x"
  }
 }
