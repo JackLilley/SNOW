@@ -30,7 +30,15 @@
     'ban':           [['circle',{cx:'12',cy:'12',r:'10'}],['line',{x1:'4.93',y1:'4.93',x2:'19.07',y2:'19.07'}]],
     'info':          [['circle',{cx:'12',cy:'12',r:'10'}],['line',{x1:'12',y1:'16',x2:'12',y2:'12'}],['line',{x1:'12',y1:'8',x2:'12.01',y2:'8'}]],
     'inbox':         [['polyline',{points:'22 12 16 12 14 15 10 15 8 12 2 12'}],['path',{d:'M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z'}]],
-    'file-text':     [['path',{d:'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'}],['polyline',{points:'14 2 14 8 20 8'}],['line',{x1:'16',y1:'13',x2:'8',y2:'13'}],['line',{x1:'16',y1:'17',x2:'8',y2:'17'}],['polyline',{points:'10 9 9 9 8 9'}]]
+    'file-text':     [['path',{d:'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'}],['polyline',{points:'14 2 14 8 20 8'}],['line',{x1:'16',y1:'13',x2:'8',y2:'13'}],['line',{x1:'16',y1:'17',x2:'8',y2:'17'}],['polyline',{points:'10 9 9 9 8 9'}]],
+    'settings':      [['circle',{cx:'12',cy:'12',r:'3'}],['path',{d:'M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'}]],
+    'bell':          [['path',{d:'M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9'}],['path',{d:'M13.73 21a2 2 0 0 1-3.46 0'}]],
+    'toggle-left':   [['rect',{x:'1',y:'5',width:'22',height:'14',rx:'7',ry:'7'}],['circle',{cx:'8',cy:'12',r:'3'}]],
+    'toggle-right':  [['rect',{x:'1',y:'5',width:'22',height:'14',rx:'7',ry:'7'}],['circle',{cx:'16',cy:'12',r:'3'}]],
+    'sun':           [['circle',{cx:'12',cy:'12',r:'5'}],['line',{x1:'12',y1:'1',x2:'12',y2:'3'}],['line',{x1:'12',y1:'21',x2:'12',y2:'23'}],['line',{x1:'4.22',y1:'4.22',x2:'5.64',y2:'5.64'}],['line',{x1:'18.36',y1:'18.36',x2:'19.78',y2:'19.78'}],['line',{x1:'1',y1:'12',x2:'3',y2:'12'}],['line',{x1:'21',y1:'12',x2:'23',y2:'12'}],['line',{x1:'4.22',y1:'19.78',x2:'5.64',y2:'18.36'}],['line',{x1:'18.36',y1:'5.64',x2:'19.78',y2:'4.22'}]],
+    'moon':          [['path',{d:'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'}]],
+    'chevron-down':  [['polyline',{points:'6 9 12 15 18 9'}]],
+    'save':          [['path',{d:'M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'}],['polyline',{points:'17 21 17 13 7 13 7 21'}],['polyline',{points:'7 3 7 8 15 8'}]]
   };
 
   function ic(name, size) {
@@ -57,12 +65,34 @@
   }
 
   /* ── State ────────────────────────────────────────────────────────── */
+  var BANNER_DEFAULTS = {
+    enableInstalling: true,
+    installingMsg: 'System maintenance in progress \u2014 application updates are being installed. Some apps may be temporarily unavailable.',
+    enableComplete: true,
+    completeMsg: 'System maintenance complete \u2014 all updates installed successfully.',
+    completeDurationHrs: 2,
+    enableScheduled: true,
+    scheduledMsg: 'Scheduled maintenance \u2014 application updates will be installed on {time}.',
+    scheduledLeadHrs: 24
+  };
   var S = {
     view: 'dashboard', updates: [], loading: true, error: null, lastRefresh: null,
     installing: false, batchId: null, installQueue: [], selected: {},
     filter: 'all', search: '', pPct: 0, pState: 'Preparing...', pErr: '', pDone: false, logs: [], elapsed: 0,
-    serverStart: null
+    serverStart: null,
+    bannerSettings: null
   };
+
+  function loadBannerSettings() {
+    try {
+      var raw = localStorage.getItem('uc_banner_settings');
+      if (raw) { S.bannerSettings = JSON.parse(raw); return; }
+    } catch(e) {}
+    S.bannerSettings = JSON.parse(JSON.stringify(BANNER_DEFAULTS));
+  }
+  function saveBannerSettings() {
+    try { localStorage.setItem('uc_banner_settings', JSON.stringify(S.bannerSettings)); } catch(e) {}
+  }
   var clientStart = 0, pollT = null, tickT = null, searchTimer = null;
 
   /* ── API Helpers ──────────────────────────────────────────────────── */
@@ -125,23 +155,27 @@
 
   function fireInstallAjax(apps) {
     var payload = JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
+    var bs = S.bannerSettings || BANNER_DEFAULTS;
     if (typeof GlideAjax !== 'undefined') {
       try {
         var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
         ga.addParam('sysparm_name', 'installBatch');
         ga.addParam('sysparm_apps', payload);
+        ga.addParam('sysparm_banner_settings', JSON.stringify(bs));
         ga.getXMLAnswer(function(answer) { if (answer && answer.length > 10 && !S.batchId) { S.batchId = answer; addLog('GlideAjax returned worker ID', 'success'); } });
       } catch (e) { console.error('[UC] GlideAjax error:', e); }
     }
   }
 
   function fireScheduleAjax(apps, schedTime, cb) {
+    var bs = S.bannerSettings || BANNER_DEFAULTS;
     if (typeof GlideAjax !== 'undefined') {
       try {
         var ga = new GlideAjax('x_g_s7s_updater.UpdateCenterInstaller');
         ga.addParam('sysparm_name', 'scheduleInstall');
         ga.addParam('sysparm_apps', JSON.stringify(apps.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; })));
         ga.addParam('sysparm_schedule_time', schedTime);
+        ga.addParam('sysparm_banner_settings', JSON.stringify(bs));
         ga.getXMLAnswer(function(answer) { cb(answer); });
       } catch (e) { cb(null); }
     } else { cb(null); }
@@ -214,7 +248,8 @@
       ['dashboard', 'Dashboard', 'bar-chart'],
       ['updates', 'Updates', 'download'],
       ['scheduled', 'Scheduled', 'calendar'],
-      ['history', 'History', 'clock']
+      ['history', 'History', 'clock'],
+      ['settings', 'Settings', 'settings']
     ];
     tabs.forEach(function(t) {
       n.appendChild(el('button', {
@@ -404,8 +439,42 @@
     function rebuildDlg() {
       c.innerHTML = '';
       var dtInput;
+
+      function presetBtn(label, hours) {
+        var target = new Date(Date.now() + hours * 3600000);
+        target.setMinutes(0, 0, 0);
+        var iso = new Date(target.getTime() - target.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        var timeStr = target.toLocaleString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+        return el('button', { className: 'uc-preset-btn', onclick: function() { if (dtInput) dtInput.value = iso; } }, [
+          el('div', { className: 'uc-preset-lbl' }, label),
+          el('div', { className: 'uc-preset-time' }, timeStr)
+        ]);
+      }
+
+      var now = new Date();
+      var tonight = new Date(now); tonight.setHours(22, 0, 0, 0);
+      if (tonight.getTime() - Date.now() < 1800000) tonight.setDate(tonight.getDate() + 1);
+      var tonightHrs = Math.max(1, Math.round((tonight.getTime() - Date.now()) / 3600000));
+
+      var tomorrow6 = new Date(now); tomorrow6.setDate(tomorrow6.getDate() + 1); tomorrow6.setHours(6, 0, 0, 0);
+      var tom6Hrs = Math.max(1, Math.round((tomorrow6.getTime() - Date.now()) / 3600000));
+
+      var presets = el('div', { className: 'uc-presets' }, [
+        el('div', { className: 'uc-presets-title' }, 'Quick schedule:'),
+        el('div', { className: 'uc-presets-grid' }, [
+          presetBtn('In 2 Hours', 2),
+          presetBtn('In 4 Hours', 4),
+          presetBtn('Tonight 10 PM', tonightHrs),
+          presetBtn('Tomorrow 6 AM', tom6Hrs),
+          presetBtn('In 12 Hours', 12),
+          presetBtn('In 24 Hours', 24)
+        ])
+      ]);
+
       var schedSection = el('div', { className: 'uc-dlg-sched', style: showSched ? '' : 'display:none' }, [
-        el('label', null, 'Schedule date & time:'),
+        presets,
+        el('div', { className: 'uc-presets-divider' }, [el('span', null, 'or pick a specific time')]),
+        el('label', null, 'Date & time:'),
         dtInput = el('input', { type: 'datetime-local', className: 'uc-dt-input' })
       ]);
       var minDt = new Date(Date.now() + 300000).toISOString().slice(0, 16);
@@ -622,38 +691,72 @@
     var c = document.getElementById('ucDialog');
     c.innerHTML = '';
 
-    var tblRows = data.apps.map(function(a) {
+    var succeeded = data.apps.filter(function(a) { return a.status === 'success'; });
+    var failures = data.apps.filter(function(a) { return a.status !== 'success'; });
+    var duration = '';
+    if (data.startTime && data.endTime) {
+      try { var ms = new Date(data.endTime).getTime() - new Date(data.startTime).getTime(); if (ms > 0) duration = fmtDur(Math.round(ms / 1000)); } catch(e) {}
+    }
+
+    function appDetailCard(a) {
       var ok = a.status === 'success';
-      return el('tr', null, [
-        el('td', null, el('span', { className: ok ? 'uc-rn-ok' : 'uc-rn-fail' }, ok ? '\u2713' : '\u2717')),
-        el('td', null, el('b', null, a.name)),
-        el('td', { className: 'uc-mono' }, a.from || ''),
-        el('td', null, '\u2192'),
-        el('td', { className: 'uc-mono' }, a.to || ''),
-        el('td', { className: ok ? 'uc-rn-ok' : 'uc-rn-fail' }, a.status || ''),
-        el('td', a.error ? { style: 'color:var(--uc-red);font-size:12px' } : null, a.error || '')
+      var expanded = { v: false };
+      var detailEl = el('div', { className: 'uc-rn-detail', style: 'display:none' });
+      var items = [];
+      if (a.method) items.push(['Install method', a.method]);
+      if (a.error) items.push(['Error', a.error]);
+      items.push(['Version change', (a.from || '?') + ' \u2192 ' + (a.to || '?')]);
+      items.forEach(function(pair) {
+        detailEl.appendChild(el('div', { className: 'uc-rn-detail-row' }, [
+          el('span', { className: 'uc-rn-detail-lbl' }, pair[0] + ':'),
+          el('span', null, pair[1])
+        ]));
+      });
+
+      var chevron = ic('chevron-down', 14);
+      var card = el('div', { className: 'uc-rn-app-card' + (ok ? '' : ' uc-rn-app-fail') }, [
+        el('button', { className: 'uc-rn-app-row', onclick: function() {
+          expanded.v = !expanded.v;
+          detailEl.style.display = expanded.v ? '' : 'none';
+          chevron.style.transform = expanded.v ? 'rotate(180deg)' : '';
+          card.classList.toggle('uc-rn-expanded', expanded.v);
+        } }, [
+          el('span', { className: ok ? 'uc-rn-ok' : 'uc-rn-fail', style: 'font-size:16px' }, ok ? '\u2713' : '\u2717'),
+          el('span', { className: 'uc-rn-app-name' }, a.name),
+          el('span', { className: 'uc-mono uc-rn-app-ver' }, (a.from || '') + ' \u2192 ' + (a.to || '')),
+          chevron
+        ]),
+        detailEl
       ]);
-    });
-    var tbl = document.createElement('table'); tbl.className = 'uc-rn-tbl';
-    var theadRow = el('tr', null, ['', 'Application', 'From', '', 'To', 'Status', 'Notes'].map(function(t) { return el('th', null, t); }));
-    var thead = document.createElement('thead');
-    thead.appendChild(theadRow);
-    tbl.appendChild(thead);
-    var tbody = document.createElement('tbody');
-    tblRows.forEach(function(tr) { tbody.appendChild(tr); });
-    tbl.appendChild(tbody);
+      return card;
+    }
 
     var copiedEl = el('span', { className: 'uc-rn-copied', style: 'visibility:hidden' }, [ic('check', 12), document.createTextNode(' Copied!')]);
     var sumText = data.completed + ' of ' + data.total + ' installed successfully' + (data.failed > 0 ? ', ' + data.failed + ' failed' : '');
 
     c.appendChild(el('div', { className: 'uc-overlay', role: 'dialog', 'aria-modal': 'true', onclick: function() { c.innerHTML = ''; } },
       el('div', { className: 'uc-rn-modal', onclick: function(e) { e.stopPropagation(); } }, [
-        el('div', { className: 'uc-rn-hdr' }, [el('h3', null, 'Release Notes'), el('button', { className: 'uc-btn uc-btn-g', onclick: function() { c.innerHTML = ''; } }, ic('x', 18))]),
+        el('div', { className: 'uc-rn-hdr' }, [el('h3', null, 'Batch Release Notes'), el('button', { className: 'uc-btn uc-btn-g', onclick: function() { c.innerHTML = ''; } }, ic('x', 18))]),
+        el('div', { className: 'uc-rn-stats' }, [
+          el('div', { className: 'uc-rn-stat uc-rn-stat-total' }, [el('div', { className: 'uc-rn-stat-val' }, '' + data.total), el('div', { className: 'uc-rn-stat-lbl' }, 'Total')]),
+          el('div', { className: 'uc-rn-stat uc-rn-stat-ok' }, [el('div', { className: 'uc-rn-stat-val' }, '' + data.completed), el('div', { className: 'uc-rn-stat-lbl' }, 'Succeeded')]),
+          el('div', { className: 'uc-rn-stat uc-rn-stat-fail' }, [el('div', { className: 'uc-rn-stat-val' }, '' + data.failed), el('div', { className: 'uc-rn-stat-lbl' }, 'Failed')]),
+          duration ? el('div', { className: 'uc-rn-stat uc-rn-stat-time' }, [el('div', { className: 'uc-rn-stat-val' }, duration), el('div', { className: 'uc-rn-stat-lbl' }, 'Duration')]) : null
+        ]),
         el('div', { className: 'uc-rn-meta' }, [
           data.startTime ? el('span', null, [ic('clock', 13), document.createTextNode(' Started: ' + data.startTime)]) : null,
           data.endTime ? el('span', null, [ic('check-circle', 13), document.createTextNode(' Ended: ' + data.endTime)]) : null
         ]),
-        el('div', { className: 'uc-rn-pre' }, [tbl]),
+        el('div', { className: 'uc-rn-pre' }, [
+          failures.length > 0 ? el('div', { className: 'uc-rn-group' }, [
+            el('div', { className: 'uc-rn-group-hdr uc-rn-group-fail' }, [ic('x-circle', 14), el('span', null, 'Failed (' + failures.length + ')')]),
+            el('div', null, failures.map(appDetailCard))
+          ]) : null,
+          succeeded.length > 0 ? el('div', { className: 'uc-rn-group' }, [
+            el('div', { className: 'uc-rn-group-hdr uc-rn-group-ok' }, [ic('check-circle', 14), el('span', null, 'Succeeded (' + succeeded.length + ')')]),
+            el('div', null, succeeded.map(appDetailCard))
+          ]) : null
+        ]),
         el('div', { className: 'uc-rn-summary' }, sumText),
         el('div', { className: 'uc-rn-acts' }, [
           copiedEl,
@@ -667,6 +770,81 @@
         ])
       ])
     ));
+  }
+
+  /* ── Settings View ───────────────────────────────────────────────── */
+  function renderSettings() {
+    if (!S.bannerSettings) loadBannerSettings();
+    var bs = S.bannerSettings;
+
+    function toggleRow(label, desc, iconName, enabled, onToggle) {
+      return el('div', { className: 'uc-set-row' }, [
+        el('div', { className: 'uc-set-row-info' }, [
+          el('div', { className: 'uc-set-row-ic' }, ic(iconName, 18)),
+          el('div', null, [
+            el('div', { className: 'uc-set-lbl' }, label),
+            el('div', { className: 'uc-set-desc' }, desc)
+          ])
+        ]),
+        el('button', { className: 'uc-toggle' + (enabled ? ' active' : ''), 'aria-pressed': enabled ? 'true' : 'false', onclick: onToggle },
+          ic(enabled ? 'toggle-right' : 'toggle-left', 22))
+      ]);
+    }
+
+    function fieldRow(label, value, onChange, opts) {
+      opts = opts || {};
+      if (opts.type === 'number') {
+        return el('div', { className: 'uc-set-field' }, [
+          el('label', null, label),
+          el('div', { className: 'uc-set-num-wrap' }, [
+            el('input', { type: 'number', className: 'uc-set-input uc-set-num', value: '' + value, oninput: function(e) { onChange(parseInt(e.target.value) || 1); } }),
+            el('span', { className: 'uc-set-unit' }, opts.unit || '')
+          ])
+        ]);
+      }
+      return el('div', { className: 'uc-set-field' }, [
+        el('label', null, label),
+        el('textarea', { className: 'uc-set-input uc-set-textarea', value: value, oninput: function(e) { onChange(e.target.value); } }, value)
+      ]);
+    }
+
+    return el('div', { className: 'uc-settings' }, [
+      el('div', { className: 'uc-fhdr' }, [
+        backBtn(),
+        el('h2', null, 'Banner & Notification Settings'),
+        el('button', { className: 'uc-btn uc-btn-p', onclick: function() { saveBannerSettings(); toast('Settings saved!', 'success'); } }, [ic('save', 14), document.createTextNode(' Save Settings')])
+      ]),
+
+      el('div', { className: 'uc-set-section' }, [
+        el('div', { className: 'uc-set-section-hdr' }, [ic('bell', 18), el('h3', null, 'System Banners'), el('span', { className: 'uc-set-badge' }, 'sys_ui_announcement')]),
+        el('p', { className: 'uc-set-section-desc' }, 'Configure banners that display across the top of ServiceNow for all logged-in users during update operations.'),
+
+        el('div', { className: 'uc-set-card' }, [
+          el('div', { className: 'uc-set-card-hdr uc-set-card-hdr-orange' }, [ic('activity', 16), el('span', null, 'Installing Banner')]),
+          toggleRow('Show during installation', 'Display a warning banner while updates are being installed.', 'alert-triangle', bs.enableInstalling, function() { bs.enableInstalling = !bs.enableInstalling; render(); }),
+          bs.enableInstalling ? fieldRow('Banner message:', bs.installingMsg, function(v) { bs.installingMsg = v; }) : null
+        ]),
+
+        el('div', { className: 'uc-set-card' }, [
+          el('div', { className: 'uc-set-card-hdr uc-set-card-hdr-green' }, [ic('check-circle', 16), el('span', null, 'Completion Banner')]),
+          toggleRow('Show after completion', 'Display a success banner after updates finish installing.', 'check-circle', bs.enableComplete, function() { bs.enableComplete = !bs.enableComplete; render(); }),
+          bs.enableComplete ? fieldRow('Banner message:', bs.completeMsg, function(v) { bs.completeMsg = v; }) : null,
+          bs.enableComplete ? fieldRow('Auto-dismiss after:', bs.completeDurationHrs, function(v) { bs.completeDurationHrs = v; }, { type: 'number', unit: 'hours' }) : null
+        ]),
+
+        el('div', { className: 'uc-set-card' }, [
+          el('div', { className: 'uc-set-card-hdr uc-set-card-hdr-blue' }, [ic('calendar', 16), el('span', null, 'Scheduled Maintenance Banner')]),
+          toggleRow('Show before scheduled install', 'Display an info banner before a scheduled maintenance window.', 'calendar', bs.enableScheduled, function() { bs.enableScheduled = !bs.enableScheduled; render(); }),
+          bs.enableScheduled ? fieldRow('Banner message:', bs.scheduledMsg, function(v) { bs.scheduledMsg = v; }) : null,
+          bs.enableScheduled ? fieldRow('Show banner this many hours before:', bs.scheduledLeadHrs, function(v) { bs.scheduledLeadHrs = v; }, { type: 'number', unit: 'hours before' }) : null
+        ]),
+
+        el('div', { className: 'uc-set-hint' }, [
+          ic('info', 14),
+          el('span', null, 'Use {count} for number of apps, {time} for scheduled time, and {user} for who triggered the action in banner messages.')
+        ])
+      ])
+    ]);
   }
 
   /* ── Navigation & State ──────────────────────────────────────────── */
@@ -820,6 +998,7 @@
     else if (S.view === 'progress') c.appendChild(renderProg());
     else if (S.view === 'scheduled') c.appendChild(renderScheduled());
     else if (S.view === 'history') c.appendChild(renderHist());
+    else if (S.view === 'settings') c.appendChild(renderSettings());
   }
 
   /* ── Session Resume ──────────────────────────────────────────────── */
@@ -843,6 +1022,7 @@
 
   /* ── Init ────────────────────────────────────────────────────────── */
   function init() {
+    loadBannerSettings();
     var dismissBtn = document.getElementById('ucErrDismiss');
     if (dismissBtn) dismissBtn.addEventListener('click', function() { S.error = null; renderErr(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { var d = document.getElementById('ucDialog'); if (d && d.innerHTML) d.innerHTML = ''; } });
