@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Set the following values on the form:
+Short description = Associate new or existing contract to Order Line Items</description>
+        <display_name>Set Field Values</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>17</order>
+        <step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:15</sys_created_on>
+        <sys_id>9089083f874f7e10375662060cbb35b3</sys_id>
+        <sys_mod_count>70</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_9089083f874f7e10375662060cbb35b3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:21:52</sys_updated_on>
+        <table>sn_ind_tmt_orm_order_task</table>
+        <test display_value="ATF Generated Test - sn_ind_tmt_orm_order_task, Melissa Holbein, User's default view (Default view)">f679c03f874f7e10375662060cbb35bb</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=9089083f874f7e10375662060cbb35b3"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>9089083f874f7e10375662060cbb35b3</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:15</sys_created_on>
+        <sys_id>5489083f874f7e10375662060cbb35cd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:15</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>9089083f874f7e10375662060cbb35b3</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:15</sys_created_on>
+        <sys_id>5489083f874f7e10375662060cbb35ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:15</sys_updated_on>
+        <value>short_description=Associate new or existing contract to Order Line Items</value>
+        <variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>9089083f874f7e10375662060cbb35b3</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:15</sys_created_on>
+        <sys_id>5c89083f874f7e10375662060cbb35cd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:15</sys_updated_on>
+        <value>sn_ind_tmt_orm_order_task</value>
+        <variable display_value="Table">424ca6465320220002c6435723dc34b5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=9089083f874f7e10375662060cbb35b3"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_9089083f874f7e10375662060cbb35b3</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Set the following values on the form:
+Short description = Associate new or existing contract to Order Line Items</description><display_name>Set Field Values</display_name><inputs/><mugshots_cache_json/><notes/><order>17</order><step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:15</sys_created_on><sys_id>9089083f874f7e10375662060cbb35b3</sys_id><sys_mod_count>70</sys_mod_count><sys_name>Set Field Values</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_9089083f874f7e10375662060cbb35b3</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:21:52</sys_updated_on><table>sn_ind_tmt_orm_order_task</table><test display_value="ATF Generated Test - sn_ind_tmt_orm_order_task, Melissa Holbein, User's default view (Default view)">f679c03f874f7e10375662060cbb35bb</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=9089083f874f7e10375662060cbb35b3"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>9089083f874f7e10375662060cbb35b3</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:15</sys_created_on><sys_id>5489083f874f7e10375662060cbb35cd</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:15</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>9089083f874f7e10375662060cbb35b3</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:15</sys_created_on><sys_id>5489083f874f7e10375662060cbb35ce</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:15</sys_updated_on><value>short_description=Associate new or existing contract to Order Line Items</value><variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>9089083f874f7e10375662060cbb35b3</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:15</sys_created_on><sys_id>5c89083f874f7e10375662060cbb35cd</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:15</sys_updated_on><value>sn_ind_tmt_orm_order_task</value><variable display_value="Table">424ca6465320220002c6435723dc34b5</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=9089083f874f7e10375662060cbb35b3"/></record_update>]]></payload>
+        <payload_hash>1563382139</payload_hash>
+        <record_name>Set Field Values</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:21:52</sys_created_on>
+        <sys_id>6f31307347433250d5441233e16d439a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba4a0110000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:21:52</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>a3313073af43325063ca791105fba599</update_guid>
+        <update_guid_history>a3313073af43325063ca791105fba599:1563382139,46313833034332500e1fbc3c9a0859e7:1589689404,f121b0ff8e0332505ca1d6bba7a68943:1615996669,002178bfbb0332502e50fc6e5a747235:-2100210797,4f017c3f4b0332509ad3c87000b3af3d:-2073903532,7c01703f9203325042a652cbc2d8e493:-2047596267,5af0f0fbd5033250f016dd3f20637762:-2021289002,2df030fb160332507a3b0d102f6db10c:-1994981737,2ac0f0f75603325064a8f3fe3ea6f3ac:-1968674472,4a907cb39b033250a91eea4ab4ef4942:-1942367207,699078b389033250275d3f6f9f80ef58:-1916059942,418038732c033250ea1ef82cf5404109:-1889752677,e360b433bb033250b6fe14263f83256d:-1863445412,b860f8fff8cffe10ba7fb698b74e40db:-1284685582,2b307c7f62cffe10de00ebe99ce95a03:-1258378317,be30f87f41cffe108bba922f6a4a4e48:-1232071052,0b20f83f12cffe10a5f9d70948c115e9:-1205763787,4210f4fb41cffe10ab31975dc6e36b08:-1179456522,640030bb34cffe1065e79d110dbe7282:-1153149257,5bcfe4b7c9cffe10d2f40735420cff0a:-1126841992,ae8fa0b3aacffe1059dd27cbf752511b:-1100534727,9c7fe83397cffe1013db496a2d791c95:-1074227462,5f6f68336ecffe103e5c3f9ae36d7d1e:-1047920197,9e4f2cbfed8ffe1064c893a525d395e5:-469160367,994f68bfd98ffe10726d9c86f37e7c9b:-442853102,711fa43f4b8ffe105a1cd9459aae0c3a:-416545837,7bfe20fbf18ffe100c2838b8b6e001cf:-390238572,31de607b7d8ffe10752a11f189a1b054:-363931307,24ce203b038ffe10eb5dd3ddfc4ada38:-337624042,ddaea8b7038ffe109d1dc98e4fb8c257:-311316777,6e9e20b7708ffe10833ed88b47f65701:-285009512,a97ea0376a8ffe10b5050566ff33837d:-258702247,787eecf3d48ffe10fde59a22a27476c2:-232394982,a65e6cb3328ffe100c3b0bb704a8c256:346364848,8b1ea8ff864ffe105b87451e446bc1ee:372672113,1c89083fd14f7e1084349dad721436d0:398979378</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:22:13</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>35e6fc81225f4190866792c2a2b71390</sys_id>
+        <sys_metadata>9089083f874f7e10375662060cbb35b3</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_9089083f874f7e10375662060cbb35b3</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_9089083f874f7e10375662060cbb35b3">6f31307347433250d5441233e16d439a</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:13</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

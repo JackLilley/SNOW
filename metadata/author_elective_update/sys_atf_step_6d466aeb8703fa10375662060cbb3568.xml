@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Impersonate the user: Mike Taylor with user Id: mike.taylor@summit7.us</description>
+        <display_name>Impersonate</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>19</order>
+        <step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:14:42</sys_created_on>
+        <sys_id>6d466aeb8703fa10375662060cbb3568</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_6d466aeb8703fa10375662060cbb3568</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:19:57</sys_updated_on>
+        <table>x_cadso_work_goal</table>
+        <test display_value="ATF Generated Test - x_cadso_work_goal, Mike Taylor, User's default view (Default view)">a4462e6b8703fa10375662060cbb35dd</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=6d466aeb8703fa10375662060cbb3568"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6d466aeb8703fa10375662060cbb3568</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:14:42</sys_created_on>
+        <sys_id>25466aeb8703fa10375662060cbb356a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:14:42</sys_updated_on>
+        <value>a4ee486edbde8610b6eff055f39619b3</value>
+        <variable display_value="User">586e2c4253e0220002c6435723dc3415</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=6d466aeb8703fa10375662060cbb3568"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_6d466aeb8703fa10375662060cbb3568</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Impersonate the user: Mike Taylor with user Id: mike.taylor@summit7.us</description><display_name>Impersonate</display_name><inputs/><mugshots_cache_json/><notes/><order>19</order><step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:14:42</sys_created_on><sys_id>6d466aeb8703fa10375662060cbb3568</sys_id><sys_mod_count>36</sys_mod_count><sys_name>Impersonate</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_6d466aeb8703fa10375662060cbb3568</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:19:57</sys_updated_on><table>x_cadso_work_goal</table><test display_value="ATF Generated Test - x_cadso_work_goal, Mike Taylor, User's default view (Default view)">a4462e6b8703fa10375662060cbb35dd</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=6d466aeb8703fa10375662060cbb3568"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6d466aeb8703fa10375662060cbb3568</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:14:42</sys_created_on><sys_id>25466aeb8703fa10375662060cbb356a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:14:42</sys_updated_on><value>a4ee486edbde8610b6eff055f39619b3</value><variable display_value="User">586e2c4253e0220002c6435723dc3415</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=6d466aeb8703fa10375662060cbb3568"/></record_update>]]></payload>
+        <payload_hash>1928673767</payload_hash>
+        <record_name>Impersonate</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:19:57</sys_created_on>
+        <sys_id>e7c038f747033250d5441233e16d43c2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba2e0740000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:19:57</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>2fc038f71e033250dfc198b9b26ff5c0</update_guid>
+        <update_guid_history>2fc038f71e033250dfc198b9b26ff5c0:1928673767,be90b0f3b203325038c03d050bbc2463:-2044890863,178030b3780332504424c00d9c4ac029:-1054152720,7a80bc7379033250296136febcf48e15:-63414577,de803c73b703325046acefa7440a3e17:927323566,b550b0ffeccffe10ddff661ff931d839:1918061709,c95030ffdacffe10acb5cc4ac445794f:-1386167444,c24074bf60cffe10837eede4703b4156:-395429301,1940f0bf01cffe1032359b3551486e53:595308842,384070bf3fcffe108e54a010be71af91:1586046985,0f00b8bb8ccffe10c4d63d7be32aeec5:-1718182168,d4efe8f702cffe1080bef50698e367f1:-1396779502,67df28f7cccffe1094f4d3fb120b2c78:-406041359,e0df2cb79ccffe102161b586af548e2f:584696784,067f6073e2cffe10777c14e4b5884555:1575434927,ac2fac3fb98ffe1068809452e4caf1be:-1728794226,3f1f2c3f038ffe10a3404b2d1e6e2b7b:-738056083,3d2ee0332e8ffe1094ca8d1f2569c901:252682060,e9466aebb903fa1050e197599d34cc6c:1243420203</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:20:06</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>37940cadc9304bd48d4ee81561c9f144</sys_id>
+        <sys_metadata>6d466aeb8703fa10375662060cbb3568</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_6d466aeb8703fa10375662060cbb3568</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_6d466aeb8703fa10375662060cbb3568">e7c038f747033250d5441233e16d43c2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:20:06</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

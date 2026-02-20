@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Assert the following:
+The following fields are visible: Backout plan, Watch list, Type, Conflict status, Communication Plan, Number, Test plan, CAB delegate, State, Configuration item, Impact, Define Security Impact, Work notes list, Service, Priority, Model, CAB recommendation, Requested by, Actual end date, Work notes, Implementation plan, Planned end date, Short description, Actual start date, Close code, Assignment group, Additional assignee list, Define Proposed Change, Service offering, Close notes, CAB required, Business Justification, Assigned to, Planned start date, Additional comments, Conflict last run, CAB date/time, Risk, Category, Compliance Impact, Operational Impact
+The following fields are read only: Type, Conflict status, Number, Conflict last run
+The following fields are mandatory: Define Proposed Change, Business Justification, Requested by, Short description
+With a failure timeout of 30 Seconds</description>
+        <display_name>Field State Validation</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>45</order>
+        <step_config display_value="Field State Validation">1dfece935332120028bc29cac2dc3478</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>5ec1532f87073e10375662060cbb3542</sys_id>
+        <sys_mod_count>52</sys_mod_count>
+        <sys_name>Field State Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_5ec1532f87073e10375662060cbb3542</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:18:38</sys_updated_on>
+        <table>change_request</table>
+        <test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=5ec1532f87073e10375662060cbb3542"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>56c1532f87073e10375662060cbb3544</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value>backout_plan,watch_list,type,conflict_status,u_communication_plan,number,test_plan,cab_delegate,state,cmdb_ci,impact,u_define_security_impact,work_notes_list,business_service,priority,chg_model,cab_recommendation,requested_by,work_end,work_notes,implementation_plan,end_date,short_description,work_start,close_code,assignment_group,additional_assignee_list,description,service_offering,close_notes,cab_required,justification,assigned_to,start_date,comments,conflict_last_run,cab_date_time,risk,category,u_compliance_impact,risk_impact_analysis</value>
+        <variable display_value="Visible">0cd9df135320220002c6435723dc3426</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>210</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>56c1532f87073e10375662060cbb3545</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value/>
+        <variable display_value="Not visible">e81ad3535320220002c6435723dc340c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>310</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>56c1532f87073e10375662060cbb3546</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value/>
+        <variable display_value="Not read only">e63a97535320220002c6435723dc34b8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>56c1532f87073e10375662060cbb3547</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value>change_request</value>
+        <variable display_value="Table">80f953535320220002c6435723dc340f</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>5ec1532f87073e10375662060cbb3543</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">b1fefcde73633300b19898b8caf6a7af</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>5ec1532f87073e10375662060cbb3544</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value>type,conflict_status,number,conflict_last_run</value>
+        <variable display_value="Read only">592a17535320220002c6435723dc34d7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>410</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>5ec1532f87073e10375662060cbb3545</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value/>
+        <variable display_value="Not mandatory">787a9b535320220002c6435723dc3455</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>5ec1532f87073e10375662060cbb3542</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:49</sys_created_on>
+        <sys_id>5ec1532f87073e10375662060cbb3546</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:49</sys_updated_on>
+        <value>description,justification,requested_by,short_description</value>
+        <variable display_value="Mandatory">6e5a1b535320220002c6435723dc3498</variable>
+    </sys_variable_value>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_5ec1532f87073e10375662060cbb3542</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Assert the following:
+The following fields are visible: Backout plan, Watch list, Type, Conflict status, Communication Plan, Number, Test plan, CAB delegate, State, Configuration item, Impact, Define Security Impact, Work notes list, Service, Priority, Model, CAB recommendation, Requested by, Actual end date, Work notes, Implementation plan, Planned end date, Short description, Actual start date, Close code, Assignment group, Additional assignee list, Define Proposed Change, Service offering, Close notes, CAB required, Business Justification, Assigned to, Planned start date, Additional comments, Conflict last run, CAB date/time, Risk, Category, Compliance Impact, Operational Impact
+The following fields are read only: Type, Conflict status, Number, Conflict last run
+The following fields are mandatory: Define Proposed Change, Business Justification, Requested by, Short description
+With a failure timeout of 30 Seconds</description><display_name>Field State Validation</display_name><inputs/><mugshots_cache_json/><notes/><order>45</order><step_config display_value="Field State Validation">1dfece935332120028bc29cac2dc3478</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>5ec1532f87073e10375662060cbb3542</sys_id><sys_mod_count>52</sys_mod_count><sys_name>Field State Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_5ec1532f87073e10375662060cbb3542</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:18:38</sys_updated_on><table>change_request</table><test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=5ec1532f87073e10375662060cbb3542"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>56c1532f87073e10375662060cbb3544</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value>backout_plan,watch_list,type,conflict_status,u_communication_plan,number,test_plan,cab_delegate,state,cmdb_ci,impact,u_define_security_impact,work_notes_list,business_service,priority,chg_model,cab_recommendation,requested_by,work_end,work_notes,implementation_plan,end_date,short_description,work_start,close_code,assignment_group,additional_assignee_list,description,service_offering,close_notes,cab_required,justification,assigned_to,start_date,comments,conflict_last_run,cab_date_time,risk,category,u_compliance_impact,risk_impact_analysis</value><variable display_value="Visible">0cd9df135320220002c6435723dc3426</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>210</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>56c1532f87073e10375662060cbb3545</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value/><variable display_value="Not visible">e81ad3535320220002c6435723dc340c</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>310</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>56c1532f87073e10375662060cbb3546</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value/><variable display_value="Not read only">e63a97535320220002c6435723dc34b8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>56c1532f87073e10375662060cbb3547</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value>change_request</value><variable display_value="Table">80f953535320220002c6435723dc340f</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>5ec1532f87073e10375662060cbb3543</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">b1fefcde73633300b19898b8caf6a7af</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>5ec1532f87073e10375662060cbb3544</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value>type,conflict_status,number,conflict_last_run</value><variable display_value="Read only">592a17535320220002c6435723dc34d7</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>410</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>5ec1532f87073e10375662060cbb3545</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value/><variable display_value="Not mandatory">787a9b535320220002c6435723dc3455</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>5ec1532f87073e10375662060cbb3542</document_key><order>400</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:49</sys_created_on><sys_id>5ec1532f87073e10375662060cbb3546</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:49</sys_updated_on><value>description,justification,requested_by,short_description</value><variable display_value="Mandatory">6e5a1b535320220002c6435723dc3498</variable></sys_variable_value></record_update>]]></payload>
+        <payload_hash>922583234</payload_hash>
+        <record_name>Field State Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:18:38</sys_created_on>
+        <sys_id>1880747347033250d5441233e16d438e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba1ac0d0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:18:38</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>5c8074736b0332503f1b3fa04769418c</update_guid>
+        <update_guid_history>5c8074736b0332503f1b3fa04769418c:922583234,fb7034734b03325063aaa1724dcb8714:-1599787197,325074ff59cffe101cceff714fd4f197:172809668,0c30307f2fcffe10d76b7becb1bd19c9:1945406533,781070fbc2cffe1070184c01a4ca2c4c:-576963898,0810bcbb2ecffe10aa0a089cb533f5d6:-234538532,b6ef643b7bcffe10669fa7777ab1a447:1538058333,31efa03b13cffe10d2e357415045561b:-984312098,c4cf6877a5cffe10394b1f4057b1bc95:788284767,66af603765cffe10b2f09272af6f471a:-1734085664,a99fe8b3d9cffe10c7515bd3074d3b9a:38511201,989fe4b36dcffe10fb00d959eb02ec86:1811108066,b25fa8ffef8ffe10c2a536cdde6fd57d:-711262365,bb3fe0bfc78ffe10ed22659e9ac6ebf6:1061334500,d13f2c7f258ffe10f399c057a6bd87dc:-1461035931,803f687f9e8ffe1081a7121b978ebe59:-1118610565,fe2f647f328ffe105e13fc9d99741b8d:653986300,39be28f75c8ffe10941047216d42a732:-1868384131,2cbee0f7648ffe109c3632df03df897f:-95787266,fc9ea877948ffe1053a17ec3969d3799:1676809599,409ea477a38ffe102be598a3142679c7:-845560832,9f4ea0b3928ffe10abf72cf9f7f2c6ff:927036033,3f3e2473fb8ffe107d8fe68eb6b55b8e:-1595334398,323ea073808ffe10de2168509ff35417:177262467,ad3e6c33c18ffe100d13dac2f5d006be:1949859332,bf2e6833b68ffe104fe53325fef9f823:-2002682598,1ec1532fab073e10737a83fe96c4c349:-230085733</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:19:16</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>66b35447a6da4a94a65268db95376f31</sys_id>
+        <sys_metadata>5ec1532f87073e10375662060cbb3542</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Field State Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_5ec1532f87073e10375662060cbb3542</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_5ec1532f87073e10375662060cbb3542">1880747347033250d5441233e16d438e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:19:16</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

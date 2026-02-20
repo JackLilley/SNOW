@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate there is at least one record in 'sc_task' matching query:
+Approval = Approved
+and Assignment group = ag-NOC
+and Item = RMM Access
+and Escalation = Normal
+and Impact = 3 - Low
+and Priority = 4 - Low
+and Short description = Setup RMM Access
+and State = Open
+and Task type = Catalog Task
+and Created by = system
+and Domain = (empty)
+and Domain Path = /
+and Upon approval = Proceed to Next Task
+and Upon reject = Cancel all future Tasks
+and Urgency = 3 - Low
+and Request = {{invalid step_id=9e65aea38703fa10375662060cbb358d.}}
+With a failure timeout of 30 Seconds</description>
+        <display_name>Record Query</display_name>
+        <inputs/>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>2</order>
+        <step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>f26522e38703fa10375662060cbb3521</sys_id>
+        <sys_mod_count>64</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_f26522e38703fa10375662060cbb3521</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:13</sys_updated_on>
+        <table>sc_task</table>
+        <test display_value="ATF Generated Test - Service Catalog, RMM Access, Nelson Smith">8a656ea38703fa10375662060cbb35c8</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=f26522e38703fa10375662060cbb3521"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f26522e38703fa10375662060cbb3521</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>b66522e38703fa10375662060cbb3535</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:10:58</sys_updated_on>
+        <value>approval=approved^assignment_group=a44ac008878e4e90375662060cbb3570^cat_item=0025a32487a24e10375662060cbb3585^escalation=0^impact=3^priority=4^short_description=Setup RMM Access
+^state=1^sys_class_name=sc_task^sys_created_by=system^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^request={{step['9e65aea38703fa10375662060cbb358d'].request_id}}</value>
+        <variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f26522e38703fa10375662060cbb3521</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>be6522e38703fa10375662060cbb3534</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:10:58</sys_updated_on>
+        <value>sc_task</value>
+        <variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f26522e38703fa10375662060cbb3521</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>f66522e38703fa10375662060cbb3527</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:10:58</sys_updated_on>
+        <value>records_match_query</value>
+        <variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f26522e38703fa10375662060cbb3521</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>fe6522e38703fa10375662060cbb3527</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:10:58</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=f26522e38703fa10375662060cbb3521"/>
+    <sys_element_mapping action="DELETE">
+        <field>field_values</field>
+        <id>f26522e38703fa10375662060cbb3521</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:10:58</sys_created_on>
+        <sys_id>3a6522e38703fa10375662060cbb353a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:10:58</sys_updated_on>
+        <table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table>
+        <value>approval=approved^assignment_group=a44ac008878e4e90375662060cbb3570^cat_item=0025a32487a24e10375662060cbb3585^escalation=0^impact=3^priority=4^short_description=Setup RMM Access
+^state=1^sys_class_name=sc_task^sys_created_by=system^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^request={{step['9e65aea38703fa10375662060cbb358d'].request_id}}</value>
+    </sys_element_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_f26522e38703fa10375662060cbb3521</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate there is at least one record in 'sc_task' matching query:
+Approval = Approved
+and Assignment group = ag-NOC
+and Item = RMM Access
+and Escalation = Normal
+and Impact = 3 - Low
+and Priority = 4 - Low
+and Short description = Setup RMM Access
+and State = Open
+and Task type = Catalog Task
+and Created by = system
+and Domain = (empty)
+and Domain Path = /
+and Upon approval = Proceed to Next Task
+and Upon reject = Cancel all future Tasks
+and Urgency = 3 - Low
+and Request = {{invalid step_id=9e65aea38703fa10375662060cbb358d.}}
+With a failure timeout of 30 Seconds</description><display_name>Record Query</display_name><inputs/><inputs/><mugshots_cache_json/><notes/><order>2</order><step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>f26522e38703fa10375662060cbb3521</sys_id><sys_mod_count>64</sys_mod_count><sys_name>Record Query</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_f26522e38703fa10375662060cbb3521</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:25:13</sys_updated_on><table>sc_task</table><test display_value="ATF Generated Test - Service Catalog, RMM Access, Nelson Smith">8a656ea38703fa10375662060cbb35c8</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=f26522e38703fa10375662060cbb3521"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f26522e38703fa10375662060cbb3521</document_key><order>400</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>b66522e38703fa10375662060cbb3535</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:10:58</sys_updated_on><value>approval=approved^assignment_group=a44ac008878e4e90375662060cbb3570^cat_item=0025a32487a24e10375662060cbb3585^escalation=0^impact=3^priority=4^short_description=Setup RMM Access
+^state=1^sys_class_name=sc_task^sys_created_by=system^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^request={{step['9e65aea38703fa10375662060cbb358d'].request_id}}</value><variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f26522e38703fa10375662060cbb3521</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>be6522e38703fa10375662060cbb3534</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:10:58</sys_updated_on><value>sc_task</value><variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f26522e38703fa10375662060cbb3521</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>f66522e38703fa10375662060cbb3527</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:10:58</sys_updated_on><value>records_match_query</value><variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f26522e38703fa10375662060cbb3521</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>fe6522e38703fa10375662060cbb3527</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:10:58</sys_updated_on><value>0</value><variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="id=f26522e38703fa10375662060cbb3521"/><sys_element_mapping action="INSERT_OR_UPDATE"><field>field_values</field><id>f26522e38703fa10375662060cbb3521</id><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:10:58</sys_created_on><sys_id>3a6522e38703fa10375662060cbb353a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:10:58</sys_updated_on><table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table><value>approval=approved^assignment_group=a44ac008878e4e90375662060cbb3570^cat_item=0025a32487a24e10375662060cbb3585^escalation=0^impact=3^priority=4^short_description=Setup RMM Access
+^state=1^sys_class_name=sc_task^sys_created_by=system^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^request={{step['9e65aea38703fa10375662060cbb358d'].request_id}}</value></sys_element_mapping></record_update>]]></payload>
+        <payload_hash>-147462263</payload_hash>
+        <record_name>Record Query</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:13</sys_created_on>
+        <sys_id>e802383747833250d5441233e16d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba7b3210000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:13</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>200238370f833250206391cf5aba287d</update_guid>
+        <update_guid_history>200238370f833250206391cf5aba287d:-147462263,20023837a88332504122e196fa86ff22:-891205720,58027437a483325071c7943d9354ecd1:-1634949177,15f134f3b8833250e000a4048620e267:1916274662,95e17c73e783325016e6a6928ef61937:1172531205,a181f03b0c433250bd1c53f3aa56c089:428787748,f87134b70b433250b49bdc0b93e35bab:-314955709,db1134bfb3033250688834d770313903:969119104,38f0f8bbfb0332501c72e2bf2af93947:626208892,ead0783b06033250c258e3ad23478d51:-117534565,b3a0b077280332503c4c75b93c89a58b:-861278022,85a034371d0332502ce6386d4c43342c:-1605021479,a490f0b339033250e93a5a95c8eea3b5:-1564806535,9eff647b22cffe1069febbb4604205f7:-1524591591,8eff647bcacffe10d6d17fefdbd5d914:2026632248,51cfac7764cffe107122c85c4a05f9a0:1282888791,8d8f2c73dfcffe1071a88c2fe4f6432c:539145334,388fa873d2cffe10f26c268a723811c0:-204598123,8a6f6433d8cffe10569529a705108546:612915007,bafeacbbef8ffe10ecb8e2d0426a8c79:-130828450,defe2cbb0a8ffe1045fd47dc5852dcd2:-90613506,41eee87b608ffe10255b0d0e033a65ae:-50398562,fd9e6c77dd8ffe10b4f5b6597fc4966b:-10183618,7a6522e38103fa102136fd061bed9f38:61513738</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>08efa34b6f1a46a880f0470ec544b440</sys_id>
+        <sys_metadata>f26522e38703fa10375662060cbb3521</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_f26522e38703fa10375662060cbb3521</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_f26522e38703fa10375662060cbb3521">e802383747833250d5441233e16d437e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

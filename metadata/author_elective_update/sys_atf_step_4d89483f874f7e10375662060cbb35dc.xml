@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate record from table 'sn_ind_tmt_orm_order_task' matches the following condition:
+Phase type = Waterfall
+With a failure timeout of 10 Seconds</description>
+        <display_name>Record Validation</display_name>
+        <inputs/>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>48</order>
+        <step_config display_value="Record Validation">1f39a288df60220062fe6c7a4df2639d</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4d89483f874f7e10375662060cbb35dc</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>Record Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_4d89483f874f7e10375662060cbb35dc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:17:31</sys_updated_on>
+        <table>sn_ind_tmt_orm_order_task</table>
+        <test display_value="ATF Generated Test - sn_ind_tmt_orm_order_task, Melissa Holbein, User's default view (Default view)">f679c03f874f7e10375662060cbb35bb</test>
+        <timeout>1970-01-01 00:00:10</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=4d89483f874f7e10375662060cbb35dc"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>4d89483f874f7e10375662060cbb35dc</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4189483f874f7e10375662060cbb35e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <value/>
+        <variable display_value="Record">52ed1e5b5360220002c6435723dc3421</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>4d89483f874f7e10375662060cbb35dc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4189483f874f7e10375662060cbb35e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <value>sn_ind_tmt_orm_order_task</value>
+        <variable display_value="Table">6aad5a575360220002c6435723dc34b0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>4d89483f874f7e10375662060cbb35dc</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4989483f874f7e10375662060cbb35df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <value>record_validated</value>
+        <variable display_value="Assert type">67400008676003007ba405225685efa4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>4d89483f874f7e10375662060cbb35dc</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4989483f874f7e10375662060cbb35e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">cbddfa135320220002c6435723dc3415</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>4d89483f874f7e10375662060cbb35dc</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>4989483f874f7e10375662060cbb35e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <value>phase_type=waterfall</value>
+        <variable display_value="Field values">ff6e125353a0220002c6435723dc3442</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=4d89483f874f7e10375662060cbb35dc"/>
+    <sys_element_mapping action="DELETE">
+        <field>record_id</field>
+        <id>4d89483f874f7e10375662060cbb35dc</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 12:28:18</sys_created_on>
+        <sys_id>cd89483f874f7e10375662060cbb35e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 12:28:18</sys_updated_on>
+        <table>var__m_atf_input_variable_1f39a288df60220062fe6c7a4df2639d</table>
+        <value>{{step['0779443f874f7e10375662060cbb3579'].record_id}}</value>
+    </sys_element_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_4d89483f874f7e10375662060cbb35dc</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate record from table 'sn_ind_tmt_orm_order_task' matches the following condition:
+Phase type = Waterfall
+With a failure timeout of 10 Seconds</description><display_name>Record Validation</display_name><inputs/><inputs/><mugshots_cache_json/><notes/><order>48</order><step_config display_value="Record Validation">1f39a288df60220062fe6c7a4df2639d</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4d89483f874f7e10375662060cbb35dc</sys_id><sys_mod_count>48</sys_mod_count><sys_name>Record Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_4d89483f874f7e10375662060cbb35dc</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:17:31</sys_updated_on><table>sn_ind_tmt_orm_order_task</table><test display_value="ATF Generated Test - sn_ind_tmt_orm_order_task, Melissa Holbein, User's default view (Default view)">f679c03f874f7e10375662060cbb35bb</test><timeout>1970-01-01 00:00:10</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=4d89483f874f7e10375662060cbb35dc"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>4d89483f874f7e10375662060cbb35dc</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4189483f874f7e10375662060cbb35e0</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><value/><variable display_value="Record">52ed1e5b5360220002c6435723dc3421</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>4d89483f874f7e10375662060cbb35dc</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4189483f874f7e10375662060cbb35e1</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><value>sn_ind_tmt_orm_order_task</value><variable display_value="Table">6aad5a575360220002c6435723dc34b0</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>4d89483f874f7e10375662060cbb35dc</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4989483f874f7e10375662060cbb35df</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><value>record_validated</value><variable display_value="Assert type">67400008676003007ba405225685efa4</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>4d89483f874f7e10375662060cbb35dc</document_key><order>10</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4989483f874f7e10375662060cbb35e0</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><value>0</value><variable display_value="Enforce security">cbddfa135320220002c6435723dc3415</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>4d89483f874f7e10375662060cbb35dc</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>4989483f874f7e10375662060cbb35e1</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><value>phase_type=waterfall</value><variable display_value="Field values">ff6e125353a0220002c6435723dc3442</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="id=4d89483f874f7e10375662060cbb35dc"/><sys_element_mapping action="INSERT_OR_UPDATE"><field>record_id</field><id>4d89483f874f7e10375662060cbb35dc</id><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 12:28:18</sys_created_on><sys_id>cd89483f874f7e10375662060cbb35e5</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 12:28:18</sys_updated_on><table>var__m_atf_input_variable_1f39a288df60220062fe6c7a4df2639d</table><value>{{step['0779443f874f7e10375662060cbb3579'].record_id}}</value></sys_element_mapping></record_update>]]></payload>
+        <payload_hash>-1874805956</payload_hash>
+        <record_name>Record Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:17:31</sys_created_on>
+        <sys_id>bb307c7f47cffe10d5441233e16d43e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba0a40e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:17:31</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>ff307c7fabcffe100107a73f85f820e3</update_guid>
+        <update_guid_history>ff307c7fabcffe100107a73f85f820e3:-1874805956,47303c7febcffe1025389dacf839b629:-1700396517,9f207c3f9ecffe105f45ca23b5a2ee39:2136611141,5a1038fb62cffe1081de67376c86713f:-1983946716,890070bb10cffe10155a66c6562b7c7b:-1809537277,3cefacf77dcffe1075c6909b3310cc29:-1635127838,91dfacb7d7cffe10ca2386c0c1c9aadf:-1460718399,67cf28b722cffe104bd96f7908759d71:-1286308960,cf8fa0b3a7cffe1058a4df7d869ed5e0:-1111899521,247f2c33fbcffe10726df71656231980:-937490082,f36fa833e9cffe1062b1ab362ffb7709:-763080643,295fa4ff168ffe10636cd634e876d1d1:-588671204,7a4facbfee8ffe10595e09e7d238336f:-1046630842,294fa8bf8a8ffe1008b62543ac5f1a9c:-872221403,961fe43f128ffe1015114a70cc32d847:-697811964,800f60fbe88ffe104650074b918e18ab:-523402525,0edea07bf78ffe10aedaf5415675d26d:-348993086,38ce603b338ffe10493510e16f1fccb5:-174583647,7daee8b76f8ffe109fcd59a38fb3fe58:-174208,7a9e60b74c8ffe1022cef2fe28f30e1b:174235231,717ee037c78ffe10ff4c37c90380bd72:348644670,8d7e2037d38ffe10098eeb73deb689cf:523054109,075eacb34d8ffe1050fee524b3a01957:65094471,ef1ee8ff164ffe1043fc86e28cc0a8fb:239503910,0189483f464f7e102a20f162dc5171e4:1454181296</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:17:57</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>0a0de57da88443c0807ecc59ec1bbe40</sys_id>
+        <sys_metadata>4d89483f874f7e10375662060cbb35dc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_4d89483f874f7e10375662060cbb35dc</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_4d89483f874f7e10375662060cbb35dc">bb307c7f47cffe10d5441233e16d43e5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:17:57</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

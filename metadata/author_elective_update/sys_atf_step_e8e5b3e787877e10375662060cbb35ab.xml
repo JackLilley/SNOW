@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Set the following values on the form:
+Short description = Tanium Configuration</description>
+        <display_name>Set Field Values</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>8</order>
+        <step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:31</sys_created_on>
+        <sys_id>e8e5b3e787877e10375662060cbb35ab</sys_id>
+        <sys_mod_count>104</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_e8e5b3e787877e10375662060cbb35ab</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:55</sys_updated_on>
+        <table>pm_project_task</table>
+        <test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=e8e5b3e787877e10375662060cbb35ab"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>e8e5b3e787877e10375662060cbb35ab</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:31</sys_created_on>
+        <sys_id>20e5b3e787877e10375662060cbb35ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:31</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>e8e5b3e787877e10375662060cbb35ab</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:31</sys_created_on>
+        <sys_id>20e5b3e787877e10375662060cbb35ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:31</sys_updated_on>
+        <value>short_description=Tanium Configuration</value>
+        <variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>e8e5b3e787877e10375662060cbb35ab</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:31</sys_created_on>
+        <sys_id>28e5b3e787877e10375662060cbb35ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:31</sys_updated_on>
+        <value>pm_project_task</value>
+        <variable display_value="Table">424ca6465320220002c6435723dc34b5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=e8e5b3e787877e10375662060cbb35ab"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_e8e5b3e787877e10375662060cbb35ab</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Set the following values on the form:
+Short description = Tanium Configuration</description><display_name>Set Field Values</display_name><inputs/><mugshots_cache_json/><notes/><order>8</order><step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:31</sys_created_on><sys_id>e8e5b3e787877e10375662060cbb35ab</sys_id><sys_mod_count>104</sys_mod_count><sys_name>Set Field Values</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_e8e5b3e787877e10375662060cbb35ab</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:24:55</sys_updated_on><table>pm_project_task</table><test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=e8e5b3e787877e10375662060cbb35ab"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>e8e5b3e787877e10375662060cbb35ab</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:31</sys_created_on><sys_id>20e5b3e787877e10375662060cbb35ad</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:31</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>e8e5b3e787877e10375662060cbb35ab</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:31</sys_created_on><sys_id>20e5b3e787877e10375662060cbb35ae</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:31</sys_updated_on><value>short_description=Tanium Configuration</value><variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>e8e5b3e787877e10375662060cbb35ab</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:31</sys_created_on><sys_id>28e5b3e787877e10375662060cbb35ad</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:31</sys_updated_on><value>pm_project_task</value><variable display_value="Table">424ca6465320220002c6435723dc34b5</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=e8e5b3e787877e10375662060cbb35ab"/></record_update>]]></payload>
+        <payload_hash>-445185793</payload_hash>
+        <record_name>Set Field Values</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:24:55</sys_created_on>
+        <sys_id>90f1fcb347833250d5441233e16d433f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba76b8e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:55</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>d4f1fcb3998332500285565405e5c83d</update_guid>
+        <update_guid_history>d4f1fcb3998332500285565405e5c83d:-445185793,77e17cb3f583325056fad905b2b5c4d8:560902144,87e1f4b39d833250436bb278a7168cb4:-1451367094,3ae1b4b3b583325003428840b8674765:-445279157,a2e174b3a3833250b9ade9513b5b5c33:560808780,0ee170b339833250ec601cfb79399065:1566896717,ece1f47311833250ebd2c15eecfd9026:-1721982642,9ed17833b2833250a4106bef94894fc4:-715894705,29d134332983325046c6b9e07818513d:290193232,51d1b0338f833250055184769618ecef:1296281169,b7c1f4ff4f43325092b372bc469af382:-1992598190,0bc170ffcb433250b75cda46efa8a186:-986510253,e1c1f4bf9c4332504b953ce6cb7f1817:-327412119,4db1f83f6c433250c66814123c850075:678675818,b9a1b4fb3d43325039750b29923ea28c:1684763755,8581fcf7fb433250d0accbda8cbe6c4b:-1604115604,fb7138f7e043325025b4dd09be6ab4cf:-598027667,7a61f4776d43325071e270b03aabdf83:408060270,5a617477a04332502fd83a7d39db67b9:1414148207,4d51b0f3f44332501c4e29b71a75013d:-1874731152,f5413c73eb433250b700ef070bcf669b:-868643215,9041347312433250cea99203c7ad85ed:137444722,36313c3381433250b2576a81ab5ae2eb:796542856,9921fcbf8b033250eff645391a63e509:1802630793,7b11f4bf3d0332504fcb081ebb5f6220:-1486248566,e0e0f07b9e03325067bbe607b71771a0:-480160629,33d0307b0403325064242ae68ccba00d:525927308,81d0703b500332505e3e9bf84621fc5d:1532015245,6d80b8732203325037f0fe8ba32b6f66:-1756864114,0c40bc7ffccffe101812e148c340ccdc:-750776177,ad30b47f24cffe10ee38f622620ac090:255311760,0310f8fbd4cffe106c411b824b15b922:1261399697,2600f4bb46cffe10757722983b5916ea:1920497831,e6bfa077edcffe109ba40b7cbf70f8e6:-1368381528,79bfac37c7cffe106e4306d3253ff996:-362293591,9b9fe0f33ccffe1059ffdac2707d558a:643794346,178fe0b394cffe100f52303e04c233cf:1649882283,2f5f2cffac8ffe1000ed300f0ed007a6:-1638997076,7b4f60ffe18ffe10f660b6d3bcf79c76:-632909139,be1f683f4c8ffe107737574d723c10e7:373178798,630facfbb68ffe1021bac34dac205425:1379266735,da0f68fb5b8ffe10f3d082249f498e5f:-1909612624,850f24fb1a8ffe10a587141729c7b369:-1250514490,75eeac7bf58ffe10c045b48c77d17a12:-244426553,4bce283bc88ffe10d9745319898de14e:761661384,16ae2cb7208ffe10ff95b59e00b467ea:1767749321,58aea4b7eb8ffe100c5b5231b15ac428:-1521130038,408ee837048ffe1052c6f8428b08b51d:-515042101,8f7ee437818ffe103dbfbe0479d190a5:491045836,6e6e68f3c08ffe10b510a9d3f6602f0a:1497133773,3c6e24f3918ffe102079e55f5495682c:-1791745586,dc2eacff524ffe10e80b219b1a595baa:-785657649,ace5b3e75d877e102a84159c35cdfbbc:-126559515</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:09</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>4304fcd8876843449e008e7da04c67b9</sys_id>
+        <sys_metadata>e8e5b3e787877e10375662060cbb35ab</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_e8e5b3e787877e10375662060cbb35ab</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_e8e5b3e787877e10375662060cbb35ab">90f1fcb347833250d5441233e16d433f</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

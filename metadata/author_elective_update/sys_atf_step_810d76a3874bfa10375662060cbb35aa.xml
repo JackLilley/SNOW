@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Impersonate the user: Joele Hernandez with user Id: Joele.Hernandez@summit7.us</description>
+        <display_name>Impersonate</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>1</order>
+        <step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 06:54:04</sys_created_on>
+        <sys_id>810d76a3874bfa10375662060cbb35aa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_810d76a3874bfa10375662060cbb35aa</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 06:54:04</sys_updated_on>
+        <table>kb_category</table>
+        <test display_value="ATF Generated Test - kb_category, Joele Hernandez, User's default view (Default view)">cd0d36a3874bfa10375662060cbb3512</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=810d76a3874bfa10375662060cbb35aa"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>810d76a3874bfa10375662060cbb35aa</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 06:54:04</sys_created_on>
+        <sys_id>c90d76a3874bfa10375662060cbb35ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 06:54:04</sys_updated_on>
+        <value>e095481d97dd6a5855c5b94de053afb9</value>
+        <variable display_value="User">586e2c4253e0220002c6435723dc3415</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=810d76a3874bfa10375662060cbb35aa"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_810d76a3874bfa10375662060cbb35aa</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Impersonate the user: Joele Hernandez with user Id: Joele.Hernandez@summit7.us</description><display_name>Impersonate</display_name><inputs/><mugshots_cache_json/><notes/><order>1</order><step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 06:54:04</sys_created_on><sys_id>810d76a3874bfa10375662060cbb35aa</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Impersonate</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_810d76a3874bfa10375662060cbb35aa</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 06:54:04</sys_updated_on><table>kb_category</table><test display_value="ATF Generated Test - kb_category, Joele Hernandez, User's default view (Default view)">cd0d36a3874bfa10375662060cbb3512</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=810d76a3874bfa10375662060cbb35aa"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>810d76a3874bfa10375662060cbb35aa</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 06:54:04</sys_created_on><sys_id>c90d76a3874bfa10375662060cbb35ab</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 06:54:04</sys_updated_on><value>e095481d97dd6a5855c5b94de053afb9</value><variable display_value="User">586e2c4253e0220002c6435723dc3415</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=810d76a3874bfa10375662060cbb35aa"/></record_update>]]></payload>
+        <payload_hash>-1936404000</payload_hash>
+        <record_name>Impersonate</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 06:54:04</sys_created_on>
+        <sys_id>050d76a3874bfa10375662060cbb35b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c79d3b9730000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 06:54:04</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>810d76a3854bfa10a9e0fe539e2048af</update_guid>
+        <update_guid_history>810d76a3854bfa10a9e0fe539e2048af:-1936404000</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:21:30</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>6d31cb05f84846b08d96a4cdf1768810</sys_id>
+        <sys_metadata>810d76a3874bfa10375662060cbb35aa</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_810d76a3874bfa10375662060cbb35aa</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_810d76a3874bfa10375662060cbb35aa">050d76a3874bfa10375662060cbb35b0</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:21:30</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

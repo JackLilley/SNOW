@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Submit the current form and confirm form submitted to server</description>
+        <display_name>Submit a Form</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>22</order>
+        <step_config display_value="Submit a Form">be8e0a935332120028bc29cac2dc34e4</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:17</sys_created_on>
+        <sys_id>a027c76747037e10d5441233e16d43c0</sys_id>
+        <sys_mod_count>88</sys_mod_count>
+        <sys_name>Submit a Form</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_a027c76747037e10d5441233e16d43c0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:51</sys_updated_on>
+        <table>rm_defect</table>
+        <test display_value="ATF Generated Test - rm_defect, Chase Waggenspack, User's default view (Default view)">b717076747037e10d5441233e16d43d5</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=a027c76747037e10d5441233e16d43c0"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>a027c76747037e10d5441233e16d43c0</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:17</sys_created_on>
+        <sys_id>a027c76747037e10d5441233e16d43c1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 07:38:17</sys_updated_on>
+        <value>form_submitted_to_server</value>
+        <variable display_value="Assert type">c796d40497302200abe4bb7503ac4ad8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>a027c76747037e10d5441233e16d43c0</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:17</sys_created_on>
+        <sys_id>e427c76747037e10d5441233e16d43c1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 07:38:17</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">ae8b91c9ffa333008d3f5d9ad53bf1ba</variable>
+    </sys_variable_value>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_a027c76747037e10d5441233e16d43c0</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Submit the current form and confirm form submitted to server</description><display_name>Submit a Form</display_name><inputs/><mugshots_cache_json/><notes/><order>22</order><step_config display_value="Submit a Form">be8e0a935332120028bc29cac2dc34e4</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:17</sys_created_on><sys_id>a027c76747037e10d5441233e16d43c0</sys_id><sys_mod_count>88</sys_mod_count><sys_name>Submit a Form</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_a027c76747037e10d5441233e16d43c0</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:22:51</sys_updated_on><table>rm_defect</table><test display_value="ATF Generated Test - rm_defect, Chase Waggenspack, User's default view (Default view)">b717076747037e10d5441233e16d43d5</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=a027c76747037e10d5441233e16d43c0"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>a027c76747037e10d5441233e16d43c0</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:17</sys_created_on><sys_id>a027c76747037e10d5441233e16d43c1</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 07:38:17</sys_updated_on><value>form_submitted_to_server</value><variable display_value="Assert type">c796d40497302200abe4bb7503ac4ad8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>a027c76747037e10d5441233e16d43c0</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:17</sys_created_on><sys_id>e427c76747037e10d5441233e16d43c1</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 07:38:17</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">ae8b91c9ffa333008d3f5d9ad53bf1ba</variable></sys_variable_value></record_update>]]></payload>
+        <payload_hash>15653485</payload_hash>
+        <record_name>Submit a Form</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:22:51</sys_created_on>
+        <sys_id>b5713cb747433250d5441233e16d4373</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba5857e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:51</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>f9713cb781433250da95ad64a3516771</update_guid>
+        <update_guid_history>f9713cb781433250da95ad64a3516771:15653485,6b5134377a433250a046f6a5fc4a7f0c:-1225969938,1b51b037c8433250871874701ad70145:1827373935,0b51fcf3e143325011cd97a5b50c95ad:585750512,6451bcb31b4332508dc4962ed51ea24b:-655872911,5451f8b322433250d09a29b4ec2958ec:-1897496334,bb4178b3b3433250daab224857510051:1155847539,77217cff32033250d4fd6b6d76b3fa0f:-85775884,0811b07f440332500b7d1d6ed93a9661:-1631687414,2101743fa9033250e6fad781223917b6:1421656459,8fc074f72c0332509de04c9ea3babbea:180033036,78c078b7d203325008b393153b822e90:-1061590387,50c0f4b7ef0332508e60fed7bb5036a5:1991753486,40c074b736033250477f1214d7544a95:750130063,e1707c3382033250c508b01c7c1cf89c:-491493360,0970f83319033250f9e67e0faa7ec0ce:-1733116783,e47078330b0332506ce329c566c022bc:1320227090,1c503cbf00cffe107ffb18e610c00ec4:78603667,2340b8bf26cffe10bfa814875e76123e:-1467307863,e230b87fc1cffe107633bee9af970c33:1586036010,ae20783fcbcffe10460d6e48347cb717:344412587,b120b43fc6cffe108ba6ca3d57ae9534:-897210836,4520f03ff8cffe100dd340d141a0217c:-2138834259,d020fcfbabcffe10531fbc97e0af03b5:914509614,4400bc7bfccffe10fb61831d7aa2523e:-327113809,c3ff687bd1cffe10930f06a3eceb1bd0:-1568737232,e8ff6c3b35cffe10fcc780ed8305ae19:1484606641,becf24b760cffe103c373b545ad651c6:242983218,9daf2cf3eecffe107db81bf6e5918056:-1302928312,45afa8f388cffe10df88632cc91b6be9:1750415561,a8af28f359cffe10461adb278cb70cec:508792138,c8afa4f3e0cffe1006d30cc1bf3d8392:-732831285,855f24ff918ffe10e4be9ef0691cadf8:-1974454708,a85fe0ffb18ffe10c7b05b4b328b90aa:1078889165,d11f243f308ffe10d22be2bf4278136b:-162734258,e41fa03fd48ffe104a25491ca0a0051c:-1404357681,78fee4bb6b8ffe10813260db2aa3b29c:1648986192,c4fe24bb5d8ffe1050f768e4efacf1aa:407362769,57eea0bb0c8ffe10c5cc9cfd98a2ce53:-1138548761,96cea43baa8ffe1045febb905559e70a:1914795112,fdcee03b568ffe1092604edf5b282ce7:673171689,cc7e6cf3ef8ffe10a258e161e5a24deb:-568451734,194ea873418ffe100b9ce2d5be29d753:-1810075157,d21ee4ff2f4ffe1097c61fa168d829f7:1243268716,e827c7673b037e10624702d11b41a4c3:1645293</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:22:51</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>85e3b41567fa49c08be1022577054400</sys_id>
+        <sys_metadata>a027c76747037e10d5441233e16d43c0</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Submit a Form</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_a027c76747037e10d5441233e16d43c0</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_a027c76747037e10d5441233e16d43c0">b5713cb747433250d5441233e16d4373</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:51</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

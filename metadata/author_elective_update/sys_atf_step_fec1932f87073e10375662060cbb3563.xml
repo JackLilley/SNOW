@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate record from table 'change_request' matches the following condition:
+Define Proposed Change = We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox
+With a failure timeout of 10 Seconds</description>
+        <display_name>Record Validation</display_name>
+        <inputs/>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>1</order>
+        <step_config display_value="Record Validation">1f39a288df60220062fe6c7a4df2639d</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>fec1932f87073e10375662060cbb3563</sys_id>
+        <sys_mod_count>178</sys_mod_count>
+        <sys_name>Record Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_fec1932f87073e10375662060cbb3563</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:26</sys_updated_on>
+        <table>change_request</table>
+        <test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test>
+        <timeout>1970-01-01 00:00:10</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=fec1932f87073e10375662060cbb3563"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>fec1932f87073e10375662060cbb3563</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>72c1932f87073e10375662060cbb3566</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <value/>
+        <variable display_value="Record">52ed1e5b5360220002c6435723dc3421</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>fec1932f87073e10375662060cbb3563</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>72c1932f87073e10375662060cbb3567</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <value>change_request</value>
+        <variable display_value="Table">6aad5a575360220002c6435723dc34b0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>fec1932f87073e10375662060cbb3563</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>7ac1932f87073e10375662060cbb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <value>record_validated</value>
+        <variable display_value="Assert type">67400008676003007ba405225685efa4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>fec1932f87073e10375662060cbb3563</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>7ac1932f87073e10375662060cbb3566</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">cbddfa135320220002c6435723dc3415</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>fec1932f87073e10375662060cbb3563</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>7ac1932f87073e10375662060cbb3567</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <value>description=We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox</value>
+        <variable display_value="Field values">ff6e125353a0220002c6435723dc3442</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=fec1932f87073e10375662060cbb3563"/>
+    <sys_element_mapping action="DELETE">
+        <field>record_id</field>
+        <id>fec1932f87073e10375662060cbb3563</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:51</sys_created_on>
+        <sys_id>b6c1932f87073e10375662060cbb3578</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:51</sys_updated_on>
+        <table>var__m_atf_input_variable_1f39a288df60220062fe6c7a4df2639d</table>
+        <value>{{step['4dc19feb87073e10375662060cbb35bc'].record_id}}</value>
+    </sys_element_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_fec1932f87073e10375662060cbb3563</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate record from table 'change_request' matches the following condition:
+Define Proposed Change = We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox
+With a failure timeout of 10 Seconds</description><display_name>Record Validation</display_name><inputs/><inputs/><mugshots_cache_json/><notes/><order>1</order><step_config display_value="Record Validation">1f39a288df60220062fe6c7a4df2639d</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>fec1932f87073e10375662060cbb3563</sys_id><sys_mod_count>178</sys_mod_count><sys_name>Record Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_fec1932f87073e10375662060cbb3563</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:25:26</sys_updated_on><table>change_request</table><test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test><timeout>1970-01-01 00:00:10</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=fec1932f87073e10375662060cbb3563"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>fec1932f87073e10375662060cbb3563</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>72c1932f87073e10375662060cbb3566</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><value/><variable display_value="Record">52ed1e5b5360220002c6435723dc3421</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>fec1932f87073e10375662060cbb3563</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>72c1932f87073e10375662060cbb3567</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><value>change_request</value><variable display_value="Table">6aad5a575360220002c6435723dc34b0</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>fec1932f87073e10375662060cbb3563</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>7ac1932f87073e10375662060cbb3565</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><value>record_validated</value><variable display_value="Assert type">67400008676003007ba405225685efa4</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>fec1932f87073e10375662060cbb3563</document_key><order>10</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>7ac1932f87073e10375662060cbb3566</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><value>0</value><variable display_value="Enforce security">cbddfa135320220002c6435723dc3415</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>fec1932f87073e10375662060cbb3563</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>7ac1932f87073e10375662060cbb3567</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><value>description=We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox</value><variable display_value="Field values">ff6e125353a0220002c6435723dc3442</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="id=fec1932f87073e10375662060cbb3563"/><sys_element_mapping action="INSERT_OR_UPDATE"><field>record_id</field><id>fec1932f87073e10375662060cbb3563</id><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:51</sys_created_on><sys_id>b6c1932f87073e10375662060cbb3578</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:51</sys_updated_on><table>var__m_atf_input_variable_1f39a288df60220062fe6c7a4df2639d</table><value>{{step['4dc19feb87073e10375662060cbb35bc'].record_id}}</value></sys_element_mapping></record_update>]]></payload>
+        <payload_hash>2078221884</payload_hash>
+        <record_name>Record Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:26</sys_created_on>
+        <sys_id>7f02787747833250d5441233e16d43d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba7e3890000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:26</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>b3027877a883325096673ddbd3e9fdd3</update_guid>
+        <update_guid_history>b3027877a883325096673ddbd3e9fdd3:2078221884,270278771d8332509edf591749cc5875:795346075,1302f4774a833250016c64735e221841:-487529734,4702b477b5833250f92a79d4499af688:-1770405543,3e02347756833250cc4c2aa3b394f51e:1241685944,a202f077e483325029abcde1ce9fe3a5:-41189865,9202b077cd8332504c772843121c0763:-1324065674,65027c37a0833250862c0b91d82c8577:1688025813,95023c37ce833250bf4ec7102dabb8d2:405150004,fc027837f3833250bd62deb0e5bfaa99:-981468828,30027837b6833250d10777b67f4e5d3a:2030622659,80027437aa8332504b5be95bc247f403:747746850,abf170373183325094c1246262030d3a:-535128959,dff1fcf3558332503c88b1e4848feef2:-1818004768,cbf1bcf312833250b32425c17e9771f1:1194086719,4bf17cf36383325084bd13d5c2337ff2:-88789090,5df174f3f18332502b9e21094866711b:-1371664899,37e13cb334833250b098221d5f139e9b:1640426588,35e1fc73fa833250d05b98e0030c44f6:357550779,2de1bc73d68332509ae5118c7fbf0fb7:-2095913243,d1e13c731d833250e2eabe0300b5932f:916178244,3fd17073c48332508251380e4d455ff7:-366697565,97d1fc3362833250b55f3f302c667ac9:-1649573374,87d17c33d9833250d153577e2333c73c:1362518113,42d1f433228332504122edb76b241ea2:79642304,aec1bcbf794332507faa223df678b91f:-1203233505,dcc130bfee43325087510d3ca3f28616:1808857982,33b13c7fe843325064f694f707ca6dbd:525982173,c2b1b07fc9433250670269b133729f59:-756893636,b1b1307f51433250b97ddb1767e83948:1084609638,c7a1fcfbcb433250d8a6f24573f59f7c:-198266171,72a17cfbc04332507505360d4b79da21:-1481141980,01a1b0fbc9433250ce4f3334485999b3:1530949507,aca1fcbb92433250ae73feb25f3421ab:248073698,ff91f8bbac43325061e88e492d048da5:-1034802111,0c91f07b48433250fc45d21dc3bf6453:1977289376,ca81b43b5c4332501a27d788c1f9ed13:694413567,6271b0f7524332505d05e6972af9ca09:-588462242,4c7130b75e433250fbb01e75fe639ff6:-1871338051,27617c77174332503b6a2257f4b8be29:-29834777,8261f0775c4332507caabfa15413f285:-1312710586,5d61fc37ff433250d8682cfa5fd2693b:1699380901,b2517cf3454332501495d76665e9715c:416505092,b241f0b394433250cccdda242b6f1d7a:-866370717,3d31f433a54332501054d300bc15f226:2145720770,b621f4ff93033250f5c6c1e49d1a6449:862844961,ba1170bf020332505032b77fdc2cb5ac:-420030848,5611bc7f110332502a46af4a06c48cd4:-1702906657,b111f87f2b0332505b3ce4b868d98bb2:1309184830,a301fc3f50033250e4561e1d474f6c1b:-1144279192,80f0f4bb1c0332503e61433a6c0fb7ce:1867812295,9fe0f0bb05033250280fd4e85b9d445d:584936486,d7d07c3be2033250a00e73983d497105:-697939323,b0d0303bf6033250a5f17db3024bbd18:-1980815132,cac070f7040332505411e626d9a90bc3:1031276355,21c0bcb7d8033250e96d4d5b026075a9:-251599454,83b030b73603325078645cc771f51355:-1534475263,52b03c7782033250a5b8a4b41e785af8:1477616224,58b03477ee033250722ce54c4639eb5a:194740415,29a0f437430332508b1a07a3ec3ee616:2036243689,2480b473000332507736428c3188f551:753367880,44803473b10332509b1a0cb5dcaba8fe:-529507929,8b50b4ff52cffe102b85204ee5e49980:-1812383738,5c30707f7bcffe103096193ac232a0bf:1199707749,cd10b0fbb9cffe10d34e08c3bd464167:-83168060,5810fcbb3dcffe10aae59dc0dc92a6cc:-1366043869,63ef283b4dcffe10c03efc8dc1d81feb:1646047618,0befa43bdbcffe10f248f37fe9a9c360:363171809,5aefe03bf0cffe1055ed7100c7658640:-919704000,a2df24f704cffe10ce47ce9b2b02f368:921799274,50cfa877b3cffe10955935a22ceaa0de:-361076535,baafa0371bcffe104def6028cc99e43d:-1643952344,3a9f60f381cffe10b4ba3ee3aa05790a:1368139143,f19f2cb348cffe10732c139c3631d0ec:85263334,ac9f28b38ccffe10eb0d56c21ac00cb2:-1197612475,8b5fe8ff638ffe108a2e420502473777:1814479012,104f64bfcf8ffe104890729ecb55fe0a:531603203,793f6c7f398ffe10d653b4a310fcc1ef:-751272606,543fa87f1d8ffe101cc105728d7e212e:-2034148415,c32fa47f288ffe10b7bc4dffa5ba8aba:-192645141,12be68f76f8ffe102d0a1364a5a3882d:-1475520950,34be24f7178ffe10383d4fa69063617a:1536570537,919ee877de8ffe10953f84a76f5d0f6f:253694728,1c9ee477578ffe107c395b3b1d3135ff:-1029181081,fb4e24b37b8ffe1098e994a60629c21f:1982910406,4c4e6473128ffe106129a586865e377c:700034597,533ee073a18ffe10fef2f4f5511dee05:-582841212,393eac33208ffe1048c0d3e55fb40da0:-1865717021,843ea833d88ffe103f4a5822b336da1e:1146374466,32c1932f1e073e10e5b400af44b3546a:607595615</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:26</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>1e0c6b0f42b2472aa6e382fbb1d6cd61</sys_id>
+        <sys_metadata>fec1932f87073e10375662060cbb3563</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_fec1932f87073e10375662060cbb3563</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_fec1932f87073e10375662060cbb3563">7f02787747833250d5441233e16d43d4</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:26</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

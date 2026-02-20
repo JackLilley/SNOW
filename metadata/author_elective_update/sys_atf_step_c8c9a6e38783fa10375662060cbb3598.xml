@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Set the following values on the form:
+Complete = true</description>
+        <display_name>Set Field Values</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>5</order>
+        <step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:54</sys_created_on>
+        <sys_id>c8c9a6e38783fa10375662060cbb3598</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_c8c9a6e38783fa10375662060cbb3598</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:13</sys_updated_on>
+        <table>checklist_item</table>
+        <test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=c8c9a6e38783fa10375662060cbb3598"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>c8c9a6e38783fa10375662060cbb3598</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:54</sys_created_on>
+        <sys_id>00c9a6e38783fa10375662060cbb359a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:54</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>c8c9a6e38783fa10375662060cbb3598</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:54</sys_created_on>
+        <sys_id>00c9a6e38783fa10375662060cbb359b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:54</sys_updated_on>
+        <value>complete=true</value>
+        <variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>c8c9a6e38783fa10375662060cbb3598</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:54</sys_created_on>
+        <sys_id>08c9a6e38783fa10375662060cbb359a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:54</sys_updated_on>
+        <value>checklist_item</value>
+        <variable display_value="Table">424ca6465320220002c6435723dc34b5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=c8c9a6e38783fa10375662060cbb3598"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_c8c9a6e38783fa10375662060cbb3598</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Set the following values on the form:
+Complete = true</description><display_name>Set Field Values</display_name><inputs/><mugshots_cache_json/><notes/><order>5</order><step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:54</sys_created_on><sys_id>c8c9a6e38783fa10375662060cbb3598</sys_id><sys_mod_count>28</sys_mod_count><sys_name>Set Field Values</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_c8c9a6e38783fa10375662060cbb3598</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:24:13</sys_updated_on><table>checklist_item</table><test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=c8c9a6e38783fa10375662060cbb3598"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>c8c9a6e38783fa10375662060cbb3598</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:54</sys_created_on><sys_id>00c9a6e38783fa10375662060cbb359a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:54</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>c8c9a6e38783fa10375662060cbb3598</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:54</sys_created_on><sys_id>00c9a6e38783fa10375662060cbb359b</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:54</sys_updated_on><value>complete=true</value><variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>c8c9a6e38783fa10375662060cbb3598</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:54</sys_created_on><sys_id>08c9a6e38783fa10375662060cbb359a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:54</sys_updated_on><value>checklist_item</value><variable display_value="Table">424ca6465320220002c6435723dc34b5</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=c8c9a6e38783fa10375662060cbb3598"/></record_update>]]></payload>
+        <payload_hash>-172136803</payload_hash>
+        <record_name>Set Field Values</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:24:13</sys_created_on>
+        <sys_id>8ec1b8bf47433250d5441233e16d43ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba6c7f90000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:13</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>c2c1b8bff34332501e1d0adea8c908cd</update_guid>
+        <update_guid_history>c2c1b8bff34332501e1d0adea8c908cd:-172136803,3cb1783f814332506f0398c278413ca0:1915437180,e4b1383fd5433250537ea23c65e24f6f:-291956133,5091747bf7433250bb81b2f9f131cc09:1795617850,7731b0735c433250bdbb94ab4b269639:-411775463,f4217cbff4033250b7501f5919005c19:29514965,ac21f8bfda033250a5f6dd0fa05a497b:2117088948,b6f074fb61033250c86192a93112c3c0:-90304365,a850bcbfc5cffe10b9433b699b77159d:1997269618,d500b0bb87cffe1083d2a775bd66b1c0:-210123695,01bfe83722cffe103d3ae93f21b67c10:1877450288,d57fac334ecffe104ad57c9b4a608fda:-329943025,ee7e64373e8ffe104187d75ba464817d:1757630958,ce7e24376b8ffe106d7b2105419fbc6d:-449762355,c4c9a6e3ba83fa102590dc3e984d999d:1637811628</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:24:20</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>0bcbb3f949854efc9c98b650c36beaa4</sys_id>
+        <sys_metadata>c8c9a6e38783fa10375662060cbb3598</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_c8c9a6e38783fa10375662060cbb3598</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_c8c9a6e38783fa10375662060cbb3598">8ec1b8bf47433250d5441233e16d43ce</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

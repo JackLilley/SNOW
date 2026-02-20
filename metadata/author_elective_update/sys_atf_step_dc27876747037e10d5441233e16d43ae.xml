@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Set the following values on the form:
+Description = this is a renewal with 1 sku. He has the bundle added and the sku (which is not part of a persona). It will not submit for approval without adding a persona.These are the line items. The G3 Original on their account is not the G3 Unified which is part of the persona saved to Snow.JD - Yeah it's reading the Amount field on the price adjustment which is just the difference from the list price. Do we need a way to differentiate those?SS - Ummm I think so. Our catalog has all of the current pricing, whereas we have customers locked into the 'older' pricing. We need to be able to change it.</description>
+        <display_name>Set Field Values</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>5</order>
+        <step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:15</sys_created_on>
+        <sys_id>dc27876747037e10d5441233e16d43ae</sys_id>
+        <sys_mod_count>56</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_dc27876747037e10d5441233e16d43ae</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:25</sys_updated_on>
+        <table>rm_defect</table>
+        <test display_value="ATF Generated Test - rm_defect, Chase Waggenspack, User's default view (Default view)">b717076747037e10d5441233e16d43d5</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=dc27876747037e10d5441233e16d43ae"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>dc27876747037e10d5441233e16d43ae</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:15</sys_created_on>
+        <sys_id>1427876747037e10d5441233e16d43b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 07:38:15</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>dc27876747037e10d5441233e16d43ae</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:15</sys_created_on>
+        <sys_id>5827876747037e10d5441233e16d43b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 07:38:15</sys_updated_on>
+        <value>rm_defect</value>
+        <variable display_value="Table">424ca6465320220002c6435723dc34b5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>dc27876747037e10d5441233e16d43ae</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 07:38:15</sys_created_on>
+        <sys_id>9c27876747037e10d5441233e16d43b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 07:38:15</sys_updated_on>
+        <value>description=this is a renewal with 1 sku. He has the bundle added and the sku (which is not part of a persona). It will not submit for approval without adding a persona.These are the line items. The G3 Original on their account is not the G3 Unified which is part of the persona saved to Snow.JD - Yeah it's reading the Amount field on the price adjustment which is just the difference from the list price. Do we need a way to differentiate those?SS - Ummm I think so. Our catalog has all of the current pricing, whereas we have customers locked into the 'older' pricing. We need to be able to change it.</value>
+        <variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=dc27876747037e10d5441233e16d43ae"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_dc27876747037e10d5441233e16d43ae</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Set the following values on the form:
+Description = this is a renewal with 1 sku. He has the bundle added and the sku (which is not part of a persona). It will not submit for approval without adding a persona.These are the line items. The G3 Original on their account is not the G3 Unified which is part of the persona saved to Snow.JD - Yeah it's reading the Amount field on the price adjustment which is just the difference from the list price. Do we need a way to differentiate those?SS - Ummm I think so. Our catalog has all of the current pricing, whereas we have customers locked into the 'older' pricing. We need to be able to change it.</description><display_name>Set Field Values</display_name><inputs/><mugshots_cache_json/><notes/><order>5</order><step_config display_value="Set Field Values">fcae4a935332120028bc29cac2dc340e</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:15</sys_created_on><sys_id>dc27876747037e10d5441233e16d43ae</sys_id><sys_mod_count>56</sys_mod_count><sys_name>Set Field Values</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_dc27876747037e10d5441233e16d43ae</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:24:25</sys_updated_on><table>rm_defect</table><test display_value="ATF Generated Test - rm_defect, Chase Waggenspack, User's default view (Default view)">b717076747037e10d5441233e16d43d5</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=dc27876747037e10d5441233e16d43ae"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>dc27876747037e10d5441233e16d43ae</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:15</sys_created_on><sys_id>1427876747037e10d5441233e16d43b0</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 07:38:15</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">946f3c1a0f23330072e6452bc4767eda</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>dc27876747037e10d5441233e16d43ae</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:15</sys_created_on><sys_id>5827876747037e10d5441233e16d43b0</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 07:38:15</sys_updated_on><value>rm_defect</value><variable display_value="Table">424ca6465320220002c6435723dc34b5</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>dc27876747037e10d5441233e16d43ae</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 07:38:15</sys_created_on><sys_id>9c27876747037e10d5441233e16d43b0</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 07:38:15</sys_updated_on><value>description=this is a renewal with 1 sku. He has the bundle added and the sku (which is not part of a persona). It will not submit for approval without adding a persona.These are the line items. The G3 Original on their account is not the G3 Unified which is part of the persona saved to Snow.JD - Yeah it's reading the Amount field on the price adjustment which is just the difference from the list price. Do we need a way to differentiate those?SS - Ummm I think so. Our catalog has all of the current pricing, whereas we have customers locked into the 'older' pricing. We need to be able to change it.</value><variable display_value="Field values">b3dba2465320220002c6435723dc34f0</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_fcae4a935332120028bc29cac2dc340e^id=dc27876747037e10d5441233e16d43ae"/></record_update>]]></payload>
+        <payload_hash>-1278719753</payload_hash>
+        <record_name>Set Field Values</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:24:25</sys_created_on>
+        <sys_id>f4d1fcff47433250d5441233e16d436f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba6f69b0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:25</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>3cd1fcffdb433250645555f0d976676d</update_guid>
+        <update_guid_history>3cd1fcffdb433250645555f0d976676d:-1278719753,1fc134ffac433250e6adabc5191243bb:759227128,47c1b0ff3543325076d5b6f1ff02dab7:-1497793287,71c138bfd9433250f9c7477bb2e8697e:540153594,76b1b47f48433250f1d5357c0454383b:-1716866821,66b1347fe643325074a71d6e0bafd2aa:1862791777,58b1b43f6d4332500cecf927b91eca40:-394228638,eb41f4b385433250a4c0aa8d3dcfbad1:1643718243,fb21f8ff8e033250feaa29154ba361cd:-613302172,7b01307f7b033250d36044c14f515afa:1424644709,dd01343f1603325068b4784b04ac5e67:-832375706,4870383328033250970a54f5e01de05d:1205571175,f740f8bfe3cffe1001e67b4427ba1f59:-1051449240,1b4078bfddcffe1065fc504aafbe395b:986497641,1630787f63cffe10f89f067a91d11d44:-1270522774,4620f43f10cffe10a85a5fce03bcedde:614635648,a120343f2ccffe10d95f7036c237baee:-1642384767,3020b03feacffe10db27a21493d97a11:395562114,0c20bcfbe2cffe102213c93abe771762:-1861458301,bfff2c7bedcffe1007b9f098b4a001eb:176488580,faff287bd5cffe107af939d77bca5d26:-2080531835,dcffe83b6acffe10dd06259c16fbf2a1:-42584954,12cfe0b72acffe105a9792720b387468:1995361927,7eee20bb1c8ffe10a96d1e45e16a9efb:-261658488,95cea03b688ffe10830dbacbb1ac969f:1776288393,676e2cf3398ffe10d53737bdd2244c4c:-633520481,744ee4732e8ffe107dc4644c639b22f9:1404426400,251ea4ffde4ffe1016c34d8a81450f95:-852594015,9027876785037e10ff2e2cb38aee94b3:1185352866</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:24:56</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>06f41293a1bc43ec808a544fab11ca90</sys_id>
+        <sys_metadata>dc27876747037e10d5441233e16d43ae</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Set Field Values</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_dc27876747037e10d5441233e16d43ae</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_dc27876747037e10d5441233e16d43ae">f4d1fcff47433250d5441233e16d436f</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:24:56</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

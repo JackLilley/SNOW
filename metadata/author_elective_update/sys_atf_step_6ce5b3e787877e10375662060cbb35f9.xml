@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate that the form matches the following condition:
+Short description = Tanium Configuration
+and Payment Milestone = false
+and Link = false
+and Phase type = Waterfall
+and Rollup = false
+and State = Pending
+and Key milestone = false
+and Percent complete = 0
+and Milestone = false
+and Override status = false
+and Status = Yellow
+With a failure timeout of 30 Seconds</description>
+        <display_name>Field Values Validation</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>38</order>
+        <step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:32</sys_created_on>
+        <sys_id>6ce5b3e787877e10375662060cbb35f9</sys_id>
+        <sys_mod_count>54</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_6ce5b3e787877e10375662060cbb35f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:20:04</sys_updated_on>
+        <table>pm_project_task</table>
+        <test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=6ce5b3e787877e10375662060cbb35f9"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6ce5b3e787877e10375662060cbb35f9</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:32</sys_created_on>
+        <sys_id>a4e5b3e787877e10375662060cbb35fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:32</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6ce5b3e787877e10375662060cbb35f9</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:32</sys_created_on>
+        <sys_id>a4e5b3e787877e10375662060cbb35fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:32</sys_updated_on>
+        <value>pm_project_task</value>
+        <variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6ce5b3e787877e10375662060cbb35f9</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:32</sys_created_on>
+        <sys_id>ace5b3e787877e10375662060cbb35fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:32</sys_updated_on>
+        <value>short_description=Tanium Configuration^u_payment_milestone=false^link=false^phase_type=waterfall^rollup=false^state=-5^key_milestone=false^percent_complete=0^milestone=false^override_status=false^status=yellow</value>
+        <variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=6ce5b3e787877e10375662060cbb35f9"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_6ce5b3e787877e10375662060cbb35f9</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate that the form matches the following condition:
+Short description = Tanium Configuration
+and Payment Milestone = false
+and Link = false
+and Phase type = Waterfall
+and Rollup = false
+and State = Pending
+and Key milestone = false
+and Percent complete = 0
+and Milestone = false
+and Override status = false
+and Status = Yellow
+With a failure timeout of 30 Seconds</description><display_name>Field Values Validation</display_name><inputs/><mugshots_cache_json/><notes/><order>38</order><step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:32</sys_created_on><sys_id>6ce5b3e787877e10375662060cbb35f9</sys_id><sys_mod_count>54</sys_mod_count><sys_name>Field Values Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_6ce5b3e787877e10375662060cbb35f9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:20:04</sys_updated_on><table>pm_project_task</table><test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=6ce5b3e787877e10375662060cbb35f9"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6ce5b3e787877e10375662060cbb35f9</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:32</sys_created_on><sys_id>a4e5b3e787877e10375662060cbb35fc</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:32</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6ce5b3e787877e10375662060cbb35f9</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:32</sys_created_on><sys_id>a4e5b3e787877e10375662060cbb35fd</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:32</sys_updated_on><value>pm_project_task</value><variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6ce5b3e787877e10375662060cbb35f9</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:32</sys_created_on><sys_id>ace5b3e787877e10375662060cbb35fc</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:32</sys_updated_on><value>short_description=Tanium Configuration^u_payment_milestone=false^link=false^phase_type=waterfall^rollup=false^state=-5^key_milestone=false^percent_complete=0^milestone=false^override_status=false^status=yellow</value><variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=6ce5b3e787877e10375662060cbb35f9"/></record_update>]]></payload>
+        <payload_hash>1030543632</payload_hash>
+        <record_name>Field Values Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:20:04</sys_created_on>
+        <sys_id>c1d0703b47033250d5441233e16d43a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba2fadb0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:20:04</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>41d0703b1a033250665a14cedefabb93</update_guid>
+        <update_guid_history>41d0703b1a033250665a14cedefabb93:1030543632,72a0bc37380332504d98b253d38a08fc:-914147217,3180b8732c0332508d66c7eac745b599:-747672935,8440fc7fc5cffe10ba4724d1629be11b:1602603512,6130b47f75cffe104d3585cf502c91c3:-342087337,8b10f8fb5ecffe10f8c503ec187acd60:2008189110,e20038bba2cffe10df734fbd9167594e:63498261,febfe0770fcffe104620891dfc25a33d:-1881192588,b9bfac3726cffe109c4fec5b6a2be6e1:469083859,6f9fe0f3e4cffe103e368d1be693c6bc:-1475606990,138f24b38dcffe101869a1207876540e:874669457,b67fe07339cffe10c220857a3c1bc624:-1070021392,6f5f2cff728ffe1088d04cda9f2870ee:-903547110,3f4f60ffda8ffe1039eccef0811cdba5:1446729337,0b1fa83f438ffe10b8c901ad5f1bdc23:-497961512,e70facfbba8ffe10ab060e4eda9f8b92:1852314935,960f68fb558ffe1078b137ee93ec3ef2:-92375914,490f24fb588ffe103ca234cea1340d98:-2037066763,39eeac7b298ffe10f422d2c3afa11341:313209684,c3ce283bf38ffe10337a408290928b8a:-1631481165,56ae6cb7bb8ffe1000c10d8794f0b932:718795282,d0aea4b7a78ffe104613bbf82bf02964:-1225895567,148ee837738ffe107ef7ba093d88434c:-1059421285,df7ee437d88ffe1052ea59f4b11b0ced:1290855162,666e68f3338ffe10a6d7bb4ae892df5f:-653835687,fc6e24f3eb8ffe10593a263fd097345b:1696440760,a02eacff804ffe1043061a4b1ff0ceda:-248250089,6ce5b3e7d4877e103da7bfa421abdcff:2102026358</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:20:05</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>9fb4618d883a4a1ca924512672d1ae39</sys_id>
+        <sys_metadata>6ce5b3e787877e10375662060cbb35f9</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_6ce5b3e787877e10375662060cbb35f9</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_6ce5b3e787877e10375662060cbb35f9">c1d0703b47033250d5441233e16d43a1</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:20:05</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

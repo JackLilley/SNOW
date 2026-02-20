@@ -1,6 +1,10 @@
 {
- "scope": "x_g_s7s_updater",
- "scopeId": "67d384af87c7b610375662060cbb35be",
- "name": "Updater",
- "tsconfigPath": "./src/server/tsconfig.json"
+    "scope": "x_g_s7s_updater",
+    "scopeId": "67d384af87c7b610375662060cbb35be",
+    "name": "Updater",
+    "tsconfigPath": "./src/server/tsconfig.json",
+    "licensing": {
+        "enforceLicense": "none"
+    },
+    "description": "Handles updates"
 }

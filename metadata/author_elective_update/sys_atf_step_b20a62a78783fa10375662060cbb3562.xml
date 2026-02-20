@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate there is at least one record in 'sc_item_produced_record' matching query:
+Producer = Create Incident using VA
+and Record table = incident
+and Created by = Renee.Steger@summit7.us
+and Task = {{invalid step_id=860aae678783fa10375662060cbb35ac.}}
+With a failure timeout of 30 Seconds</description>
+        <display_name>Record Query</display_name>
+        <inputs/>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>7</order>
+        <step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>b20a62a78783fa10375662060cbb3562</sys_id>
+        <sys_mod_count>72</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_b20a62a78783fa10375662060cbb3562</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:23</sys_updated_on>
+        <table>sc_item_produced_record</table>
+        <test display_value="ATF Generated Test - Record Producer, Create Incident using VA, Renee Steger">f90a6e678783fa10375662060cbb3505</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=b20a62a78783fa10375662060cbb3562"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>b20a62a78783fa10375662060cbb3562</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>760a62a78783fa10375662060cbb357f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:31:11</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>b20a62a78783fa10375662060cbb3562</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>760a62a78783fa10375662060cbb3580</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:31:11</sys_updated_on>
+        <value>producer=9531047253230010fa75ddeeff7b1262^record_table=incident^sys_created_by=Renee.Steger@summit7.us^task={{step['860aae678783fa10375662060cbb35ac'].record_id}}</value>
+        <variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>b20a62a78783fa10375662060cbb3562</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>7e0a62a78783fa10375662060cbb357f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:31:11</sys_updated_on>
+        <value>sc_item_produced_record</value>
+        <variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>b20a62a78783fa10375662060cbb3562</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>fe0a62a78783fa10375662060cbb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:31:11</sys_updated_on>
+        <value>records_match_query</value>
+        <variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=b20a62a78783fa10375662060cbb3562"/>
+    <sys_element_mapping action="DELETE">
+        <field>field_values</field>
+        <id>b20a62a78783fa10375662060cbb3562</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:31:11</sys_created_on>
+        <sys_id>f60a62a78783fa10375662060cbb3585</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:31:11</sys_updated_on>
+        <table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table>
+        <value>producer=9531047253230010fa75ddeeff7b1262^record_table=incident^sys_created_by=Renee.Steger@summit7.us^task={{step['860aae678783fa10375662060cbb35ac'].record_id}}</value>
+    </sys_element_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_b20a62a78783fa10375662060cbb3562</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate there is at least one record in 'sc_item_produced_record' matching query:
+Producer = Create Incident using VA
+and Record table = incident
+and Created by = Renee.Steger@summit7.us
+and Task = {{invalid step_id=860aae678783fa10375662060cbb35ac.}}
+With a failure timeout of 30 Seconds</description><display_name>Record Query</display_name><inputs/><inputs/><mugshots_cache_json/><notes/><order>7</order><step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>b20a62a78783fa10375662060cbb3562</sys_id><sys_mod_count>72</sys_mod_count><sys_name>Record Query</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_b20a62a78783fa10375662060cbb3562</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:23:23</sys_updated_on><table>sc_item_produced_record</table><test display_value="ATF Generated Test - Record Producer, Create Incident using VA, Renee Steger">f90a6e678783fa10375662060cbb3505</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=b20a62a78783fa10375662060cbb3562"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>b20a62a78783fa10375662060cbb3562</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>760a62a78783fa10375662060cbb357f</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:31:11</sys_updated_on><value>0</value><variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>b20a62a78783fa10375662060cbb3562</document_key><order>400</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>760a62a78783fa10375662060cbb3580</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:31:11</sys_updated_on><value>producer=9531047253230010fa75ddeeff7b1262^record_table=incident^sys_created_by=Renee.Steger@summit7.us^task={{step['860aae678783fa10375662060cbb35ac'].record_id}}</value><variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>b20a62a78783fa10375662060cbb3562</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>7e0a62a78783fa10375662060cbb357f</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:31:11</sys_updated_on><value>sc_item_produced_record</value><variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>b20a62a78783fa10375662060cbb3562</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>fe0a62a78783fa10375662060cbb3565</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:31:11</sys_updated_on><value>records_match_query</value><variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="id=b20a62a78783fa10375662060cbb3562"/><sys_element_mapping action="INSERT_OR_UPDATE"><field>field_values</field><id>b20a62a78783fa10375662060cbb3562</id><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:31:11</sys_created_on><sys_id>f60a62a78783fa10375662060cbb3585</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:31:11</sys_updated_on><table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table><value>producer=9531047253230010fa75ddeeff7b1262^record_table=incident^sys_created_by=Renee.Steger@summit7.us^task={{step['860aae678783fa10375662060cbb35ac'].record_id}}</value></sys_element_mapping></record_update>]]></payload>
+        <payload_hash>1045480045</payload_hash>
+        <record_name>Record Query</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:23:23</sys_created_on>
+        <sys_id>7191bc7b47433250d5441233e16d4334</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba6042e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:23</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>b591bc7b67433250d66368a71d34fa32</update_guid>
+        <update_guid_history>b591bc7b67433250d66368a71d34fa32:1045480045,ed917c7b1b43325033a27184cea8bbc2:-1755857588,de7130f7754332500cca2698dc7f4926:-262227925,d471b0b776433250a93923eebc1e4360:642985179,7151b4f3fb433250639caee55feb6da4:2136614842,45413873fe43325086806eb04fca63f1:-664722791,dd317433fa433250ae4ad23478ae8565:828906872,d53134330c433250e7fd3514e5b3a939:-419322932,c131b033e6433250f1101a92aa3d7cdd:2147285164,c72138ff670332509fa2b17d41e2bbe4:418925964,8311f0bf5a033250cda97876c4f39d59:-1309433236,cb11b0bf1f0332506cb1c60d401154e2:184196427,1ad0f43bb3033250b675a4701848bb6e:1677826090,a7a07077ec0332509c071bd5daf5cfe3:177940308,1ca07cf30b033250bbe80056baa533f9:1671569971,08a0f8f320033250fc9cdc0f30e7d29a:-1129767662,7b9078f31103325084cacf90a0a19494:363862001,4e603033620332500780a470df7e9f17:1857491664,7560fcfffccffe106629a4341857aa19:-943845969,8b4038bf30cffe105100c01255772079:549783694,fdffe07b89cffe109b2e53d994ea1337:1192937555,4a9facb387cffe100328761cf112a444:-1608400078,716f243309cffe10efd191834dc5e112:-114770415,616fe03311cffe102e5cf0b670af643c:-1614656197,08ee687bcf8ffe10cf58da9bddd1e52d:-121026534,c55e28b3338ffe1019c99a536cdf2908:1372603129,3a0a62a7ba83fa10d719580e5ddb0e83:1225463222</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:23:36</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>3d17396b485f4083a8965391c9894331</sys_id>
+        <sys_metadata>b20a62a78783fa10375662060cbb3562</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_b20a62a78783fa10375662060cbb3562</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_b20a62a78783fa10375662060cbb3562">7191bc7b47433250d5441233e16d4334</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:36</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

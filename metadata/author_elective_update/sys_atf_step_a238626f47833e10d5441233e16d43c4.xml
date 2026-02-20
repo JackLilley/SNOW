@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Submit the current form and confirm form submitted to server</description>
+        <display_name>Submit a Form</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>3</order>
+        <step_config display_value="Submit a Form">be8e0a935332120028bc29cac2dc34e4</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:23:14</sys_created_on>
+        <sys_id>a238626f47833e10d5441233e16d43c4</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Submit a Form</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_a238626f47833e10d5441233e16d43c4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:53</sys_updated_on>
+        <table>baseline_core</table>
+        <test display_value="ATF Generated Test - baseline_core, Chase Waggenspack, User's default view (Default view)">1e38ee2f47833e10d5441233e16d4387</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=a238626f47833e10d5441233e16d43c4"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>a238626f47833e10d5441233e16d43c4</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:23:14</sys_created_on>
+        <sys_id>a238626f47833e10d5441233e16d43c5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:23:14</sys_updated_on>
+        <value>form_submitted_to_server</value>
+        <variable display_value="Assert type">c796d40497302200abe4bb7503ac4ad8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>a238626f47833e10d5441233e16d43c4</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:23:14</sys_created_on>
+        <sys_id>e638626f47833e10d5441233e16d43c5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:23:14</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">ae8b91c9ffa333008d3f5d9ad53bf1ba</variable>
+    </sys_variable_value>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_a238626f47833e10d5441233e16d43c4</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Submit the current form and confirm form submitted to server</description><display_name>Submit a Form</display_name><inputs/><mugshots_cache_json/><notes/><order>3</order><step_config display_value="Submit a Form">be8e0a935332120028bc29cac2dc34e4</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:23:14</sys_created_on><sys_id>a238626f47833e10d5441233e16d43c4</sys_id><sys_mod_count>24</sys_mod_count><sys_name>Submit a Form</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_a238626f47833e10d5441233e16d43c4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:22:53</sys_updated_on><table>baseline_core</table><test display_value="ATF Generated Test - baseline_core, Chase Waggenspack, User's default view (Default view)">1e38ee2f47833e10d5441233e16d4387</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=a238626f47833e10d5441233e16d43c4"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>a238626f47833e10d5441233e16d43c4</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:23:14</sys_created_on><sys_id>a238626f47833e10d5441233e16d43c5</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:23:14</sys_updated_on><value>form_submitted_to_server</value><variable display_value="Assert type">c796d40497302200abe4bb7503ac4ad8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>a238626f47833e10d5441233e16d43c4</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:23:14</sys_created_on><sys_id>e638626f47833e10d5441233e16d43c5</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:23:14</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">ae8b91c9ffa333008d3f5d9ad53bf1ba</variable></sys_variable_value></record_update>]]></payload>
+        <payload_hash>2066371946</payload_hash>
+        <record_name>Submit a Form</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:22:53</sys_created_on>
+        <sys_id>a27130f747433250d5441233e16d43ba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba58fac0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:53</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>e67130f7ef4332502c0ed0b4cc0654b8</update_guid>
+        <update_guid_history>e67130f7ef4332502c0ed0b4cc0654b8:2066371946,2071f0b772433250d82f7535b63078b0:2115016939,e071f0b72f4332501d1799b19a28f50d:-2131305364,bd6170774c43325052d7bbfc81e46f39:-2082660371,8461f4370f4332504f9163ad4928c608:-2034015378,c861b437e9433250279c6fc254d3bd58:-1985370385,b7517437f843325078b3bf288875f07a:-1936725392,38a0703722033250e2364a8275f9c53e:-1033336562,84bfe4373acffe101a1e4108f8924056:-984691569,c8bfa43715cffe10bba2f185f30538ef:-936046576,648f6873edcffe10185e8db5584e0aab:-887401583,d0ee687b278ffe10e339aea59c898ce2:-838756590,ea38626f65833e10ed9f6e8a89a252c7:-790111597</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:22:53</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>000d3c6ce0e34b3b811ade2efa50f939</sys_id>
+        <sys_metadata>a238626f47833e10d5441233e16d43c4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Submit a Form</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_a238626f47833e10d5441233e16d43c4</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_a238626f47833e10d5441233e16d43c4">a27130f747433250d5441233e16d43ba</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:22:53</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

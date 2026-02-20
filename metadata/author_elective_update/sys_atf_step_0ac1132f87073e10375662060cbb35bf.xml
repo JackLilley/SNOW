@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate that the form matches the following condition:
+Type = Normal
+and Conflict status = Not Run
+and State = New
+and Impact = 3 - Low
+and Priority = 4 - Low
+and Model = Normal
+and Requested by = Jay Simcox
+and Short description = Sales SharePoint permissions modification request
+and Define Proposed Change = We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox
+and CAB required = false
+and Business Justification = document control need to prevent ongoing rework of templates that are changed causing formulas to break and templates to be recreated or re-located.
+and Approval = Not Yet Requested
+and On hold = false
+and Unauthorized = false
+and Risk = Moderate
+and Category = Other
+With a failure timeout of 30 Seconds</description>
+        <display_name>Field Values Validation</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>55</order>
+        <step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:48</sys_created_on>
+        <sys_id>0ac1132f87073e10375662060cbb35bf</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_0ac1132f87073e10375662060cbb35bf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:10:09</sys_updated_on>
+        <table>change_request</table>
+        <test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=0ac1132f87073e10375662060cbb35bf"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>0ac1132f87073e10375662060cbb35bf</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:48</sys_created_on>
+        <sys_id>c6c1132f87073e10375662060cbb35c3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:48</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>0ac1132f87073e10375662060cbb35bf</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:48</sys_created_on>
+        <sys_id>c6c1132f87073e10375662060cbb35c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:48</sys_updated_on>
+        <value>change_request</value>
+        <variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>0ac1132f87073e10375662060cbb35bf</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 08:24:48</sys_created_on>
+        <sys_id>cec1132f87073e10375662060cbb35c3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 08:24:48</sys_updated_on>
+        <value>type=normal^conflict_status=Not Run^state=-5^impact=3^priority=4^chg_model=007c4001c343101035ae3f52c1d3aeb2^requested_by=25be0c2edbde8610b6eff055f3961995^short_description=Sales SharePoint permissions modification request^description=We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox^cab_required=false^justification=document control need to prevent ongoing rework of templates that are changed causing formulas to break and templates to be recreated or re-located.^approval=not requested^on_hold=false^unauthorized=false^risk=3^category=Other</value>
+        <variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=0ac1132f87073e10375662060cbb35bf"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_0ac1132f87073e10375662060cbb35bf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate that the form matches the following condition:
+Type = Normal
+and Conflict status = Not Run
+and State = New
+and Impact = 3 - Low
+and Priority = 4 - Low
+and Model = Normal
+and Requested by = Jay Simcox
+and Short description = Sales SharePoint permissions modification request
+and Define Proposed Change = We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox
+and CAB required = false
+and Business Justification = document control need to prevent ongoing rework of templates that are changed causing formulas to break and templates to be recreated or re-located.
+and Approval = Not Yet Requested
+and On hold = false
+and Unauthorized = false
+and Risk = Moderate
+and Category = Other
+With a failure timeout of 30 Seconds</description><display_name>Field Values Validation</display_name><inputs/><mugshots_cache_json/><notes/><order>55</order><step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:48</sys_created_on><sys_id>0ac1132f87073e10375662060cbb35bf</sys_id><sys_mod_count>10</sys_mod_count><sys_name>Field Values Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_0ac1132f87073e10375662060cbb35bf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:10:09</sys_updated_on><table>change_request</table><test display_value="ATF Generated Test - change_request, Jay Simcox, User's default view (Default view)">a0c15feb87073e10375662060cbb357b</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=0ac1132f87073e10375662060cbb35bf"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>0ac1132f87073e10375662060cbb35bf</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:48</sys_created_on><sys_id>c6c1132f87073e10375662060cbb35c3</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:48</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>0ac1132f87073e10375662060cbb35bf</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:48</sys_created_on><sys_id>c6c1132f87073e10375662060cbb35c4</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:48</sys_updated_on><value>change_request</value><variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>0ac1132f87073e10375662060cbb35bf</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 08:24:48</sys_created_on><sys_id>cec1132f87073e10375662060cbb35c3</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 08:24:48</sys_updated_on><value>type=normal^conflict_status=Not Run^state=-5^impact=3^priority=4^chg_model=007c4001c343101035ae3f52c1d3aeb2^requested_by=25be0c2edbde8610b6eff055f3961995^short_description=Sales SharePoint permissions modification request^description=We'd like the permissions level the Sales Members Group currently has (Contribute) changed to Read, Users are making changes that are causing issues with calculators and templates in the library.Additionally, there are multiple user accounts for employees no longer with the company we'd like removed. I've attached a spreadsheet that lists both the Sales Member and Sales Owner group memberships for reference.Currently, the only members of the Sales Members group that need the ability to make changes of any kind to that library are Patrick Abel, Kevin Boucher, Brad Shannon, John Crouch, Carson Plunkett, Vadim Sushchik, Josiah Spann, Patrick Peebles, Ken Snyder, and Jay Simcox^cab_required=false^justification=document control need to prevent ongoing rework of templates that are changed causing formulas to break and templates to be recreated or re-located.^approval=not requested^on_hold=false^unauthorized=false^risk=3^category=Other</value><variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=0ac1132f87073e10375662060cbb35bf"/></record_update>]]></payload>
+        <payload_hash>1302609134</payload_hash>
+        <record_name>Field Values Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:10:09</sys_created_on>
+        <sys_id>778ea477478ffe10d5441233e16d4342</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7b99e6f20000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:10:09</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>bb8ea477bd8ffe10eac007a0c5696c40</update_guid>
+        <update_guid_history>bb8ea477bd8ffe10eac007a0c5696c40:1302609134,934ea0b3d78ffe1083ba990d99914954:-46804625,f63e6073a28ffe102975d01b4c005e7b:-1396218384,9d3e6c33278ffe10391952c01a1afc16:1549335153,af2e2833a98ffe106642bac6e5e4277b:199921394,8ec1132fc7073e10f212001a47e3aec6:577589768</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:10:12</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>77b7b74f6fd8482f90212e609bcacc59</sys_id>
+        <sys_metadata>0ac1132f87073e10375662060cbb35bf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_0ac1132f87073e10375662060cbb35bf</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_0ac1132f87073e10375662060cbb35bf">778ea477478ffe10d5441233e16d4342</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:10:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

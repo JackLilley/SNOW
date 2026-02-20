@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate that the form matches the following condition:
+Name = Tenant Credentials
+and Checklist = (empty)
+and Complete = true
+and Completed by = Chet Hall
+and Order = 2
+With a failure timeout of 30 Seconds</description>
+        <display_name>Field Values Validation</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>21</order>
+        <step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:55</sys_created_on>
+        <sys_id>6cc9e6e38783fa10375662060cbb3543</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_6cc9e6e38783fa10375662060cbb3543</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:19:05</sys_updated_on>
+        <table>checklist_item</table>
+        <test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=6cc9e6e38783fa10375662060cbb3543"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6cc9e6e38783fa10375662060cbb3543</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:55</sys_created_on>
+        <sys_id>a4c9e6e38783fa10375662060cbb3545</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:55</sys_updated_on>
+        <value>standard_ui</value>
+        <variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6cc9e6e38783fa10375662060cbb3543</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:55</sys_created_on>
+        <sys_id>a4c9e6e38783fa10375662060cbb3546</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:55</sys_updated_on>
+        <value>checklist_item</value>
+        <variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>6cc9e6e38783fa10375662060cbb3543</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:55</sys_created_on>
+        <sys_id>acc9e6e38783fa10375662060cbb3545</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:55</sys_updated_on>
+        <value>name=Tenant Credentials^checklist=6bf2f27f971ebad455c5b94de053afa7^complete=true^completed_by=20ee086e97564a1047d9f64ef053af1e^order=2</value>
+        <variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=6cc9e6e38783fa10375662060cbb3543"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_6cc9e6e38783fa10375662060cbb3543</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate that the form matches the following condition:
+Name = Tenant Credentials
+and Checklist = (empty)
+and Complete = true
+and Completed by = Chet Hall
+and Order = 2
+With a failure timeout of 30 Seconds</description><display_name>Field Values Validation</display_name><inputs/><mugshots_cache_json/><notes/><order>21</order><step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:55</sys_created_on><sys_id>6cc9e6e38783fa10375662060cbb3543</sys_id><sys_mod_count>24</sys_mod_count><sys_name>Field Values Validation</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_6cc9e6e38783fa10375662060cbb3543</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:19:05</sys_updated_on><table>checklist_item</table><test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=6cc9e6e38783fa10375662060cbb3543"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6cc9e6e38783fa10375662060cbb3543</document_key><order>50</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:55</sys_created_on><sys_id>a4c9e6e38783fa10375662060cbb3545</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:55</sys_updated_on><value>standard_ui</value><variable display_value="Form UI">c83b5337e7633300e12127d8d2f6a98b</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6cc9e6e38783fa10375662060cbb3543</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:55</sys_created_on><sys_id>a4c9e6e38783fa10375662060cbb3546</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:55</sys_updated_on><value>checklist_item</value><variable display_value="Table">a0e13cc35320220002c6435723dc3467</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>6cc9e6e38783fa10375662060cbb3543</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:55</sys_created_on><sys_id>acc9e6e38783fa10375662060cbb3545</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:55</sys_updated_on><value>name=Tenant Credentials^checklist=6bf2f27f971ebad455c5b94de053afa7^complete=true^completed_by=20ee086e97564a1047d9f64ef053af1e^order=2</value><variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=6cc9e6e38783fa10375662060cbb3543"/></record_update>]]></payload>
+        <payload_hash>-1049481046</payload_hash>
+        <record_name>Field Values Validation</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:19:05</sys_created_on>
+        <sys_id>2a9030f347033250d5441233e16d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba212f00000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:19:05</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>a69030f3e6033250d18cdaeb344e138a</update_guid>
+        <update_guid_history>a69030f3e6033250d18cdaeb344e138a:-1049481046,21807873800332507fd333dd518227ff:-428982613,4270fc3351033250bdea3c69ec4eb608:191515820,7850fcbf15cffe10c45dbb81d97a9018:812014253,9100f0bbe3cffe10a8b2e66c4cb8066d:1432512686,95bfe8375ccffe10b96c00989ee50197:2053011119,a17fec339bcffe108d92017fdede0287:-1621457744,721f683f988ffe102c6a012f13693226:-1000959311,6e1f283fe88ffe1096421158ae73a74b:-380460878,f67e6437a88ffe101a177b82fee46cfe:385602760,9e7e2437418ffe10a179bd2d5807b1fa:1006101193,124e6c73908ffe10623c93e3514143ba:1626599626,6cc9e6e30d83fa104927d4d0554cb248:-2047869237</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:20:03</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>06174928fc6e4f21812b0faffd5e0901</sys_id>
+        <sys_metadata>6cc9e6e38783fa10375662060cbb3543</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Field Values Validation</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_6cc9e6e38783fa10375662060cbb3543</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_6cc9e6e38783fa10375662060cbb3543">2a9030f347033250d5441233e16d4398</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:20:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

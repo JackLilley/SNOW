@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate there is at least one record in 'pm_project_task' matching query:
+Approval = Not Yet Requested
+and Calculation = Automatic
+and Escalation = Normal
+and Expense type = Opex
+and Impact = 3 - Low
+and Level = 1
+and Percent complete = 0
+and Phase type = Waterfall
+and Priority = 4 - Low
+and Short description = Tanium Configuration
+and State = Pending
+and Status = Red
+and Task type = Project Task
+and Created by = karlton.smith@summit7.us
+and Domain = (empty)
+and Domain Path = /
+and Upon approval = Proceed to Next Task
+and Upon reject = Cancel all future Tasks
+and Urgency = 3 - Low
+and Version = 2
+and WBS Order = 1
+and Top project = {{invalid step_id=0bd5ffa787877e10375662060cbb35a8.}}
+With a failure timeout of 30 Seconds</description>
+        <display_name>Record Query</display_name>
+        <inputs/>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>5</order>
+        <step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:36</sys_created_on>
+        <sys_id>f9e577e787877e10375662060cbb350d</sys_id>
+        <sys_mod_count>206</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_f9e577e787877e10375662060cbb350d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:23</sys_updated_on>
+        <table>pm_project_task</table>
+        <test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=f9e577e787877e10375662060cbb350d"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f9e577e787877e10375662060cbb350d</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:37</sys_created_on>
+        <sys_id>31e577e787877e10375662060cbb3516</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:37</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f9e577e787877e10375662060cbb350d</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:37</sys_created_on>
+        <sys_id>31e577e787877e10375662060cbb3517</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:37</sys_updated_on>
+        <value>approval=not requested^calculation_type=automatic^escalation=0^expense_type=opex^impact=3^level=1^percent_complete=0^phase_type=waterfall^priority=4^short_description=Tanium Configuration^state=-5^status=red^sys_class_name=pm_project_task^sys_created_by=karlton.smith@summit7.us^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^version=2^wbs_order=1^top_task={{step['0bd5ffa787877e10375662060cbb35a8'].record_id}}</value>
+        <variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f9e577e787877e10375662060cbb350d</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:37</sys_created_on>
+        <sys_id>39e577e787877e10375662060cbb3515</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:37</sys_updated_on>
+        <value>records_match_query</value>
+        <variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>f9e577e787877e10375662060cbb350d</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:37</sys_created_on>
+        <sys_id>39e577e787877e10375662060cbb3516</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:37</sys_updated_on>
+        <value>pm_project_task</value>
+        <variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=f9e577e787877e10375662060cbb350d"/>
+    <sys_element_mapping action="DELETE">
+        <field>field_values</field>
+        <id>f9e577e787877e10375662060cbb350d</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 11:02:37</sys_created_on>
+        <sys_id>b5e577e787877e10375662060cbb351b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 11:02:37</sys_updated_on>
+        <table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table>
+        <value>approval=not requested^calculation_type=automatic^escalation=0^expense_type=opex^impact=3^level=1^percent_complete=0^phase_type=waterfall^priority=4^short_description=Tanium Configuration^state=-5^status=red^sys_class_name=pm_project_task^sys_created_by=karlton.smith@summit7.us^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^version=2^wbs_order=1^top_task={{step['0bd5ffa787877e10375662060cbb35a8'].record_id}}</value>
+    </sys_element_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_f9e577e787877e10375662060cbb350d</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate there is at least one record in 'pm_project_task' matching query:
+Approval = Not Yet Requested
+and Calculation = Automatic
+and Escalation = Normal
+and Expense type = Opex
+and Impact = 3 - Low
+and Level = 1
+and Percent complete = 0
+and Phase type = Waterfall
+and Priority = 4 - Low
+and Short description = Tanium Configuration
+and State = Pending
+and Status = Red
+and Task type = Project Task
+and Created by = karlton.smith@summit7.us
+and Domain = (empty)
+and Domain Path = /
+and Upon approval = Proceed to Next Task
+and Upon reject = Cancel all future Tasks
+and Urgency = 3 - Low
+and Version = 2
+and WBS Order = 1
+and Top project = {{invalid step_id=0bd5ffa787877e10375662060cbb35a8.}}
+With a failure timeout of 30 Seconds</description><display_name>Record Query</display_name><inputs/><inputs/><mugshots_cache_json/><notes/><order>5</order><step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:36</sys_created_on><sys_id>f9e577e787877e10375662060cbb350d</sys_id><sys_mod_count>206</sys_mod_count><sys_name>Record Query</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_f9e577e787877e10375662060cbb350d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:25:23</sys_updated_on><table>pm_project_task</table><test display_value="ATF Generated Test - pm_project_task, Karlton Smith, User's default view (Default view)">fed5ffa787877e10375662060cbb3531</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=f9e577e787877e10375662060cbb350d"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f9e577e787877e10375662060cbb350d</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:37</sys_created_on><sys_id>31e577e787877e10375662060cbb3516</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:37</sys_updated_on><value>0</value><variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f9e577e787877e10375662060cbb350d</document_key><order>400</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:37</sys_created_on><sys_id>31e577e787877e10375662060cbb3517</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:37</sys_updated_on><value>approval=not requested^calculation_type=automatic^escalation=0^expense_type=opex^impact=3^level=1^percent_complete=0^phase_type=waterfall^priority=4^short_description=Tanium Configuration^state=-5^status=red^sys_class_name=pm_project_task^sys_created_by=karlton.smith@summit7.us^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^version=2^wbs_order=1^top_task={{step['0bd5ffa787877e10375662060cbb35a8'].record_id}}</value><variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f9e577e787877e10375662060cbb350d</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:37</sys_created_on><sys_id>39e577e787877e10375662060cbb3515</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:37</sys_updated_on><value>records_match_query</value><variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>f9e577e787877e10375662060cbb350d</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:37</sys_created_on><sys_id>39e577e787877e10375662060cbb3516</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:37</sys_updated_on><value>pm_project_task</value><variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="id=f9e577e787877e10375662060cbb350d"/><sys_element_mapping action="INSERT_OR_UPDATE"><field>field_values</field><id>f9e577e787877e10375662060cbb350d</id><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 11:02:37</sys_created_on><sys_id>b5e577e787877e10375662060cbb351b</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 11:02:37</sys_updated_on><table>var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7</table><value>approval=not requested^calculation_type=automatic^escalation=0^expense_type=opex^impact=3^level=1^percent_complete=0^phase_type=waterfall^priority=4^short_description=Tanium Configuration^state=-5^status=red^sys_class_name=pm_project_task^sys_created_by=karlton.smith@summit7.us^sys_domain=global^sys_domain_path=/^upon_approval=proceed^upon_reject=cancel^urgency=3^version=2^wbs_order=1^top_task={{step['0bd5ffa787877e10375662060cbb35a8'].record_id}}</value></sys_element_mapping></record_update>]]></payload>
+        <payload_hash>-207747679</payload_hash>
+        <record_name>Record Query</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:23</sys_created_on>
+        <sys_id>8b02747747833250d5441233e16d43b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba7d73c0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:23</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>fe0274772d833250538896285f72e8b3</update_guid>
+        <update_guid_history>fe0274772d833250538896285f72e8b3:-207747679,2202b077588332505cb0055b98979fcb:576210722,fd02fc37e5833250523d8b4734624caa:1360169123,ed027c378583325097abc49fa64c57b0:2144127524,8102b8372a833250d1575b1475b81fb8:-1366881371,9402b4376e833250cdd54211cf2c4eed:668250379,bbf1b0377983325068ed05127c4033ec:1452208780,33f1b03772833250dac16328f2699d72:-2058800115,daf1b8f3c5833250a344b552fb08ff6b:-1274841714,86f178f3398332508459267022fa5cb2:-490883313,90f1fcb3ea833250e1cb869b8bafa0dd:293075088,80f1bcb3e5833250ee4b018d62bda45f:1077033489,07e138b31c8332509fed9a0d25ec3fab:1860991890,cbe1f4b303833250ef918a8f5e47fa68:-1650017005,b2e174b3198332505c238f2f0d19b1f8:-866058604,52e1b0b3f2833250400e793ca2824750:-798842966,28e1f4730683325012fdbbe308eae8df:-14884565,e6d1b833f98332509f4ebb2c008d4f7d:769073836,fdd17433be8332502702c0612f4fbb0e:1553032237,a9d1f0338f8332503bf9cbe0aece61a7:-1957976658,b3c138ff1843325046dc867ef34e4979:-1174018257,8bc1b0ffb1433250f1d30e80c201c332:-390059856,d2c13cbf09433250f76c641527fdd7f4:393898545,1ec13cbf6a43325090147cc16366ef89:1177856946,29c1f4bfa64332500b551171905973fb:1961815347,49b13c3f0d43325084138fa86c148e66:2029030985,a2a1f8fbd2433250ad4bdc860db67d95:-1481977910,79a1f4fb9e4332504fc748b8901ecd87:-698019509,a5917c7bb4433250e013f9331bf2d260:85938892,a5913c7b82433250d659a2932f9ef1e9:869897293,e981b03b76433250e3874c243bfb1ce0:1653855694,cd81303bf743325076855c1af51353a2:-1857153201,c481b8f7c143325004fe6cf59b3e024c:-1073194800,326138775a4332503bf78208a31482db:-289236399,2261f477b1433250eafb08aebbb37911:494722002,2161307733433250e5f7b19103aa86d3:561937640,515134f377433250d0f4860cd21b941c:1345896041,c241bc73f84332503d0f46d38c54e816:2129854442,bc4138733643325097ee51b045e65c0c:-1381154453,6841b473b6433250d2e580198b682540:-597196052,cb31bc33cf4332501b8da756689fc63e:186762349,e12130ffd8033250a89b4b49f8c06e44:970720750,0c2138bf5c033250108ad9ebdb376fa5:1754679151,f7f0f8fb2f0332505fe22e2b795f7cc2:-1756329744,64f0b8bbf703325068e88f14484c3dda:-972371343,e0f078bb6c03325063083904350d62d7:-905155705,fce0747b120332509d15483a051937bd:-121197304,84e0707bf503325034f24df4c2da97ae:662761097,b9d0343b49033250e090b0c8a414e038:1446719498,ddd0b03b0f03325085bfef64a6cc43d6:-2064289397,35c0fcb78e0332504aded0133845e7c0:-1280330996,8fa0fc370b0332505e46b4c5c2cb6ee6:-496372595,2b90f4f3290332502361c1d24f2224ef:287585806,6f90b4f3b703325007d7cac217100fc8:1071544207,1890b0b3ad033250c241e29238708db6:1855502608,8280f873ca03325058747b6fd928c5a2:1922718246,6240f4bff0cffe1093eb1387c68d8639:-1588290649,e04030bf9dcffe10e933860f5c316f92:-804332248,3530f47fa0cffe1062418d9db37841ef:-20373847,3320fc3f28cffe1036516d53f91962f8:763584554,af103cfb30cffe100d5d448b791f58af:1547542955,be0078bb91cffe10e58b57e939890aa9:-1963465940,f9ffa07b95cffe10a2b367fc8746eae3:-1179507539,c2dfa0f7d5cffe1022a65fc272674255:-395549138,f1df60f7ebcffe103d311ccf4afa2f05:388409263,45cf6c7774cffe1098aaf97f1bcb3878:455624901,8bbf6477f3cffe10e7b62985ae945665:1239583302,9abf6077cfcffe107f4be2a58818462e:2023541703,b3af64373ecffe1027bb86f22d6fbcd7:-1487467192,739f64f3b0cffe10d7c3ce1c184961a4:-703508791,338f64b324cffe107c2af0703189e560:80449610,848f287300cffe108805b0a37ff783ae:864408011,137f64730acffe10eaf64d0c9bc4be22:1648366412,5d6fa03382cffe10abd17207d82ea35e:-1862642483,2c6f2033ebcffe104757dfbf6944e938:-1078684082,446facffa98ffe10d09a36c2edd06683:-1011468444,d85fe0ff578ffe1074c4688b2c9f2746:-227510043,b63f60bf3b8ffe10689d4bf90d7f2805:556448358,223f20bf198ffe10895472f22c9ee85d:1340406759,5e3fec7fd08ffe10c9c1e818c11032ae:2124365160,6f1fe83f6d8ffe108405b2a2f24a39bd:-1386643735,cc1f203f5f8ffe1091bdc5b9638b286a:-602685334,f60fe8fb2e8ffe105064e65192ad5ebe:181273067,e50fa4fbc78ffe10603bb944802485ed:965231468,b5fea8bb938ffe10452bfa145b18f5f1:1749189869,12eeec7be68ffe101002f6fb6b5865ff:1816405507,44dee83bd08ffe1077aee4b605ac1fa7:-1694603388,b3cea83b5e8ffe10d6f04ec6f8d0feb5:-910644987,72bee8f79c8ffe1064ae1722dfdb1151:-126686586,03aeacb71a8ffe10de591dacdf6d35f6:657271815,38ae28b73e8ffe10eece7a7b46bbee72:1441230216,2e8ea0770e8ffe1072996733a6320510:-385466353,0a8e20774f8ffe102c6d9681ccb4959d:398492048,b08e6c372c8ffe104d39903e793c6d17:1182450449,7b7e6837f58ffe1042ee477793c886ea:1966408850,0b6ee8f3da8ffe107d1550511c308d4f:1155054871,d96ea4f3ff8ffe106d0f577baa86713f:1939013272,685ea4b33f8ffe10a40890e1b8860f33:-1588725798,c12e2033a68ffe109778084d854a67c8:-804767397,f5e577e73b877e10c31a70f45fb28d19:344239082</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:25:23</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>f29bcf21028445aaaddab8ae7ec91971</sys_id>
+        <sys_metadata>f9e577e787877e10375662060cbb350d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_f9e577e787877e10375662060cbb350d</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_f9e577e787877e10375662060cbb350d">8b02747747833250d5441233e16d43b5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:25:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

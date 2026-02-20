@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Validate there is at least one record in 'pm_portfolio_project' matching query:
+Cost = Green
+and Milestones cleared = 0
+and Milestones pending = 0
+and Milestones slipped = 0
+and Milestones total = 0
+and % Complete = 0
+and % Complete = 0
+and % Complete target = 0
+and Phase = Initiating
+and Project manager = Narcesse Louis
+and Risk = Low
+and Scope = Green
+and Short description = TM/Akita Innovations - Offboarding
+and State = -5
+and Task type = Portfolio Project
+and Created by = narcesse.louis@summit7.us
+and Domain = (empty)
+and Project = {{Step 11: Submit a Form.Record}}
+With a failure timeout of 30 Seconds</description>
+        <display_name>Record Query</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>48</order>
+        <step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>8cbc926f478bfa10d5441233e16d43f6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_8cbc926f478bfa10d5441233e16d43f6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <table>pm_portfolio_project</table>
+        <test display_value="ATF Generated Test - customer_project, Narcesse Louis, User's default view (Default view)">8facd62f478bfa10d5441233e16d43e6</test>
+        <timeout>1970-01-01 00:00:30</timeout>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=8cbc926f478bfa10d5441233e16d43f6"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>8cbc926f478bfa10d5441233e16d43f6</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>00bc926f478bfa10d5441233e16d43fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <value>pm_portfolio_project</value>
+        <variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>8cbc926f478bfa10d5441233e16d43f6</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>44bc926f478bfa10d5441233e16d43fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <value>cost_color=green^milestones_cleared=0^milestones_pending=0^milestones_slipped=0^milestones_total=0^percent_complete=0^percent_complete_dashboard=0^percent_complete_target=0^phase=initiating^project_manager=f0de806e97564a1047d9f64ef053afeb^risk=low^scope=green^short_description=TM/Akita Innovations - Offboarding ^state=-5^sys_class_name=pm_portfolio_project^sys_created_by=narcesse.louis@summit7.us^sys_domain=global^pm_project={{step['d7ac9a2f478bfa10d5441233e16d438c'].record_id}}</value>
+        <variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>8cbc926f478bfa10d5441233e16d43f6</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>84bc926f478bfa10d5441233e16d43fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <value>records_match_query</value>
+        <variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>8cbc926f478bfa10d5441233e16d43f6</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>c8bc926f478bfa10d5441233e16d43fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7^id=8cbc926f478bfa10d5441233e16d43f6"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_8cbc926f478bfa10d5441233e16d43f6</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Validate there is at least one record in 'pm_portfolio_project' matching query:
+Cost = Green
+and Milestones cleared = 0
+and Milestones pending = 0
+and Milestones slipped = 0
+and Milestones total = 0
+and % Complete = 0
+and % Complete = 0
+and % Complete target = 0
+and Phase = Initiating
+and Project manager = Narcesse Louis
+and Risk = Low
+and Scope = Green
+and Short description = TM/Akita Innovations - Offboarding
+and State = -5
+and Task type = Portfolio Project
+and Created by = narcesse.louis@summit7.us
+and Domain = (empty)
+and Project = {{Step 11: Submit a Form.Record}}
+With a failure timeout of 30 Seconds</description><display_name>Record Query</display_name><inputs/><mugshots_cache_json/><notes/><order>48</order><step_config display_value="Record Query">2d82e3c7531400109e02ddeeff7b12a7</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 04:32:50</sys_created_on><sys_id>8cbc926f478bfa10d5441233e16d43f6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Record Query</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_8cbc926f478bfa10d5441233e16d43f6</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 04:32:50</sys_updated_on><table>pm_portfolio_project</table><test display_value="ATF Generated Test - customer_project, Narcesse Louis, User's default view (Default view)">8facd62f478bfa10d5441233e16d43e6</test><timeout>1970-01-01 00:00:30</timeout><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=8cbc926f478bfa10d5441233e16d43f6"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>8cbc926f478bfa10d5441233e16d43f6</document_key><order>300</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 04:32:50</sys_created_on><sys_id>00bc926f478bfa10d5441233e16d43fc</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 04:32:50</sys_updated_on><value>pm_portfolio_project</value><variable display_value="Table">78b8d86b531000109e02ddeeff7b12f3</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>8cbc926f478bfa10d5441233e16d43f6</document_key><order>400</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 04:32:50</sys_created_on><sys_id>44bc926f478bfa10d5441233e16d43fc</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 04:32:50</sys_updated_on><value>cost_color=green^milestones_cleared=0^milestones_pending=0^milestones_slipped=0^milestones_total=0^percent_complete=0^percent_complete_dashboard=0^percent_complete_target=0^phase=initiating^project_manager=f0de806e97564a1047d9f64ef053afeb^risk=low^scope=green^short_description=TM/Akita Innovations - Offboarding ^state=-5^sys_class_name=pm_portfolio_project^sys_created_by=narcesse.louis@summit7.us^sys_domain=global^pm_project={{step['d7ac9a2f478bfa10d5441233e16d438c'].record_id}}</value><variable display_value="Conditions">915990ab531000109e02ddeeff7b12f8</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>8cbc926f478bfa10d5441233e16d43f6</document_key><order>200</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 04:32:50</sys_created_on><sys_id>84bc926f478bfa10d5441233e16d43fb</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 04:32:50</sys_updated_on><value>records_match_query</value><variable display_value="Assert type">b86c0427531000109e02ddeeff7b1227</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>8cbc926f478bfa10d5441233e16d43f6</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 04:32:50</sys_created_on><sys_id>c8bc926f478bfa10d5441233e16d43fb</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 04:32:50</sys_updated_on><value>0</value><variable display_value="Enforce security">02fb0027531000109e02ddeeff7b120b</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_2d82e3c7531400109e02ddeeff7b12a7^id=8cbc926f478bfa10d5441233e16d43f6"/></record_update>]]></payload>
+        <payload_hash>-1553736813</payload_hash>
+        <record_name>Record Query</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:32:50</sys_created_on>
+        <sys_id>84bcd26f478bfa10d5441233e16d4364</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c79526a100000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:32:50</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>00bcd26f308bfa10189a6fc7f91f4963</update_guid>
+        <update_guid_history>00bcd26f308bfa10189a6fc7f91f4963:-1553736813</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 04:59:11</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>21119dd0b36c434b8c3160f2b3ce5979</sys_id>
+        <sys_metadata>8cbc926f478bfa10d5441233e16d43f6</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Query</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_8cbc926f478bfa10d5441233e16d43f6</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_8cbc926f478bfa10d5441233e16d43f6">84bcd26f478bfa10d5441233e16d4364</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 04:59:11</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

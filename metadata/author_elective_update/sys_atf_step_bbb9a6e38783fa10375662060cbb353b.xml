@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="DELETE">
+        <active>true</active>
+        <callable_outputs/>
+        <copied_from/>
+        <description>Impersonate the user: Chet Hall with user Id: chet.hall@summit7.us</description>
+        <display_name>Impersonate</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>4</order>
+        <step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:53</sys_created_on>
+        <sys_id>bbb9a6e38783fa10375662060cbb353b</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_atf_step_bbb9a6e38783fa10375662060cbb353b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:51</sys_updated_on>
+        <table>checklist_item</table>
+        <test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="DELETE" query="document_key=bbb9a6e38783fa10375662060cbb353b"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_atf_step</document>
+        <document_key>bbb9a6e38783fa10375662060cbb353b</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 05:29:53</sys_created_on>
+        <sys_id>73b9a6e38783fa10375662060cbb353d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 05:29:53</sys_updated_on>
+        <value>20ee086e97564a1047d9f64ef053af1e</value>
+        <variable display_value="User">586e2c4253e0220002c6435723dc3415</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=bbb9a6e38783fa10375662060cbb353b"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Updater">67d384af87c7b610375662060cbb35be</application>
+        <file_path/>
+        <instance_id>a2d718a71b2042d08e39415d9c4bcb8f</instance_id>
+        <instance_name>summit7systemsdev</instance_name>
+        <name>sys_atf_step_bbb9a6e38783fa10375662060cbb353b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step"><sys_atf_step action="INSERT_OR_UPDATE"><active>true</active><callable_outputs/><copied_from/><description>Impersonate the user: Chet Hall with user Id: chet.hall@summit7.us</description><display_name>Impersonate</display_name><inputs/><mugshots_cache_json/><notes/><order>4</order><step_config display_value="Impersonate">071ee5b253331200040729cac2dc348d</step_config><sys_class_name>sys_atf_step</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:53</sys_created_on><sys_id>bbb9a6e38783fa10375662060cbb353b</sys_id><sys_mod_count>16</sys_mod_count><sys_name>Impersonate</sys_name><sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package><sys_policy/><sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope><sys_update_name>sys_atf_step_bbb9a6e38783fa10375662060cbb353b</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 15:23:51</sys_updated_on><table>checklist_item</table><test display_value="ATF Generated Test - checklist_item, Montana Martzall, User's default view (Default view)">ebb966e38783fa10375662060cbb3555</test><timeout/><warning_message/></sys_atf_step><sys_variable_value action="delete_multiple" query="document_key=bbb9a6e38783fa10375662060cbb353b"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_atf_step</document><document_key>bbb9a6e38783fa10375662060cbb353b</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-02-20 05:29:53</sys_created_on><sys_id>73b9a6e38783fa10375662060cbb353d</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-02-20 05:29:53</sys_updated_on><value>20ee086e97564a1047d9f64ef053af1e</value><variable display_value="User">586e2c4253e0220002c6435723dc3415</variable></sys_variable_value><sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_071ee5b253331200040729cac2dc348d^id=bbb9a6e38783fa10375662060cbb353b"/></record_update>]]></payload>
+        <payload_hash>1827405802</payload_hash>
+        <record_name>Impersonate</record_name>
+        <reverted_from/>
+        <source>2fd384af87c7b610375662060cbb35c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:23:51</sys_created_on>
+        <sys_id>a0b1383f47433250d5441233e16d4331</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c7ba66ffc0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:51</sys_updated_on>
+        <type>Test Step</type>
+        <update_guid>e4b1383fa943325084d43dd915cb2e2f</update_guid>
+        <update_guid_history>e4b1383fa943325084d43dd915cb2e2f:1827405802,1891347bdf4332508ced9ce1daca80d5:-218844885,b4213cbf9f033250b290193893c752b7:2029871724,6c21f8bfa6033250053bc7487a790532:-16378963,76f074fb260332503d196771e1de3677:-2062629650,0d00b0bb3dcffe106e0227e91e2d5f85:186086959,c5bfa83747cffe101200a80fc4d9f3bc:1499059791,d17fac338acffe10690280cbd3d2c3ac:-547190896,3bb9a6e37983fa10843dd9dcd858523f:1701525713</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-20 15:23:51</sys_created_on>
+        <sys_db_object display_value="" name="sys_atf_step">sys_atf_step</sys_db_object>
+        <sys_id>1029f6b78ce54ab0b12cbb8ec9ffedf1</sys_id>
+        <sys_metadata>bbb9a6e38783fa10375662060cbb353b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Impersonate</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_scope_delete display_value="">2e01286e573e42da91d72c8407412df1</sys_scope_delete>
+        <sys_update_name>sys_atf_step_bbb9a6e38783fa10375662060cbb353b</sys_update_name>
+        <sys_update_version display_value="sys_atf_step_bbb9a6e38783fa10375662060cbb353b">a0b1383f47433250d5441233e16d4331</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-20 15:23:51</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
