@@ -75,6 +75,7 @@
         x.open('GET', '/api/now/table/sys_properties?sysparm_query=name=css.base.color&sysparm_fields=value&sysparm_limit=1', false);
         var tk = (window.g_ck || (window.NOW && window.NOW.g_ck) || '');
         x.setRequestHeader('Accept', 'application/json');
+        x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         if (tk) x.setRequestHeader('X-UserToken', tk);
         x.send();
         if (x.status === 200) { var d = JSON.parse(x.responseText); if (d.result && d.result[0] && d.result[0].value) accent = d.result[0].value; }
@@ -112,7 +113,7 @@
     try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) return m[1]; } catch(e){}
     return '';
   }
-  function hdrs() { var h = { Accept: 'application/json', 'Content-Type': 'application/json' }; var t = getToken(); if (t) h['X-UserToken'] = t; return h; }
+  function hdrs() { var h = { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }; var t = getToken(); if (t) h['X-UserToken'] = t; return h; }
   function api(url, opts) {
     return fetch(url, Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
       .then(function(r) { if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);}); return r.json(); });
