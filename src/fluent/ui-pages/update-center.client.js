@@ -112,8 +112,14 @@
     if (t) h['X-UserToken'] = t;
     return h;
   }
+  function apiUrl(url) {
+    var t = getToken();
+    if (!t) return url;
+    var sep = url.indexOf('?') === -1 ? '?' : '&';
+    return url + sep + 'sysparm_ck=' + encodeURIComponent(t);
+  }
   function api(url, opts) {
-    return fetch(url, Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
+    return fetch(apiUrl(url), Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
       .then(function(r) {
         if (r.status === 401) throw new Error('Session expired. Please refresh the page.');
         if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);});
