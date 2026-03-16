@@ -550,7 +550,7 @@
 
   function doSchedule(sel, snDt, localDt) {
     addLog('Scheduling ' + sel.length + ' update' + (sel.length > 1 ? 's' : '') + ' for ' + localDt + '...');
-    var payload = JSON.stringify(sel.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
+    var payload = JSON.stringify(sel.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv, scope: a.scope }; }));
     var bs = S.bannerSettings || BANNER_DEFAULTS;
     callGlideAjax('scheduleInstall', {
       sysparm_apps: payload,
@@ -921,6 +921,51 @@
   }
 
   /* ── Installation Flow ───────────────────────────────────────────── */
+
+  var INSTALL_APIS = [
+    { path: '/api/sn_cicd/app_repo/install', method: 'POST', useQuery: true },
+    { path: '/api/sn_cicd/app/install', method: 'POST', useQuery: true },
+    { path: '/api/now/table/sys_store_app/{sys_id}/install', method: 'POST', useQuery: false },
+    { path: null }
+  ];
+
+  function tryInstallApp(app, apiIdx) {
+    apiIdx = apiIdx || 0;
+    var apiDef = INSTALL_APIS[apiIdx];
+    if (!apiDef || !apiDef.path) {
+      console.log('[UpdateCenter] All REST APIs exhausted for ' + (app.name || app.id) + ', falling back to GlideAjax');
+      return Promise.resolve({ method: 'glideajax', app: app });
+    }
+    var total = INSTALL_APIS.filter(function(a) { return a.path; }).length;
+    var url = apiDef.path.replace('{sys_id}', app.id);
+    if (apiDef.useQuery) {
+      var params = [];
+      if (app.id) params.push('sys_id=' + encodeURIComponent(app.id));
+      if (app.scope) params.push('scope=' + encodeURIComponent(app.scope));
+      if (app.lv) params.push('version=' + encodeURIComponent(app.lv));
+      if (params.length) url += '?' + params.join('&');
+    }
+    console.log('[UpdateCenter] Trying API ' + (apiIdx + 1) + '/' + total + ': ' + url);
+    addLog('Trying API ' + (apiIdx + 1) + '/' + total + ': ' + apiDef.path.split('?')[0]);
+
+    return fetch(url, {
+      method: apiDef.method,
+      headers: hdrs(),
+      credentials: 'same-origin',
+      body: !apiDef.useQuery ? JSON.stringify({ sys_id: app.id, scope: app.scope, version: app.lv }) : undefined
+    }).then(function(r) {
+      return r.json().catch(function() { return {}; }).then(function(body) {
+        console.log('[UpdateCenter] API response: ' + r.status, JSON.stringify(body));
+        if (r.ok && body.result && body.result.status !== '3') {
+          return { method: apiDef.path, app: app, response: body };
+        }
+        return tryInstallApp(app, apiIdx + 1);
+      });
+    }).catch(function() {
+      return tryInstallApp(app, apiIdx + 1);
+    });
+  }
+
   function doInstall(sel) {
     S.installQueue = sel; S.installing = true; S.view = 'progress';
     S.pPct = 0; S.pState = 'Preparing\u2026'; S.pErr = ''; S.pDone = false; S.logs = [];
@@ -933,13 +978,53 @@
 
     setTimeout(function() {
       addLog('Triggering batch installation (' + sel.length + ' app' + (sel.length > 1 ? 's' : '') + ')\u2026');
-      var payload = JSON.stringify(sel.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv }; }));
+      console.log('[UpdateCenter] Loaded ' + sel.length + ' apps');
+
+      var needGlideAjax = [];
+      var completed = 0, failed = 0, results = [];
+
+      function installNext(idx) {
+        if (idx >= sel.length) {
+          finishDirectInstall(results, completed, failed, needGlideAjax);
+          return;
+        }
+        var app = sel[idx];
+        S.pState = 'Installing (' + (idx + 1) + '/' + sel.length + '): ' + app.name;
+        S.pPct = Math.round((idx / sel.length) * 100);
+        updateProgressUI();
+        addLog('Installing: ' + app.name + ' (' + app.iv + ' \u2192 ' + app.lv + ')');
+
+        tryInstallApp(app, 0).then(function(res) {
+          if (res.method === 'glideajax') {
+            needGlideAjax.push(app);
+          } else {
+            completed++;
+            results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+            addLog(app.name + ' install triggered via ' + res.method, 'success');
+          }
+          installNext(idx + 1);
+        }).catch(function(e) {
+          failed++;
+          results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: e.message });
+          addLog(app.name + ' failed: ' + e.message, 'error');
+          installNext(idx + 1);
+        });
+      }
+
+      installNext(0);
+    }, 100);
+  }
+
+  function finishDirectInstall(results, completed, failed, needGlideAjax) {
+    if (needGlideAjax.length > 0) {
+      addLog('Falling back to server-side install for ' + needGlideAjax.length + ' app(s)\u2026');
+      var payload = JSON.stringify(needGlideAjax.map(function(a) { return { id: a.id, name: a.name, lv: a.lv, iv: a.iv, scope: a.scope }; }));
       var bs = S.bannerSettings || BANNER_DEFAULTS;
       callGlideAjax('installBatch', {
         sysparm_apps: payload,
         sysparm_banner_settings: JSON.stringify(bs)
       }).then(function(answer) {
-        addLog('Install request sent to server', 'success');
+        addLog('Server-side install request sent', 'success');
         if (answer && answer.length > 10 && !S.batchId) {
           S.batchId = answer;
           addLog('Server returned worker ID: ' + answer.substring(0, 8) + '\u2026', 'success');
@@ -947,14 +1032,31 @@
         addLog('Searching for progress worker\u2026', 'info');
         searchForWorker(0);
       }).catch(function(e) {
-        addLog('Install request failed: ' + e.message, 'error');
-        toast('Install request failed: ' + e.message, 'error');
-        S.pDone = true; S.pErr = 'Install request failed: ' + e.message;
+        addLog('Server-side install failed: ' + e.message, 'error');
+        S.pDone = true; S.pErr = 'Install failed: ' + e.message;
         S.installing = false;
         if (tickT) clearInterval(tickT);
         clearSession(); render();
       });
-    }, 100);
+    } else if (completed > 0 || failed > 0) {
+      S.pPct = 100; S.pDone = true;
+      S.installing = false;
+      if (failed === 0) {
+        addLog('All ' + completed + ' app(s) installed successfully!', 'success');
+        toast('Installation completed!', 'success');
+      } else {
+        S.pErr = failed + ' of ' + (completed + failed) + ' app(s) failed.';
+        addLog(completed + ' succeeded, ' + failed + ' failed.', failed > 0 ? 'warning' : 'success');
+        toast(S.pErr, 'error');
+      }
+      if (tickT) clearInterval(tickT);
+      clearSession(); render(); refresh();
+    } else {
+      S.pDone = true; S.pErr = 'No apps to install.';
+      S.installing = false;
+      if (tickT) clearInterval(tickT);
+      clearSession(); render();
+    }
   }
 
   function startTick() {

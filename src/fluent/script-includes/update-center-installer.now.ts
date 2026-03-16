@@ -244,7 +244,14 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
             "    updateWorker('Installing (' + (i + 1) + '/' + totalApps + '): ' + appName + '...', pctBefore, 'running');\\n" +
             "    try {\\n" +
             "        var storeApp = new GlideRecord('sys_store_app');\\n" +
-            "        if (storeApp.get(app.id)) {\\n" +
+            "        var found = storeApp.get(app.id);\\n" +
+            "        if (!found && app.scope) {\\n" +
+            "            storeApp = new GlideRecord('sys_store_app');\\n" +
+            "            storeApp.addQuery('scope', app.scope);\\n" +
+            "            storeApp.query();\\n" +
+            "            found = storeApp.next();\\n" +
+            "        }\\n" +
+            "        if (found) {\\n" +
             "            var appId = storeApp.getValue('sys_id');\\n" +
             "            var version = app.lv || '';\\n" +
             "            var installed = false;\\n" +
