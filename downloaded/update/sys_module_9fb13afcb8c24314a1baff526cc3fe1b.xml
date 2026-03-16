@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[{
+  "name": "x-g-s-7-s-updater",
+  "version": "1.0.0",
+  "description": "Batch Store update installer with real-time progress monitoring",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "now-sdk build",
+    "deploy": "now-sdk install",
+    "transform": "now-sdk transform",
+    "types": "now-sdk dependencies"
+  },
+  "devDependencies": {
+    "@servicenow/eslint-plugin-sdk-app-plugin": "4.2.0",
+    "@servicenow/glide": "26.0.1",
+    "@servicenow/sdk": "^4.2.0",
+    "eslint": "8.50.0",
+    "typescript": "5.5.4"
+  }
+}]]></content>
+        <external_source>false</external_source>
+        <path>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/package.json</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>jack.lilley@summit7.us</sys_created_by>
+        <sys_created_on>2026-03-16 21:17:20</sys_created_on>
+        <sys_id>9fb13afcb8c24314a1baff526cc3fe1b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/package.json</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_module_9fb13afcb8c24314a1baff526cc3fe1b</sys_update_name>
+        <sys_updated_by>jack.lilley@summit7.us</sys_updated_by>
+        <sys_updated_on>2026-03-16 21:17:20</sys_updated_on>
+    </sys_module>
+</record_update>

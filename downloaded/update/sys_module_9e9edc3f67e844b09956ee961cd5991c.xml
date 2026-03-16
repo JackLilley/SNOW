@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[// Test script for Batch Store Update Installer
+// Run in ServiceNow Script Console or as an Automated Test
+
+(function() {
+  var installer = new BatchUpdateInstaller();
+  var installResult = installer.install();
+  gs.info('Install result: ' + JSON.stringify(installResult));
+
+  var verifyResult = installer.verify();
+  gs.info('Verify result: ' + JSON.stringify(verifyResult));
+
+  var batchInstaller = new BatchStoreUpdateInstaller();
+  var batchId = batchInstaller.createBatch('TestStore', 5);
+  gs.info('Created batch: ' + batchId);
+
+  batchInstaller.processPendingBatches();
+  var status = batchInstaller.getBatchStatus(batchId);
+  gs.info('Batch status: ' + JSON.stringify(status));
+})();
+]]></content>
+        <external_source>false</external_source>
+        <path>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/src/server/test-installer.js</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>jack.lilley@summit7.us</sys_created_by>
+        <sys_created_on>2026-03-16 21:17:20</sys_created_on>
+        <sys_id>9e9edc3f67e844b09956ee961cd5991c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/src/server/test-installer.js</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_module_9e9edc3f67e844b09956ee961cd5991c</sys_update_name>
+        <sys_updated_by>jack.lilley@summit7.us</sys_updated_by>
+        <sys_updated_on>2026-03-16 21:17:20</sys_updated_on>
+    </sys_module>
+</record_update>

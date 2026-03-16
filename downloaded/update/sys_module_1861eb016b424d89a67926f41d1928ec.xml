@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[/**
+ * REST API: Batch Update Installer Setup
+ * ServiceNow REST API endpoint for installing the app
+ * Route: /api/now/x_g_s7s/batch-install
+ */
+
+(function processRequest() {
+  // Check if this is a GET request for installation
+  if (request.getMethod() !== 'GET' && request.getMethod() !== 'POST') {
+    response.setStatus(405);
+    response.setContentType('application/json');
+    gs.info('[BatchUpdate] Invalid method: ' + request.getMethod());
+    response.getStreamWriter().writeString(JSON.stringify({
+      status: 'error',
+      message: 'Method not allowed'
+    }));
+    return;
+  }
+
+  try {
+    gs.info('[BatchUpdate] Installation endpoint called');
+
+    // Verify admin access
+    if (!gs.getUser().hasRole('admin') && !gs.getUser().hasRole('x_g_s7s.admin')) {
+      response.setStatus(403);
+      response.setContentType('application/json');
+      response.getStreamWriter().writeString(JSON.stringify({
+        status: 'error',
+        message: 'Insufficient permissions'
+      }));
+      return;
+    }
+
+    // Get action parameter
+    var action = request.getParameter('action') || 'install';
+
+    var installer = new BatchUpdateInstaller();
+    var result;
+
+    switch (action) {
+      case 'install':
+        result = installer.install();
+        break;
+      case 'verify':
+        result = installer.verify();
+        break;
+      case 'uninstall':
+        result = installer.uninstall();
+        break;
+      default:
+        result = { success: false, message: 'Unknown action: ' + action };
+    }
+
+    response.setStatus(result.success ? 200 : 500);
+    response.setContentType('application/json');
+    response.getStreamWriter().writeString(JSON.stringify(result));
+
+  } catch (error) {
+    gs.error('[BatchUpdate] REST API error: ' + error);
+    response.setStatus(500);
+    response.setContentType('application/json');
+    response.getStreamWriter().writeString(JSON.stringify({
+      status: 'error',
+      message: 'Server error: ' + error
+    }));
+  }
+})();
+]]></content>
+        <external_source>false</external_source>
+        <path>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/src/server/rest-install.js</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>jack.lilley@summit7.us</sys_created_by>
+        <sys_created_on>2026-03-16 21:17:20</sys_created_on>
+        <sys_id>1861eb016b424d89a67926f41d1928ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_g_s7s_updater/x-g-s-7-s-updater/1.0.0/src/server/rest-install.js</sys_name>
+        <sys_package display_value="Updater" source="x_g_s7s_updater">67d384af87c7b610375662060cbb35be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Updater">67d384af87c7b610375662060cbb35be</sys_scope>
+        <sys_update_name>sys_module_1861eb016b424d89a67926f41d1928ec</sys_update_name>
+        <sys_updated_by>jack.lilley@summit7.us</sys_updated_by>
+        <sys_updated_on>2026-03-16 21:17:20</sys_updated_on>
+    </sys_module>
+</record_update>

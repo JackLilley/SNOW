@@ -97,14 +97,33 @@
 
   /* ── API Helpers ──────────────────────────────────────────────────── */
   var _cachedToken = '';
+  function initToken() {
+    console.log('[UpdateCenter] Initializing...');
+    var ckInput = document.querySelector('input[name="sysparm_ck"]');
+    if (ckInput && ckInput.value) {
+      _cachedToken = ckInput.value;
+      console.log('[UpdateCenter] Token from sysparm_ck input');
+    }
+    if (!_cachedToken) {
+      var root = document.getElementById('ucRoot');
+      if (root && root.getAttribute('data-ck')) {
+        _cachedToken = root.getAttribute('data-ck');
+        console.log('[UpdateCenter] Token from data-ck attribute');
+      }
+    }
+    if (!_cachedToken && window.g_ck) { _cachedToken = window.g_ck; console.log('[UpdateCenter] Token from window.g_ck'); }
+    if (!_cachedToken && window.NOW && window.NOW.g_ck) { _cachedToken = window.NOW.g_ck; console.log('[UpdateCenter] Token from NOW.g_ck'); }
+    if (!_cachedToken) { try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) { _cachedToken = m[1]; console.log('[UpdateCenter] Token from cookie'); } } catch(e){} }
+    if (_cachedToken) {
+      window.g_ck = _cachedToken;
+      console.log('[UpdateCenter] Set window.g_ck from token');
+    }
+    console.log('[UpdateCenter] Token available: ' + !!_cachedToken);
+  }
   function getToken() {
     if (_cachedToken) return _cachedToken;
-    var root = document.getElementById('ucRoot');
-    if (root && root.getAttribute('data-ck')) { _cachedToken = root.getAttribute('data-ck'); return _cachedToken; }
-    if (window.g_ck) { _cachedToken = window.g_ck; return _cachedToken; }
-    if (window.NOW && window.NOW.g_ck) { _cachedToken = window.NOW.g_ck; return _cachedToken; }
-    try { var m = document.cookie.match(/g_ck=([^;]+)/); if (m) { _cachedToken = m[1]; return _cachedToken; } } catch(e){}
-    return '';
+    initToken();
+    return _cachedToken;
   }
   function hdrs() {
     var t = getToken();
@@ -112,14 +131,8 @@
     if (t) h['X-UserToken'] = t;
     return h;
   }
-  function apiUrl(url) {
-    var t = getToken();
-    if (!t) return url;
-    var sep = url.indexOf('?') === -1 ? '?' : '&';
-    return url + sep + 'sysparm_ck=' + encodeURIComponent(t);
-  }
   function api(url, opts) {
-    return fetch(apiUrl(url), Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
+    return fetch(url, Object.assign({ headers: hdrs(), credentials: 'same-origin' }, opts || {}))
       .then(function(r) {
         if (r.status === 401) throw new Error('Session expired. Please refresh the page.');
         if (!r.ok) return r.json().catch(function(){return{};}).then(function(e){throw new Error((e.error&&e.error.message)||'HTTP '+r.status);});
@@ -1181,10 +1194,12 @@
 
   /* ── Init ────────────────────────────────────────────────────────── */
   function init() {
+    initToken();
     loadBannerSettings();
     var dismissBtn = document.getElementById('ucErrDismiss');
     if (dismissBtn) dismissBtn.addEventListener('click', function() { S.error = null; renderErr(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { var d = document.getElementById('ucDialog'); if (d && d.innerHTML) d.innerHTML = ''; } });
+    console.log('[UpdateCenter] Init complete');
     if (!resumeSession()) { render(); refresh(); } else { refresh(); }
   }
 
