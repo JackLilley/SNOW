@@ -141,16 +141,30 @@
   }
   function fv(f) { return f && (f.value !== undefined ? f.value : f); }
   function fd(f) { return f && (f.display_value !== undefined ? f.display_value : fv(f)); }
-  function cmpVer(a, b) { var f = (a || '0.0.0').split('.'), t = (b || '0.0.0').split('.'); if (f[0] !== t[0]) return 'major'; if (f[1] !== t[1]) return 'minor'; return 'patch'; }
+  function cmpVer(a, b) { var va = a || '0.0.0', vb = b || '0.0.0'; if (va === vb) return 'none'; var f = va.split('.'), t = vb.split('.'); if (f[0] !== t[0]) return 'major'; if (f[1] !== t[1]) return 'minor'; return 'patch'; }
   function risk(l) { return l === 'major' ? 'high' : l === 'minor' ? 'medium' : 'low'; }
   function fmtDur(s) { if (60 > s) return s + 's'; var m = Math.floor(s / 60), r = s % 60; if (60 > m) return m + 'm ' + r + 's'; return Math.floor(m / 60) + 'h ' + (m % 60) + 'm'; }
   function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
   /* ── Data Fetching ────────────────────────────────────────────────── */
-  function getUpdates() {
-    return api('/api/now/table/sys_store_app?sysparm_display_value=all&sysparm_fields=sys_id,name,scope,version,vendor,active&sysparm_query=active=true^update_available=true^ORDERBYname')
+  var _storeAppFields = 'sys_id,name,scope,version,vendor,active';
+  function _fetchStoreApps() {
+    return api('/api/now/table/sys_store_app?sysparm_display_value=all&sysparm_fields=' + _storeAppFields + '&sysparm_query=active=true^update_available=true^ORDERBYname')
       .then(function(d) {
-        var apps = d.result || [];
+        if ((d.result || []).length > 0) return d.result;
+        // No results — field may not exist or no updates; try broader query
+        return api('/api/now/table/sys_store_app?sysparm_display_value=all&sysparm_fields=' + _storeAppFields + '&sysparm_query=active=true^ORDERBYname')
+          .then(function(d2) { return d2.result || []; });
+      })
+      .catch(function() {
+        // update_available field may not exist on this instance — use broader query
+        return api('/api/now/table/sys_store_app?sysparm_display_value=all&sysparm_fields=' + _storeAppFields + '&sysparm_query=active=true^ORDERBYname')
+          .then(function(d2) { return d2.result || []; });
+      });
+  }
+  function getUpdates() {
+    return _fetchStoreApps()
+      .then(function(apps) {
         return Promise.all(apps.map(function(app) {
           return api('/api/now/table/sys_app_version?sysparm_display_value=all&sysparm_fields=sys_id,version,source_app_id,publish_date,description,short_description&sysparm_query=source_app_id=' + fv(app.sys_id) + '^ORDERBYversion')
             .then(function(v) { return { app: app, ver: v.result || [] }; }).catch(function() { return { app: app, ver: [] }; });
@@ -160,7 +174,7 @@
           var a = r.app, l = r.ver[r.ver.length - 1], iv = fv(a.version), lv = fv(l.version), lev = cmpVer(iv, lv);
           var notes = fd(l.description) || fd(l.short_description) || '';
           return { id: fv(a.sys_id), name: fd(a.name), scope: fv(a.scope), iv: iv, lv: lv, lvId: fv(l.sys_id), level: lev, risk: risk(lev), vendor: fd(a.vendor) || 'ServiceNow', date: fd(l.publish_date) || '', notes: notes };
-        });
+        }).filter(function(u) { return u.level !== 'none'; });
       });
   }
 
@@ -194,7 +208,7 @@
   }
 
   function findRecentWorker() {
-    var q = 'nameSTARTSWITHUpdate Center^ORDERBYDESCsys_created_on';
+    var q = 'nameSTARTSWITHUpdate Center^sys_created_on>javascript:gs.minutesAgo(5)^ORDERBYDESCsys_created_on';
     return api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + encodeURIComponent(q) + '&sysparm_limit=1')
       .then(function(d) { var r = (d.result || [])[0]; return r ? fv(r.sys_id) : null; }).catch(function() { return null; });
   }
@@ -938,7 +952,6 @@
   var INSTALL_APIS = [
     { path: '/api/sn_cicd/app_repo/install', method: 'POST', useQuery: true },
     { path: '/api/sn_cicd/app/install', method: 'POST', useQuery: true },
-    { path: '/api/now/table/sys_store_app/{sys_id}/install', method: 'POST', useQuery: false },
     { path: null }
   ];
 
@@ -1010,12 +1023,47 @@
         tryInstallApp(app, 0).then(function(res) {
           if (res.method === 'glideajax') {
             needGlideAjax.push(app);
+            installNext(idx + 1);
           } else {
-            completed++;
-            results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+            /* Extract progress worker ID from CI/CD API response */
+            var workerId = null;
+            var rb = res.response || {};
+            var rr = rb.result || {};
+            if (rr.links && rr.links.progress && rr.links.progress.id) {
+              workerId = rr.links.progress.id;
+            } else if (rr.progress_id) {
+              workerId = rr.progress_id;
+            } else if (rr.sys_id) {
+              workerId = rr.sys_id;
+            }
             addLog(app.name + ' install triggered via ' + res.method, 'success');
+            if (workerId) {
+              addLog('Tracking progress worker: ' + workerId.substring(0, 8) + '\u2026', 'info');
+              pollAppInstall(app, workerId, function(success, errMsg) {
+                if (success) {
+                  completed++;
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+                } else {
+                  failed++;
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg });
+                  addLog(app.name + ' failed: ' + errMsg, 'error');
+                }
+                installNext(idx + 1);
+              });
+            } else {
+              addLog('No progress worker returned \u2014 searching\u2026', 'info');
+              waitForWorkerThenPoll(app, res.method, function(success, errMsg) {
+                if (success) {
+                  completed++;
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+                } else {
+                  failed++;
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg });
+                }
+                installNext(idx + 1);
+              });
+            }
           }
-          installNext(idx + 1);
         }).catch(function(e) {
           failed++;
           results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: e.message });
@@ -1026,6 +1074,62 @@
 
       installNext(0);
     }, 100);
+  }
+
+  function pollAppInstall(app, workerId, cb) {
+    var maxPolls = 120, pollCount = 0, pollDelay = 3000;
+    function doPoll() {
+      pollCount++;
+      pollWorker(workerId).then(function(p) {
+        var pct = parseInt(fv(p.percent_complete)) || 0;
+        var msg = fd(p.message) || fv(p.message) || '';
+        S.pPct = pct;
+        S.pState = app.name + ': ' + (msg || pct + '%');
+        updateProgressUI();
+        if (msg) addLog(app.name + ': ' + msg);
+        if (isStateDone(p)) {
+          addLog(app.name + ' installed successfully!', 'success');
+          cb(true);
+        } else if (isStateFailed(p)) {
+          var err = fd(p.error_message) || fv(p.error_message) || 'Installation failed';
+          cb(false, err);
+        } else if (pollCount >= maxPolls) {
+          cb(false, 'Timed out waiting for installation to complete');
+        } else {
+          setTimeout(doPoll, pollDelay);
+        }
+      }).catch(function(e) {
+        if (pollCount >= maxPolls) { cb(false, 'Poll error: ' + e.message); return; }
+        setTimeout(doPoll, pollDelay);
+      });
+    }
+    setTimeout(doPoll, 2000);
+  }
+
+  function waitForWorkerThenPoll(app, method, cb) {
+    var attempts = 0, maxAttempts = 15;
+    function search() {
+      attempts++;
+      var q = 'nameSTARTSWITH' + encodeURIComponent(app.name) + '^ORDERBYDESCsys_created_on';
+      api('/api/now/table/sys_progress_worker?sysparm_display_value=all&sysparm_fields=sys_id,state,name,sys_created_on&sysparm_query=' + q + '&sysparm_limit=1')
+        .then(function(d) {
+          var r = (d.result || [])[0];
+          if (r) {
+            var wid = fv(r.sys_id);
+            addLog('Found worker for ' + app.name + ': ' + wid.substring(0, 8) + '\u2026', 'success');
+            pollAppInstall(app, wid, cb);
+          } else if (attempts < maxAttempts) {
+            setTimeout(search, 3000);
+          } else {
+            addLog(app.name + ': Could not find progress worker, assuming triggered.', 'warning');
+            cb(true);
+          }
+        }).catch(function() {
+          if (attempts < maxAttempts) setTimeout(search, 3000);
+          else cb(true);
+        });
+    }
+    setTimeout(search, 2000);
   }
 
   function finishDirectInstall(results, completed, failed, needGlideAjax) {
