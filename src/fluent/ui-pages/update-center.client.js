@@ -64,6 +64,17 @@
     return span;
   }
 
+  /* ── Brand Assets ────────────────────────────────────────────────── */
+  var S7_LOGO_URI = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50"><polygon fill="#A21D22" points="25,2 48,46 2,46"/><text x="58" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#002140" letter-spacing="2">SUMMIT</text><text x="228" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#A21D22" letter-spacing="2">7</text></svg>');
+  var S7_FAVICON_SVG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><polygon fill="#A21D22" points="24,2 46,44 2,44"/></svg>');
+
+  /* Set favicon */
+  (function() {
+    var link = document.querySelector('link[rel*="icon"]') || document.createElement('link');
+    link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = S7_FAVICON_SVG;
+    document.head.appendChild(link);
+  })();
+
   /* ── State ────────────────────────────────────────────────────────── */
   var BANNER_DEFAULTS = {
     enableInstalling: true,
@@ -259,7 +270,18 @@
     if (!n) return;
     n.innerHTML = '';
     var brand = document.getElementById('ucBrand');
-    if (brand && !brand._icSet) { brand.insertBefore(ic('layers', 18), brand.firstChild); brand._icSet = true; }
+    if (brand && !brand._icSet) {
+      var logo = document.createElement('img');
+      logo.src = S7_LOGO_URI;
+      logo.alt = 'Summit 7';
+      logo.className = 'uc-nav-logo';
+      brand.appendChild(logo);
+      var divider = document.createElement('div');
+      divider.className = 'uc-nav-divider';
+      brand.appendChild(divider);
+      brand.appendChild(document.createTextNode('Update Center'));
+      brand._icSet = true;
+    }
     var tabs = [
       ['dashboard', 'Dashboard', 'bar-chart'],
       ['updates', 'Updates', 'download'],
