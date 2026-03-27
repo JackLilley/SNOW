@@ -64,15 +64,19 @@
     return span;
   }
 
-  /* ── Brand Assets ────────────────────────────────────────────────── */
-  var S7_LOGO_URI = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50"><polygon fill="#A21D22" points="25,2 48,46 2,46"/><text x="58" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#002140" letter-spacing="2">SUMMIT</text><text x="228" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#A21D22" letter-spacing="2">7</text></svg>');
-  var S7_FAVICON_SVG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><polygon fill="#A21D22" points="24,2 46,44 2,44"/></svg>');
+  /* ── Brand Assets (Jelly-safe: no angle brackets in strings) ───── */
+  var S7_LOGO_URI = 'data:image/svg+xml,' + encodeURIComponent('\x3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50"\x3e\x3cpolygon fill="#A21D22" points="25,2 48,46 2,46"/\x3e\x3ctext x="58" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#002140" letter-spacing="2"\x3eSUMMIT\x3c/text\x3e\x3ctext x="228" y="38" font-family="DM Sans,system-ui,sans-serif" font-weight="700" font-size="32" fill="#A21D22" letter-spacing="2"\x3e7\x3c/text\x3e\x3c/svg\x3e');
+  var S7_FAVICON_SVG = 'data:image/svg+xml,' + encodeURIComponent('\x3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"\x3e\x3cpolygon fill="#A21D22" points="24,2 46,44 2,44"/\x3e\x3c/svg\x3e');
 
-  /* Set favicon */
+  /* Load DM Sans font + set favicon */
   (function() {
-    var link = document.querySelector('link[rel*="icon"]') || document.createElement('link');
-    link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = S7_FAVICON_SVG;
-    document.head.appendChild(link);
+    var fontLink = document.createElement('link');
+    fontLink.rel = 'stylesheet';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800' + String.fromCharCode(38) + 'display=swap';
+    document.head.appendChild(fontLink);
+    var ico = document.querySelector('link[rel*="icon"]') || document.createElement('link');
+    ico.rel = 'icon'; ico.type = 'image/svg+xml'; ico.href = S7_FAVICON_SVG;
+    document.head.appendChild(ico);
   })();
 
   /* ── State ────────────────────────────────────────────────────────── */
