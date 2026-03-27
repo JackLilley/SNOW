@@ -751,6 +751,91 @@
       });
   }
 
+  /* ── Export Helpers ──────────────────────────────────────────────── */
+  function buildReleaseNotesText(data) {
+    var line = '════════════════════════════════════════════════════════════';
+    var thin = '────────────────────────────────────────────────────────────';
+    var txt = '';
+    txt += line + '\n';
+    txt += '  BATCH UPDATE RELEASE NOTES\n';
+    txt += line + '\n\n';
+    if (data.startTime) txt += 'Started:   ' + data.startTime + '\n';
+    if (data.endTime)   txt += 'Completed: ' + data.endTime + '\n';
+    if (data.startTime && data.endTime) {
+      try { var ms = new Date(data.endTime).getTime() - new Date(data.startTime).getTime(); if (ms > 0) txt += 'Duration:  ' + fmtDur(Math.round(ms / 1000)) + '\n'; } catch(e) {}
+    }
+    txt += 'Total:     ' + data.total + ' application(s)\n';
+    txt += 'Succeeded: ' + data.completed + '\n';
+    txt += 'Failed:    ' + data.failed + '\n\n';
+
+    var succeeded = (data.apps || []).filter(function(a) { return a.status === 'success'; });
+    var failures  = (data.apps || []).filter(function(a) { return a.status !== 'success'; });
+
+    if (succeeded.length > 0) {
+      txt += thin + '\n';
+      txt += '  SUCCESSFULLY UPDATED (' + succeeded.length + ')\n';
+      txt += thin + '\n\n';
+      succeeded.forEach(function(a, i) {
+        txt += '  ' + (i + 1) + '. ' + a.name + '\n';
+        txt += '     Version: ' + (a.from || '?') + ' → ' + (a.to || '?') + '\n';
+        if (a.level)  txt += '     Type:    ' + a.level + '\n';
+        if (a.vendor) txt += '     Vendor:  ' + a.vendor + '\n';
+        if (a.date)   txt += '     Date:    ' + a.date + '\n';
+        if (a.method) txt += '     Method:  ' + a.method + '\n';
+        if (a.notes)  txt += '     Notes:   ' + a.notes.replace(/\n/g, '\n             ') + '\n';
+        txt += '\n';
+      });
+    }
+
+    if (failures.length > 0) {
+      txt += thin + '\n';
+      txt += '  FAILED (' + failures.length + ')\n';
+      txt += thin + '\n\n';
+      failures.forEach(function(a, i) {
+        txt += '  ' + (i + 1) + '. ' + a.name + '\n';
+        txt += '     Version: ' + (a.from || '?') + ' → ' + (a.to || '?') + '\n';
+        if (a.error) txt += '     Error:   ' + a.error + '\n';
+        if (a.notes) txt += '     Notes:   ' + a.notes.replace(/\n/g, '\n             ') + '\n';
+        txt += '\n';
+      });
+    }
+
+    txt += line + '\n';
+    txt += '  Summary: ' + data.completed + ' of ' + data.total + ' installed successfully';
+    if (data.failed > 0) txt += ', ' + data.failed + ' failed';
+    txt += '\n' + line + '\n';
+    return txt;
+  }
+
+  function buildReleaseNotesCsv(data) {
+    var rows = [['Application', 'From Version', 'To Version', 'Status', 'Type', 'Vendor', 'Publish Date', 'Install Method', 'Error', 'Notes']];
+    (data.apps || []).forEach(function(a) {
+      rows.push([
+        a.name || '', a.from || '', a.to || '', a.status || '',
+        a.level || '', a.vendor || '', a.date || '', a.method || '',
+        a.error || '', (a.notes || '').replace(/[\r\n]+/g, ' ')
+      ]);
+    });
+    return rows.map(function(r) {
+      return r.map(function(cell) {
+        var s = '' + cell;
+        if (s.indexOf(',') > -1 || s.indexOf('"') > -1 || s.indexOf('\n') > -1) return '"' + s.replace(/"/g, '""') + '"';
+        return s;
+      }).join(',');
+    }).join('\n');
+  }
+
+  function downloadFile(content, filename, mime) {
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+
   /* ── Release Notes Modal ─────────────────────────────────────────── */
   function showReleaseNotes(summaryJson) {
     var data; try { data = JSON.parse(summaryJson); } catch(e) { toast('No release notes data available.', 'warning'); return; }
@@ -770,9 +855,13 @@
       var expanded = { v: false };
       var detailEl = el('div', { className: 'uc-rn-detail', style: 'display:none' });
       var items = [];
+      if (a.vendor) items.push(['Vendor', a.vendor]);
+      if (a.level) items.push(['Update type', a.level]);
+      if (a.date) items.push(['Published', a.date]);
       if (a.method) items.push(['Install method', a.method]);
       if (a.error) items.push(['Error', a.error]);
       items.push(['Version change', (a.from || '?') + ' \u2192 ' + (a.to || '?')]);
+      if (a.notes) items.push(['Vendor notes', a.notes]);
       items.forEach(function(pair) {
         detailEl.appendChild(el('div', { className: 'uc-rn-detail-row' }, [
           el('span', { className: 'uc-rn-detail-lbl' }, pair[0] + ':'),
@@ -828,11 +917,15 @@
         el('div', { className: 'uc-rn-acts' }, [
           copiedEl,
           el('button', { className: 'uc-btn uc-btn-s', onclick: function() {
-            var txt = 'RELEASE NOTES\n' + (data.startTime ? 'Date: ' + data.startTime + '\n' : '') + '\n';
-            data.apps.forEach(function(a) { txt += (a.status === 'success' ? '[OK] ' : '[FAIL] ') + a.name + ' ' + a.from + ' -> ' + a.to + (a.error ? ' (' + a.error + ')' : '') + '\n'; });
-            txt += '\nSummary: ' + sumText;
+            var txt = buildReleaseNotesText(data);
             try { navigator.clipboard.writeText(txt); copiedEl.style.visibility = 'visible'; setTimeout(function() { copiedEl.style.visibility = 'hidden'; }, 2000); } catch(e) { prompt('Copy:', txt); }
           } }, [ic('clipboard', 14), document.createTextNode(' Copy to Clipboard')]),
+          el('button', { className: 'uc-btn uc-btn-s', onclick: function() {
+            downloadFile(buildReleaseNotesText(data), 'release-notes.txt', 'text/plain');
+          } }, [ic('download', 14), document.createTextNode(' Download Text')]),
+          el('button', { className: 'uc-btn uc-btn-s', onclick: function() {
+            downloadFile(buildReleaseNotesCsv(data), 'release-notes.csv', 'text/csv');
+          } }, [ic('download', 14), document.createTextNode(' Download CSV')]),
           el('button', { className: 'uc-btn uc-btn-p', onclick: function() { c.innerHTML = ''; } }, 'Close')
         ])
       ])
@@ -1072,10 +1165,10 @@
               pollAppInstall(app, workerId, function(success, errMsg) {
                 if (success) {
                   completed++;
-                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method, vendor: app.vendor, notes: app.notes, level: app.level, date: app.date });
                 } else {
                   failed++;
-                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg });
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg, vendor: app.vendor, notes: app.notes, level: app.level, date: app.date });
                   addLog(app.name + ' failed: ' + errMsg, 'error');
                 }
                 installNext(idx + 1);
@@ -1085,10 +1178,10 @@
               waitForWorkerThenPoll(app, res.method, function(success, errMsg) {
                 if (success) {
                   completed++;
-                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method });
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'success', method: res.method, vendor: app.vendor, notes: app.notes, level: app.level, date: app.date });
                 } else {
                   failed++;
-                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg });
+                  results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: errMsg, vendor: app.vendor, notes: app.notes, level: app.level, date: app.date });
                 }
                 installNext(idx + 1);
               });
@@ -1096,7 +1189,7 @@
           }
         }).catch(function(e) {
           failed++;
-          results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: e.message });
+          results.push({ name: app.name, from: app.iv, to: app.lv, status: 'failed', error: e.message, vendor: app.vendor, notes: app.notes, level: app.level, date: app.date });
           addLog(app.name + ' failed: ' + e.message, 'error');
           installNext(idx + 1);
         });
@@ -1200,6 +1293,16 @@
       }
       if (tickT) clearInterval(tickT);
       clearSession(); render(); refresh();
+      /* Auto-show grouped release notes */
+      if (results.length > 0) {
+        var endNow = new Date();
+        showReleaseNotes({
+          startTime: S.serverStart ? S.serverStart.toLocaleString() : clientStart ? new Date(clientStart).toLocaleString() : '',
+          endTime: endNow.toLocaleString(),
+          elapsed: S.elapsed || 0,
+          apps: results
+        });
+      }
     } else {
       S.pDone = true; S.pErr = 'No apps to install.';
       S.installing = false;
@@ -1266,6 +1369,11 @@
           toast('Installation completed successfully!', 'success');
           S.installing = false; S.batchId = null;
           clearSession(); render(); refresh();
+          /* Auto-show release notes from worker output_summary */
+          var rawSum = fd(p.output_summary) || fv(p.output_summary) || '';
+          if (rawSum) {
+            try { var rnData = JSON.parse(rawSum); if (rnData && rnData.apps) showReleaseNotes(rnData); } catch(e) { /* ignore parse errors */ }
+          }
         } else if (isStateFailed(p)) {
           clearInterval(pollT); if (tickT) clearInterval(tickT);
           S.pDone = true;
@@ -1275,6 +1383,11 @@
           addLog('Installation issue: ' + errMsg, 'error');
           toast('Installation failed: ' + errMsg, 'error');
           clearSession(); render();
+          /* Auto-show release notes from worker output_summary */
+          var rawSumF = fd(p.output_summary) || fv(p.output_summary) || '';
+          if (rawSumF) {
+            try { var rnDataF = JSON.parse(rawSumF); if (rnDataF && rnDataF.apps) showReleaseNotes(rnDataF); } catch(e) { /* ignore parse errors */ }
+          }
         } else {
           updateProgressUI();
         }
