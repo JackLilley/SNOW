@@ -80,7 +80,8 @@
     installing: false, batchId: null, installQueue: [], selected: {},
     filter: 'all', search: '', pPct: 0, pState: 'Preparing...', pErr: '', pDone: false, logs: [], elapsed: 0,
     serverStart: null,
-    bannerSettings: null
+    bannerSettings: null,
+    activeBannerId: null
   };
 
   function loadBannerSettings() {
@@ -992,6 +993,35 @@
     });
   }
 
+  function createInstallBanner(count, cb) {
+    var bs = S.bannerSettings || BANNER_DEFAULTS;
+    if (!bs.enableInstalling) { cb(); return; }
+    callGlideAjax('showBanner', {
+      sysparm_banner_settings: JSON.stringify(bs),
+      sysparm_count: '' + count
+    }).then(function(bannerId) {
+      if (bannerId) {
+        S.activeBannerId = bannerId;
+        addLog('System banner activated', 'info');
+      }
+      cb();
+    }).catch(function() { cb(); });
+  }
+
+  function removeInstallBanner(succeeded, total) {
+    if (!S.activeBannerId) return;
+    var bs = S.bannerSettings || BANNER_DEFAULTS;
+    callGlideAjax('removeBanner', {
+      sysparm_banner_id: S.activeBannerId,
+      sysparm_show_complete: succeeded ? 'true' : 'false',
+      sysparm_banner_settings: JSON.stringify(bs),
+      sysparm_count: '' + total
+    }).then(function() {
+      addLog('System banner removed', 'info');
+    }).catch(function() {});
+    S.activeBannerId = null;
+  }
+
   function doInstall(sel) {
     S.installQueue = sel; S.installing = true; S.view = 'progress';
     S.pPct = 0; S.pState = 'Preparing\u2026'; S.pErr = ''; S.pDone = false; S.logs = [];
@@ -1002,7 +1032,7 @@
     startTick(); render();
     toast('Starting batch installation (' + sel.length + ' app' + (sel.length > 1 ? 's' : '') + ')\u2026', 'info');
 
-    setTimeout(function() {
+    createInstallBanner(sel.length, function() {
       addLog('Triggering batch installation (' + sel.length + ' app' + (sel.length > 1 ? 's' : '') + ')\u2026');
       console.log('[UpdateCenter] Loaded ' + sel.length + ' apps');
 
@@ -1073,7 +1103,7 @@
       }
 
       installNext(0);
-    }, 100);
+    });
   }
 
   function pollAppInstall(app, workerId, cb) {
@@ -1152,12 +1182,14 @@
         addLog('Server-side install failed: ' + e.message, 'error');
         S.pDone = true; S.pErr = 'Install failed: ' + e.message;
         S.installing = false;
+        removeInstallBanner(false, S.installQueue.length);
         if (tickT) clearInterval(tickT);
         clearSession(); render();
       });
     } else if (completed > 0 || failed > 0) {
       S.pPct = 100; S.pDone = true;
       S.installing = false;
+      removeInstallBanner(failed === 0, completed + failed);
       if (failed === 0) {
         addLog('All ' + completed + ' app(s) installed successfully!', 'success');
         toast('Installation completed!', 'success');
@@ -1171,6 +1203,7 @@
     } else {
       S.pDone = true; S.pErr = 'No apps to install.';
       S.installing = false;
+      removeInstallBanner(false, 0);
       if (tickT) clearInterval(tickT);
       clearSession(); render();
     }
@@ -1228,6 +1261,7 @@
         if (isStateDone(p)) {
           clearInterval(pollT); if (tickT) clearInterval(tickT);
           S.pPct = 100; S.pDone = true;
+          removeInstallBanner(true, S.installQueue.length);
           addLog('Batch installation completed!', 'success');
           toast('Installation completed successfully!', 'success');
           S.installing = false; S.batchId = null;
@@ -1237,6 +1271,7 @@
           S.pDone = true;
           var errMsg = fd(p.error_message) || fv(p.error_message) || 'Installation encountered an issue.';
           S.pErr = errMsg;
+          removeInstallBanner(false, S.installQueue.length);
           addLog('Installation issue: ' + errMsg, 'error');
           toast('Installation failed: ' + errMsg, 'error');
           clearSession(); render();

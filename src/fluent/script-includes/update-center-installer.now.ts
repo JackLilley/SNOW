@@ -103,6 +103,37 @@ UpdateCenterInstaller.prototype = Object.extendsObject(global.AbstractAjaxProces
         return JSON.stringify({ workerId: workerId, triggerId: triggerId });
     },
 
+    showBanner: function() {
+        if (!gs.hasRole('admin')) return '';
+        var bannerSettings = {};
+        try { bannerSettings = JSON.parse(this.getParameter('sysparm_banner_settings') || '{}'); } catch(e) {}
+        if (!bannerSettings.enableInstalling) return '';
+        var count = this.getParameter('sysparm_count') || '0';
+        this._cleanupOldBanners();
+        var msg = (bannerSettings.installingMsg || 'System maintenance in progress.').replace('{count}', count).replace('{user}', gs.getUserName());
+        return this._createBanner(msg, 'installing');
+    },
+
+    removeBanner: function() {
+        if (!gs.hasRole('admin')) return 'error';
+        var bannerId = this.getParameter('sysparm_banner_id');
+        if (bannerId) { this._removeBanner(bannerId); }
+        var showComplete = this.getParameter('sysparm_show_complete');
+        if (showComplete === 'true') {
+            var bannerSettings = {};
+            try { bannerSettings = JSON.parse(this.getParameter('sysparm_banner_settings') || '{}'); } catch(e) {}
+            if (bannerSettings.enableComplete) {
+                var count = this.getParameter('sysparm_count') || '0';
+                var msg = (bannerSettings.completeMsg || 'System maintenance complete.').replace('{count}', count).replace('{user}', gs.getUserName());
+                var hrs = bannerSettings.completeDurationHrs || 2;
+                var endDt = new GlideDateTime();
+                endDt.addSeconds(hrs * 3600);
+                this._createBanner(msg, 'complete', endDt.getDisplayValue());
+            }
+        }
+        return 'ok';
+    },
+
     cancelScheduled: function() {
         if (!gs.hasRole('admin')) return 'error';
         var workerId = this.getParameter('sysparm_worker_id');
